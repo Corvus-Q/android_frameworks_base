@@ -44,4 +44,7 @@
     <dimen name="status_bar_mobile_type_height">8dp</dimen>
     <dimen name="status_bar_mobile_type_padding">2dp</dimen>
     <dimen name="status_bar_mobile_type_padding_limit">10dp</dimen>
+
+    <!-- QS detail view scrolling -->
+    <dimen name="qs_detail_item_height_twoline">72dp</dimen>
 </resources>
