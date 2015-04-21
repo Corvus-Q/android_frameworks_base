@@ -37,6 +37,7 @@ import com.android.systemui.qs.tiles.ColorInversionTile;
 import com.android.systemui.qs.tiles.DataSaverTile;
 import com.android.systemui.qs.tiles.DndTile;
 import com.android.systemui.qs.tiles.FlashlightTile;
+import com.android.systemui.qs.tiles.HeadsUpTile;
 import com.android.systemui.qs.tiles.HotspotTile;
 import com.android.systemui.qs.tiles.IntentTile;
 import com.android.systemui.qs.tiles.LocationTile;
@@ -84,6 +85,7 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<AmbientDisplayTile> mAmbientDisplayTileProvider;
     private final Provider<SoundTile> mSoundTileProvider;
     private final Provider<RebootTile> mRebootTileProvider;
+    private final Provider<HeadsUpTile> mHeadsUpTileProvider;
 
     private QSTileHost mHost;
 
@@ -110,7 +112,8 @@ public class QSFactoryImpl implements QSFactory {
             Provider<CaffeineTile> caffeineTileProvider,
             Provider<AmbientDisplayTile> ambientDisplayTileProvider,
             Provider<SoundTile> soundTileProvider,
-            Provider<RebootTile> rebootTileProvider) {
+            Provider<RebootTile> rebootTileProvider,
+            Provider<HeadsUpTile> headsUpTileProvider) {
         mWifiTileProvider = wifiTileProvider;
         mBluetoothTileProvider = bluetoothTileProvider;
         mCellularTileProvider = cellularTileProvider;
@@ -134,6 +137,7 @@ public class QSFactoryImpl implements QSFactory {
         mAmbientDisplayTileProvider = ambientDisplayTileProvider;
         mSoundTileProvider = soundTileProvider;
         mRebootTileProvider = rebootTileProvider;
+        mHeadsUpTileProvider = headsUpTileProvider;
     }
 
     public void setHost(QSTileHost host) {
@@ -197,6 +201,8 @@ public class QSFactoryImpl implements QSFactory {
                 return mSoundTileProvider.get();
             case "reboot":
                 return mRebootTileProvider.get();
+            case "heads_up":
+                return mHeadsUpTileProvider.get();
         }
 
         // Intent tiles.
