@@ -5016,6 +5016,12 @@ public final class Settings {
         private static final Validator SCREEN_OFF_ANIMATION_VALIDATOR =
                 ANY_INTEGER_VALIDATOR;
 
+        /**
+         * Allow users to pull down the status bar quickly
+         * @hide
+         */
+        public static final String STATUS_BAR_QUICK_QS_PULLDOWN = "status_bar_quick_qs_pulldown";
+
          /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
