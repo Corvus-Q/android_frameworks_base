@@ -5151,6 +5151,16 @@ public final class Settings {
         private static final Validator HEADS_UP_NOTIFICATION_SNOOZE_VALIDATOR =
               new SettingsValidators.InclusiveIntegerRangeValidator(0, 1200000);
 
+       /**
+        * Heads up timeout configuration
+        * @hide
+        */
+        public static final String HEADS_UP_TIMEOUT = "heads_up_timeout";
+
+        /** @hide */
+        private static final Validator HEADS_UP_TIMEOUT_VALIDATOR =
+              new SettingsValidators.InclusiveIntegerRangeValidator(0, 10000);
+
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
@@ -5245,6 +5255,7 @@ public final class Settings {
             ALLOW_INCALL_HOME,
             VOLUME_DIALOG_TIMEOUT,
             HEADS_UP_NOTIFICATION_SNOOZE,
+            HEADS_UP_TIMEOUT,
         };
 
         /**
@@ -5407,6 +5418,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(ALLOW_INCALL_HOME);
             PRIVATE_SETTINGS.add(VOLUME_DIALOG_TIMEOUT);
             PRIVATE_SETTINGS.add(HEADS_UP_NOTIFICATION_SNOOZE);
+            PRIVATE_SETTINGS.add(HEADS_UP_TIMEOUT);
         }
 
         /**
@@ -5534,6 +5546,7 @@ public final class Settings {
             VALIDATORS.put(ALLOW_INCALL_HOME, ALLOW_INCALL_HOME_VALIDATOR);
             VALIDATORS.put(VOLUME_DIALOG_TIMEOUT,VOLUME_DIALOG_TIMEOUT_VALIDATOR);
             VALIDATORS.put(HEADS_UP_NOTIFICATION_SNOOZE,HEADS_UP_NOTIFICATION_SNOOZE_VALIDATOR);
+            VALIDATORS.put(HEADS_UP_TIMEOUT,HEADS_UP_TIMEOUT_VALIDATOR);
         }
 
         /**
