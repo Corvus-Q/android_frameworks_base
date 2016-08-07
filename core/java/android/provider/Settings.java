@@ -11264,6 +11264,12 @@ public final class Settings {
         public static final String ADB_PORT = "adb_port";
 
         /**
+         * Enable hw buttons - actions, brightness, haptic feedback, overflow menu
+         * @hide
+         */
+        public static final String HARDWARE_KEYS_ENABLE = "hardware_keys_enable";
+
+        /**
          * This are the settings to be backed up.
          *
          * NOTE: Settings are backed up and restored in the order they appear
