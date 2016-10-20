@@ -19,4 +19,7 @@
     <dimen name="net_traffic_txt_img_padding">1dp</dimen>
 
     <dimen name="screenrecord_dot_size">48dp</dimen>
+
+    <!-- Custom Carrier Label -->
+    <dimen name="status_bar_carrier_height">14dp</dimen>
 </resources>
