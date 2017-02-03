@@ -79,6 +79,7 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
     private SettingsButton mSettingsButton;
     protected View mSettingsContainer;
     private PageIndicator mPageIndicator;
+    private View mRunningServicesButton;
 
     private boolean mQsDisabled;
     private QSPanel mQsPanel;
@@ -139,6 +140,9 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
 
         mPageIndicator = findViewById(R.id.footer_page_indicator);
 
+        mRunningServicesButton = findViewById(R.id.running_services_button);
+        mRunningServicesButton.setOnClickListener(this);
+
         mSettingsButton = findViewById(R.id.settings_button);
         mSettingsContainer = findViewById(R.id.settings_button_container);
         mSettingsButton.setOnClickListener(this);
@@ -154,6 +158,7 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
         // RenderThread is doing more harm than good when touching the header (to expand quick
         // settings), so disable it for this view
         ((RippleDrawable) mSettingsButton.getBackground()).setForceSoftware(true);
+        ((RippleDrawable) mRunningServicesButton.getBackground()).setForceSoftware(true);
 
         updateResources();
 
@@ -221,6 +226,7 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
                 .addFloat(mEditContainer, "alpha", 0, 1)
                 .addFloat(mDragHandle, "alpha", 1, 0, 0)
                 .addFloat(mPageIndicator, "alpha", 0, 1)
+                .addFloat(mRunningServicesButton, "alpha", 0, 1)
                 .setStartDelay(0.15f)
                 .build();
     }
@@ -322,6 +328,7 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
         mMultiUserSwitch.setVisibility(showUserSwitcher() ? View.VISIBLE : View.INVISIBLE);
         mEditContainer.setVisibility(isDemo || !mExpanded ? View.INVISIBLE : View.VISIBLE);
         mSettingsButton.setVisibility(isDemo || !mExpanded ? View.INVISIBLE : View.VISIBLE);
+        mRunningServicesButton.setVisibility(!isDemo && mExpanded ? View.VISIBLE : View.INVISIBLE);
     }
 
     private boolean showUserSwitcher() {
@@ -363,6 +370,11 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
                     mExpanded ? MetricsProto.MetricsEvent.ACTION_QS_EXPANDED_SETTINGS_LAUNCH
                             : MetricsProto.MetricsEvent.ACTION_QS_COLLAPSED_SETTINGS_LAUNCH);
             startSettingsActivity();
+        } else if (v == mRunningServicesButton) {
+            MetricsLogger.action(mContext,
+                    mExpanded ? MetricsProto.MetricsEvent.ACTION_QS_EXPANDED_SETTINGS_LAUNCH
+                            : MetricsProto.MetricsEvent.ACTION_QS_COLLAPSED_SETTINGS_LAUNCH);
+            startRunningServicesActivity();
         }
     }
 
@@ -379,6 +391,13 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
         nIntent.setClassName("com.android.settings",
             "com.android.settings.Settings$DirtyTweaksActivity");
         mActivityStarter.startActivity(nIntent, true /* dismissShade */);
+    }
+
+    private void startRunningServicesActivity() {
+        Intent intent = new Intent();
+        intent.setClassName("com.android.settings",
+                "com.android.settings.Settings$DevRunningServicesActivity");
+        mActivityStarter.startActivity(intent, true /* dismissShade */);
     }
 
     private void startSettingsActivity() {

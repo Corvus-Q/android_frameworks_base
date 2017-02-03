@@ -95,6 +95,19 @@
                     android:scaleType="centerInside"/>
             </com.android.systemui.statusbar.phone.MultiUserSwitch>
 
+            <com.android.systemui.statusbar.AlphaOptimizedImageView
+                android:id="@+id/running_services_button"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:layout_width="46dp"
+                android:layout_height="48dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="15dp"
+                android:clipToPadding="false"
+                android:src="@drawable/ic_settings_memory"
+                android:tint="?android:attr/colorForeground"
+                android:contentDescription="@string/accessibility_quick_settings_running_services" />
+
             <com.android.systemui.statusbar.AlphaOptimizedFrameLayout
                 android:id="@+id/settings_button_container"
                 android:layout_width="@dimen/qs_footer_action_button_size"
