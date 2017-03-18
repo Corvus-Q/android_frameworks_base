@@ -6461,6 +6461,12 @@ public final class Settings {
         public static final String PULSE_TRIGGER_REASON = "pulse_trigger_reason";
 
         /**
+         * Enable\Disable Bluetooth Battery bar
+         * @hide
+         */
+        public static final String BLUETOOTH_SHOW_BATTERY = "bluetooth_show_battery";
+
+        /**
          * @hide
          */
         public static final String QS_TILE_STYLE = "qs_tile_style";
