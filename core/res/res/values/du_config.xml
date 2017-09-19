@@ -56,6 +56,7 @@
         <item>recovery</item>
         <item>screenshot</item>
         <item>screenrecord</item>
+        <item>torch</item>
     </string-array>
 
     <!-- Button backlight -->
