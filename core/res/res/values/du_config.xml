@@ -82,4 +82,9 @@
      <!-- Do the battery/notification LEDs support pulsing?
          Used to decide if we show pulse settings -->
     <bool name="config_ledCanPulse">true</bool>
+
+    <!-- HW keys binding -->
+    <java-symbol type="anim" name="custom_app_in" />
+    <java-symbol type="anim" name="custom_app_out" />
+    <java-symbol type="integer" name="config_deviceHardwareKeys" />
 </resources>
