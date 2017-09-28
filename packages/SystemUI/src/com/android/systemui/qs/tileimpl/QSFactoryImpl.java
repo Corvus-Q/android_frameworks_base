@@ -30,6 +30,7 @@ import com.android.systemui.qs.tiles.AdbOverNetworkTile;
 import com.android.systemui.qs.tiles.AmbientDisplayTile;
 import com.android.systemui.qs.tiles.AirplaneModeTile;
 import com.android.systemui.qs.tiles.AODTile;
+import com.android.systemui.qs.tiles.MusicTile;
 import com.android.systemui.qs.tiles.BatterySaverTile;
 import com.android.systemui.qs.tiles.BluetoothTile;
 import com.android.systemui.qs.tiles.CaffeineTile;
@@ -110,6 +111,7 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<NavBarTile> mNavBarTileProvider;
     private final Provider<FPSInfoTile> mFPSInfoTileProvider;
     private final Provider<AODTile> mAODTileProvider;
+    private final Provider<MusicTile> mMusicTileProvider;
     private final Provider<UsbTetherTile> mUsbTetherTileProvider;
     private final Provider<LiveDisplayTile> mLiveDisplayTileProvider;
     private final Provider<ReadingModeTile> mReadingModeTileProvider;
@@ -151,6 +153,7 @@ public class QSFactoryImpl implements QSFactory {
             Provider<NavBarTile> navbarTileProvider,
             Provider<FPSInfoTile> fpsInfoTileProvider,
             Provider<AODTile> aodTileProvider,
+            Provider<MusicTile> musicTileProvider,
             Provider<UsbTetherTile> usbTetherTileProvider,
             Provider<LiveDisplayTile> liveDisplayTileProvider,
             Provider<ReadingModeTile> readingModeTileProvider) {
@@ -188,6 +191,7 @@ public class QSFactoryImpl implements QSFactory {
         mNavBarTileProvider = navbarTileProvider;
         mFPSInfoTileProvider = fpsInfoTileProvider;
         mAODTileProvider = aodTileProvider;
+        mMusicTileProvider = musicTileProvider;
         mUsbTetherTileProvider = usbTetherTileProvider;
         mLiveDisplayTileProvider = liveDisplayTileProvider;
         mReadingModeTileProvider = readingModeTileProvider;
@@ -278,6 +282,8 @@ public class QSFactoryImpl implements QSFactory {
                 return mFPSInfoTileProvider.get();
             case "aod":
                 return mAODTileProvider.get();
+            case "music":
+                return mMusicTileProvider.get();
             case "usb_tether":
                 return mUsbTetherTileProvider.get();
             case "livedisplay":
