@@ -45,6 +45,7 @@
 
     <!-- Tuner -->
     <string name="statusbar_items_title">Statusbar icon</string>
+    <string name="quick_settings_vpn_title">VPN</string>
 
     <!-- Sync Tile -->
     <string name="quick_settings_sync_label">Sync</string>
