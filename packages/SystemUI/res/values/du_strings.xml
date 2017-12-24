@@ -95,4 +95,9 @@
 
     <!-- accessibility label for button to open running apps prefscreen [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_running_services">Open Running Services screen.</string>
+
+    <!-- CPUInfo tile -->
+    <string name="quick_settings_cpuinfo_label">CPU Info</string>
+    <string name="accessibility_quick_settings_cpuinfo_off">CPU Info off</string>
+    <string name="accessibility_quick_settings_cpuinfo_on">CPU Info on</string>
 </resources>

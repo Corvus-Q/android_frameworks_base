@@ -34,6 +34,7 @@ import com.android.systemui.qs.tiles.CaffeineTile;
 import com.android.systemui.qs.tiles.CastTile;
 import com.android.systemui.qs.tiles.CellularTile;
 import com.android.systemui.qs.tiles.ColorInversionTile;
+import com.android.systemui.qs.tiles.CPUInfoTile;
 import com.android.systemui.qs.tiles.DataSaverTile;
 import com.android.systemui.qs.tiles.DndTile;
 import com.android.systemui.qs.tiles.FlashlightTile;
@@ -90,6 +91,7 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<HeadsUpTile> mHeadsUpTileProvider;
     private final Provider<ScreenshotTile> mScreenshotTileProvider;
     private final Provider<LteTile> mLteTileProvider;
+    private final Provider<CPUInfoTile> mCPUInfoTileProvider;
 
     private QSTileHost mHost;
 
@@ -119,7 +121,8 @@ public class QSFactoryImpl implements QSFactory {
             Provider<RebootTile> rebootTileProvider,
             Provider<HeadsUpTile> headsUpTileProvider,
             Provider<ScreenshotTile> screenshotTileProvider,
-            Provider<LteTile> lteTileProvider) {
+            Provider<LteTile> lteTileProvider,
+            Provider<CPUInfoTile> cpuInfoTileProvider) {
         mWifiTileProvider = wifiTileProvider;
         mBluetoothTileProvider = bluetoothTileProvider;
         mCellularTileProvider = cellularTileProvider;
@@ -146,6 +149,7 @@ public class QSFactoryImpl implements QSFactory {
         mHeadsUpTileProvider = headsUpTileProvider;
         mScreenshotTileProvider = screenshotTileProvider;
         mLteTileProvider = lteTileProvider;
+        mCPUInfoTileProvider = cpuInfoTileProvider;
     }
 
     public void setHost(QSTileHost host) {
@@ -215,6 +219,8 @@ public class QSFactoryImpl implements QSFactory {
                 return mScreenshotTileProvider.get();
             case "lte":
                 return mLteTileProvider.get();
+            case "cpuinfo":
+                return mCPUInfoTileProvider.get();
         }
 
         // Intent tiles.
