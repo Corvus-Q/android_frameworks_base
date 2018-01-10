@@ -122,4 +122,6 @@
         <item>com.google.android.apps.wellbeing</item>
         <item>com.android.wallpaper.livepicker</item>
     </string-array>
+
+    <integer name="config_flashlightProximityTimeout">300</integer>
 </resources>
