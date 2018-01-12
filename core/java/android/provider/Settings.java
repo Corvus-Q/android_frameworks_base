@@ -5006,6 +5006,16 @@ public final class Settings {
 
         private static final Validator LOCKSCREEN_MEDIA_BLUR_VALIDATOR = ANY_INTEGER_VALIDATOR;
 
+        /**
+         * Defines the screen-off animation to display
+         * @hide
+         */
+        public static final String SCREEN_OFF_ANIMATION = "screen_off_animation";
+
+        /** @hide */
+        private static final Validator SCREEN_OFF_ANIMATION_VALIDATOR =
+                ANY_INTEGER_VALIDATOR;
+
          /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
@@ -5089,6 +5099,7 @@ public final class Settings {
             HEADS_UP_STOPLIST_VALUES,
             HEADS_UP_BLACKLIST_VALUES,
             LOCKSCREEN_MEDIA_BLUR,
+            SCREEN_OFF_ANIMATION,
         };
 
         /**
@@ -5240,6 +5251,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(HEADS_UP_BLACKLIST_VALUES);
             PRIVATE_SETTINGS.add(LOCKSCREEN_MEDIA_METADATA);
             PRIVATE_SETTINGS.add(LOCKSCREEN_MEDIA_BLUR);
+            PRIVATE_SETTINGS.add(SCREEN_OFF_ANIMATION);
         }
 
         /**
@@ -5356,6 +5368,7 @@ public final class Settings {
             VALIDATORS.put(HEADS_UP_BLACKLIST_VALUES, HEADS_UP_BLACKLIST_VALUES_VALIDATOR);
             VALIDATORS.put(LOCKSCREEN_MEDIA_METADATA, LOCKSCREEN_MEDIA_METADATA_VALIDATOR);
             VALIDATORS.put(LOCKSCREEN_MEDIA_BLUR, LOCKSCREEN_MEDIA_BLUR_VALIDATOR);
+            VALIDATORS.put(SCREEN_OFF_ANIMATION, SCREEN_OFF_ANIMATION_VALIDATOR);
         }
 
         /**
