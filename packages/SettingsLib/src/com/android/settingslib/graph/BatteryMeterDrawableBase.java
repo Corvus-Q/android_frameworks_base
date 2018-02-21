@@ -23,6 +23,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
@@ -95,6 +96,7 @@ public class BatteryMeterDrawableBase extends Drawable {
     private final Path mShapePath = new Path();
     private final Path mOutlinePath = new Path();
     private final Path mTextPath = new Path();
+    private DashPathEffect mPathEffect;
 
     public BatteryMeterDrawableBase(Context context, int frameColor) {
         mContext = context;
@@ -168,8 +170,14 @@ public class BatteryMeterDrawableBase extends Drawable {
         mPowersavePaint.setStrokeWidth(context.getResources()
                 .getDimensionPixelSize(R.dimen.battery_powersave_outline_thickness));
 
+        mPathEffect = new DashPathEffect(new float[]{3,2}, 0);
+
         mIntrinsicWidth = context.getResources().getDimensionPixelSize(R.dimen.battery_width);
         mIntrinsicHeight = context.getResources().getDimensionPixelSize(R.dimen.battery_height);
+    }
+
+    public void setDashEffect(float[] intervals, float phase) {
+        mPathEffect = new DashPathEffect(intervals, phase);
     }
 
     @Override
