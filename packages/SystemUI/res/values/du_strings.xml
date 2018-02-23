@@ -200,4 +200,9 @@
     <string name="stabilization_velocity_amplitude">Velocity Amplitude</string>
     <string name="stabilization_position_friction">Position Friction</string>
 
+    <!-- ADB over Network tile -->
+    <string name="quick_settings_adb_network">ADB over Network</string>
+    <string name="quick_settings_network_adb_enabled_label">ADB over Network</string>
+    <string name="quick_settings_network_adb_disabled_label">ADB over Network</string>
+
 </resources>
