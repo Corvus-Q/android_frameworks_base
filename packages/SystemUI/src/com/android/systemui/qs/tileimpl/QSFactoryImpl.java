@@ -29,6 +29,7 @@ import com.android.systemui.qs.external.CustomTile;
 import com.android.systemui.qs.tiles.AdbOverNetworkTile;
 import com.android.systemui.qs.tiles.AmbientDisplayTile;
 import com.android.systemui.qs.tiles.AirplaneModeTile;
+import com.android.systemui.qs.tiles.AODTile;
 import com.android.systemui.qs.tiles.BatterySaverTile;
 import com.android.systemui.qs.tiles.BluetoothTile;
 import com.android.systemui.qs.tiles.CaffeineTile;
@@ -107,6 +108,7 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<HWKeysTile> mHWKeysTileProvider;
     private final Provider<NavBarTile> mNavBarTileProvider;
     private final Provider<FPSInfoTile> mFPSInfoTileProvider;
+    private final Provider<AODTile> mAODTileProvider;
 
     private QSTileHost mHost;
 
@@ -144,7 +146,8 @@ public class QSFactoryImpl implements QSFactory {
             Provider<AdbOverNetworkTile> adbOverNetworkTileProvider,
             Provider<HWKeysTile> hWKeysTileProvider,
             Provider<NavBarTile> navbarTileProvider,
-            Provider<FPSInfoTile> fpsInfoTileProvider) {
+            Provider<FPSInfoTile> fpsInfoTileProvider,
+            Provider<AODTile> aodTileProvider) {
         mWifiTileProvider = wifiTileProvider;
         mBluetoothTileProvider = bluetoothTileProvider;
         mCellularTileProvider = cellularTileProvider;
@@ -179,6 +182,7 @@ public class QSFactoryImpl implements QSFactory {
         mHWKeysTileProvider = hWKeysTileProvider;
         mNavBarTileProvider = navbarTileProvider;
         mFPSInfoTileProvider = fpsInfoTileProvider;
+        mAODTileProvider = aodTileProvider;
     }
 
     public void setHost(QSTileHost host) {
@@ -266,6 +270,8 @@ public class QSFactoryImpl implements QSFactory {
                 return mNavBarTileProvider.get();
             case "fpsinfo":
                 return mFPSInfoTileProvider.get();
+            case "aod":
+                return mAODTileProvider.get();
         }
 
         // Intent tiles.
