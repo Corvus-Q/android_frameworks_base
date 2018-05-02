@@ -20,31 +20,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.PowerManager;
-import android.os.RemoteException;
-import android.os.ServiceManager;
-import android.service.quicksettings.Tile;
-import com.android.systemui.R;
-import com.android.systemui.qs.QSHost;
-import com.android.systemui.plugins.qs.QSTile.BooleanState;
-import com.android.systemui.qs.tileimpl.QSTileImpl;
+
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.internal.statusbar.IStatusBarService;
+import com.android.systemui.R;
+import com.android.systemui.plugins.qs.QSTile.BooleanState;
+import com.android.systemui.qs.QSHost;
+import com.android.systemui.qs.tileimpl.QSTileImpl;
 
 import javax.inject.Inject;
 
 public class RebootTile extends QSTileImpl<BooleanState> {
 
-    private boolean mRebootToRecovery = false;
-    private IStatusBarService mBarService;
+    private int mRebootToRecovery = 0;
 
     @Inject
     public RebootTile(QSHost host) {
         super(host);
-    }
-
-    @Override
-    public int getMetricsCategory() {
-        return MetricsEvent.CUSTOM_QUICK_TILES;
     }
 
     @Override
@@ -53,25 +45,31 @@ public class RebootTile extends QSTileImpl<BooleanState> {
     }
 
     @Override
-    protected void handleClick() {
-        mRebootToRecovery = !mRebootToRecovery;
+    public void handleClick() {
+        if (mRebootToRecovery == 0) {
+            mRebootToRecovery = 1;
+        } else if (mRebootToRecovery == 1) {
+            mRebootToRecovery = 2;
+        } else {
+            mRebootToRecovery = 0;
+        }
         refreshState();
     }
 
     @Override
     protected void handleLongClick() {
         mHost.collapsePanels();
-        mBarService = IStatusBarService.Stub.asInterface(
-                ServiceManager.getService(Context.STATUS_BAR_SERVICE));
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-                try {
-                    if(mRebootToRecovery)
-                        mBarService.advancedReboot(PowerManager.REBOOT_RECOVERY);
-                    else
-                        mBarService.reboot(false);
-                } catch (RemoteException e) {
+                PowerManager pm =
+                    (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
+                if (mRebootToRecovery == 1) {
+                    pm.reboot(PowerManager.REBOOT_RECOVERY);
+                } else if (mRebootToRecovery == 2) {
+                    pm.shutdown(false, pm.SHUTDOWN_USER_REQUESTED, false);
+                } else {
+                    pm.reboot("");
                 }
             }
         }, 500);
@@ -83,26 +81,30 @@ public class RebootTile extends QSTileImpl<BooleanState> {
     }
 
     @Override
-    public void handleSetListening(boolean listening) {
-    }
-
-    @Override
     public CharSequence getTileLabel() {
         return mContext.getString(R.string.quick_settings_reboot_label);
     }
 
     @Override
+    public int getMetricsCategory() {
+        return MetricsEvent.CUSTOM_QUICK_TILES;
+    }
+
+    @Override
     protected void handleUpdateState(BooleanState state, Object arg) {
-        if (mRebootToRecovery) {
+        if (mRebootToRecovery == 1) {
             state.label = mContext.getString(R.string.quick_settings_reboot_recovery_label);
             state.icon = ResourceIcon.get(R.drawable.ic_qs_reboot_recovery);
-            state.contentDescription =  mContext.getString(
-                    R.string.quick_settings_reboot_recovery_label);
+        } else if (mRebootToRecovery == 2) {
+            state.label = mContext.getString(R.string.quick_settings_poweroff_label);
+            state.icon = ResourceIcon.get(R.drawable.ic_qs_poweroff);
         } else {
             state.label = mContext.getString(R.string.quick_settings_reboot_label);
             state.icon = ResourceIcon.get(R.drawable.ic_qs_reboot);
-            state.contentDescription =  mContext.getString(
-                    R.string.quick_settings_reboot_label);
         }
+    }
+
+    @Override
+    public void handleSetListening(boolean listening) {
     }
 }
