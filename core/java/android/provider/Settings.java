@@ -5853,6 +5853,12 @@ public final class Settings {
         public static final String FOD_ICON = "fod_icon";
 
         /**
+         * Force show navigation bar setting.
+         * @hide
+         */
+        public static final String FORCE_SHOW_NAVBAR = "force_show_navbar";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -6182,6 +6188,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(ACCENT_COLOR);
             PRIVATE_SETTINGS.add(PULSE_BRIGHTNESS);
             PRIVATE_SETTINGS.add(DOZE_BRIGHTNESS);
+            PRIVATE_SETTINGS.add(FORCE_SHOW_NAVBAR);
         }
 
         /**
