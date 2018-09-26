@@ -97,13 +97,14 @@
 
             <com.android.systemui.statusbar.AlphaOptimizedImageView
                 android:id="@+id/running_services_button"
-                android:background="?android:attr/selectableItemBackgroundBorderless"
-                android:layout_width="46dp"
-                android:layout_height="48dp"
+                style="@android:style/Widget.Material.Button.Borderless"
+                android:layout_width="@dimen/qs_footer_action_button_size"
+                android:layout_height="@dimen/qs_footer_action_button_size"
+                android:padding="@dimen/qs_footer_icon_padding"
                 android:clickable="true"
-                android:focusable="true"
-                android:padding="15dp"
                 android:clipToPadding="false"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_settings_memory"
                 android:tint="?android:attr/colorForeground"
                 android:contentDescription="@string/accessibility_quick_settings_running_services" />
