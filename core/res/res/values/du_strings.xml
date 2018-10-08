@@ -54,5 +54,9 @@
     <string name="adb_active_generic_notification_message">Touch to disable debugging.</string>
 
     <!-- Pocket Lock --> 
-    <string name="pocket_lock_message_long_press">Press and hold power button to unlock</string> 
+    <string name="pocket_lock_message_long_press">Press and hold power button to unlock</string>
+
+    <!-- SystemUI Restart -->
+    <string name="systemui_restart_title">Restart SystemUI</string>
+    <string name="systemui_restart_message">For the changes to take effect, a SystemUI restart is required. Restart SystemUI now?</string>
 </resources>
