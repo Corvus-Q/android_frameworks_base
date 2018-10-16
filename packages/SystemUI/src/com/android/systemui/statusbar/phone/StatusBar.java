@@ -2379,6 +2379,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.QS_SHOW_BATTERY_ESTIMATE),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                     Settings.System.QS_TILE_STYLE),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -2451,6 +2454,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         updateTickerAnimation();
         updateTickerTickDuration();
         updateKeyguardStatusSettings();
+        updateTileStyle();
         handleCutout(null);
         }
     }
@@ -2579,6 +2583,11 @@ public class StatusBar extends SystemUI implements DemoMode,
             getNavigationBarView().setLongSwipeOptions();
         }
     }
+
+     public void updateTileStyle() {
+         int qsTileStyle = Settings.System.getIntForUser(mContext.getContentResolver(),
+                 Settings.System.QS_TILE_STYLE, 0, mLockscreenUserManager.getCurrentUserId());
+     }
 
     /**
      * All changes to the status bar and notifications funnel through here and are batched.
