@@ -35,6 +35,8 @@ public final class PhoneStatusBarTransitions extends BarTransitions {
 
     private View mLeftSide, mStatusIcons, mBattery, mCenterClock;
 
+    private View mBatteryBars[] = new View[2];
+
     private Animator mCurrentAnimation;
 
     public PhoneStatusBarTransitions(PhoneStatusBarView view) {
@@ -48,6 +50,8 @@ public final class PhoneStatusBarTransitions extends BarTransitions {
         mLeftSide = mView.findViewById(R.id.status_bar_left_side);
         mStatusIcons = mView.findViewById(R.id.statusIcons);
         mBattery = mView.findViewById(R.id.battery);
+        mBatteryBars[0] = mView.findViewById(R.id.battery_bar);
+        mBatteryBars[1] = mView.findViewById(R.id.battery_bar_1);
         mCenterClock = mView.findViewById(R.id.center_clock);
         mDULogo = mView.findViewById(R.id.du_logo);
         mDULogoRight = mView.findViewById(R.id.du_logo_right);
@@ -93,7 +97,9 @@ public final class PhoneStatusBarTransitions extends BarTransitions {
             anims.playTogether(
                     animateTransitionTo(mLeftSide, newAlpha),
                     animateTransitionTo(mStatusIcons, newAlpha),
-		  animateTransitionTo(mBattery, newAlphaBC),
+                    animateTransitionTo(mBattery, newAlphaBC),
+                    animateTransitionTo(mBatteryBars[0], newAlphaBC),
+                    animateTransitionTo(mBatteryBars[1], newAlphaBC),
                     animateTransitionTo(mCenterClock, newAlphaBC),
                     animateTransitionTo(mDULogo, newAlpha),
                     animateTransitionTo(mDULogoRight, newAlpha)
@@ -107,6 +113,8 @@ public final class PhoneStatusBarTransitions extends BarTransitions {
             mLeftSide.setAlpha(newAlpha);
             mStatusIcons.setAlpha(newAlpha);
             mBattery.setAlpha(newAlphaBC);
+            mBatteryBars[0].setAlpha(newAlphaBC);
+            mBatteryBars[1].setAlpha(newAlphaBC);
             mCenterClock.setAlpha(newAlphaBC);
             mDULogo.setAlpha(newAlpha);
             mDULogoRight.setAlpha(newAlpha);
