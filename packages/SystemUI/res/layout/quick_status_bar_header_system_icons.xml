@@ -50,4 +50,18 @@
         android:singleLine="false"
         android:lineSpacingMultiplier="1.2"
         systemui:showDark="false"/>
+
+    <android.widget.Space
+        android:id="@+id/space"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical|center_horizontal" />
+
+    <com.android.systemui.BatteryMeterView
+        android:id="@+id/battery"
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:gravity="center_vertical|end"
+        android:visibility="gone" />
 </LinearLayout>
