@@ -6490,6 +6490,16 @@ public final class Settings {
         public static final String QS_TILE_STYLE = "qs_tile_style";
 
         /**
+         * Settings dashboard icon style
+         * @hide
+         */
+        public static final String THEMING_SETTINGS_DASHBOARD_ICONS =
+                "theming_settings_dashboard_icons";
+
+        /** @hide */
+        private static final Validator THEMING_SETTINGS_DASHBOARD_ICONS_VALIDATOR = ANY_INTEGER_VALIDATOR;
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -6634,6 +6644,7 @@ public final class Settings {
             AMBIENT_LIGHT_REPEAT_COUNT,
             AMBIENT_LIGHT_PULSE_FOR_ALL,
             QS_DATAUSAGE,
+            THEMING_SETTINGS_DASHBOARD_ICONS,
         };
 
         /**
@@ -6850,6 +6861,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(AMBIENT_LIGHT_PULSE_FOR_ALL);
             PRIVATE_SETTINGS.add(QS_DATAUSAGE);
             PRIVATE_SETTINGS.add(QS_TILE_STYLE);
+            PRIVATE_SETTINGS.add(THEMING_SETTINGS_DASHBOARD_ICONS);
         }
 
         /**
@@ -7041,6 +7053,7 @@ public final class Settings {
             VALIDATORS.put(AMBIENT_LIGHT_REPEAT_COUNT, AMBIENT_LIGHT_REPEAT_COUNT_VALIDATOR);
             VALIDATORS.put(AMBIENT_LIGHT_PULSE_FOR_ALL, AMBIENT_LIGHT_PULSE_FOR_ALL_VALIDATOR);
             VALIDATORS.put(QS_DATAUSAGE, QS_DATAUSAGE_VALIDATOR);
+            VALIDATORS.put(THEMING_SETTINGS_DASHBOARD_ICONS, THEMING_SETTINGS_DASHBOARD_ICONS_VALIDATOR);
         }
 
         /**
