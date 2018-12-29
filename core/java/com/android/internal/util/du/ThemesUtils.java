@@ -119,4 +119,9 @@ public class ThemesUtils {
             "com.android.systemui.qsheader.accent", 
             "com.android.systemui.qsheader.transparent",
     };
+
+    public static final String[] SWITCH_STYLE = {
+        "com.android.system.switch.md2", // 1
+        "com.android.system.switch.oneplus", // 2
+    };
 }
