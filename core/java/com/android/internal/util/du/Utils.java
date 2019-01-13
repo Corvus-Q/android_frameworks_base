@@ -34,6 +34,7 @@ import android.os.SystemProperties;
 import android.os.SystemClock;
 import android.view.IWindowManager;
 import android.view.WindowManagerGlobal;
+import android.util.DisplayMetrics;
 
 import com.android.internal.R;
 import com.android.internal.statusbar.IStatusBarService;
@@ -192,5 +193,23 @@ public class Utils {
         } catch (RemoteException e) {
             return false;
         }
+    }
+
+    public static boolean hasNotch(Context context) {
+        int result = 0;
+        int resid;
+        int resourceId = context.getResources().getIdentifier(
+                "status_bar_height", "dimen", "android");
+        resid = context.getResources().getIdentifier("config_fillMainBuiltInDisplayCutout",
+                "bool", "android");
+        if (resid > 0) {
+            return context.getResources().getBoolean(resid);
+        }
+        if (resourceId > 0) {
+            result = context.getResources().getDimensionPixelSize(resourceId);
+        }
+        DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
+        float px = 24 * (metrics.densityDpi / 160f);
+        return result > Math.round(px);
     }
 }
