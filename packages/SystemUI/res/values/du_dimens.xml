@@ -32,6 +32,7 @@
     <dimen name="status_bar_battery_icon_circle_width">12.5dp</dimen>
 
     <!-- QS header image -->
-    <dimen name="qs_header_image_offset">0dp</dimen>
-    <dimen name="qs_header_image_side_margin">0dp</dimen>
+    <dimen name="qs_header_image_offset">25dp</dimen>
+    <dimen name="qs_header_image_side_margin">4dp</dimen>
+    <dimen name="qs_header_image_bottom_margin">4dp</dimen>
 </resources>
