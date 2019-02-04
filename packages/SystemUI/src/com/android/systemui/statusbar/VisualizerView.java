@@ -478,7 +478,6 @@ public class VisualizerView extends View
                 AsyncTask.execute(mLinkVisualizer);
                 animate()
                         .alpha(1f)
-                        .withEndAction(null)
                         .setDuration(800);
                 if (mLavaLampEnabled) mLavaLamp.start();
             } else {
