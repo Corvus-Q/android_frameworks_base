@@ -5446,6 +5446,15 @@ public final class Settings {
                 ANY_STRING_VALIDATOR;
 
         /**
+        /*
+         * Whether to auto hide clock
+         * @hide
+         */
+        public static final String STATUS_BAR_CLOCK_AUTO_HIDE = "status_bar_clock_auto_hide";
+        public static final String STATUS_BAR_CLOCK_AUTO_HIDE_HDURATION = "status_bar_clock_auto_hide_hduration";
+        public static final String STATUS_BAR_CLOCK_AUTO_HIDE_SDURATION = "status_bar_clock_auto_hide_sduration";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
