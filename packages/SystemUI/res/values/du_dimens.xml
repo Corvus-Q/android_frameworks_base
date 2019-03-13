@@ -19,7 +19,7 @@
 
     <!-- Network traffic monitor -->
     <dimen name="net_traffic_multi_text_size">13dp</dimen>
-    <dimen name="net_traffic_txt_img_padding">2dp</dimen>
+    <dimen name="net_traffic_txt_img_padding">1dp</dimen>
 
     <!-- Custom Carrier Label -->
     <dimen name="status_bar_carrier_height">14dp</dimen>
