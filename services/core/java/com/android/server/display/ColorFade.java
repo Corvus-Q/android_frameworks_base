@@ -698,7 +698,9 @@ final class ColorFade {
     }
 
     private static void logEglError(String func) {
-        Slog.e(TAG, func + " failed: error " + EGL14.eglGetError(), new Throwable());
+        if (DEBUG) {
+            Slog.e(TAG, func + " failed: error " + EGL14.eglGetError(), new Throwable());
+        }
     }
 
     private static boolean checkGlErrors(String func) {
