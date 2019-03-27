@@ -5618,14 +5618,6 @@ public final class Settings {
         public static final String FOOTER_TEXT_STRING = "footer_text_string";
 
         /**
-         * Show network traffic indicator
-         * 0 - Statusbar (default)
-         * 1 - QS Header
-         * @hide
-         */
-         public static final String NETWORK_TRAFFIC_VIEW_LOCATION = "network_traffic_view_location";
-
-        /**
          * Whether to vibrate on notifications
          * @hide
          */
@@ -6448,6 +6440,14 @@ public final class Settings {
         public static final String NETWORK_TRAFFIC_HIDEARROW = "network_traffic_hidearrow";
 
         /**
+         * Show network traffic indicator
+         * 0 - Statusbar (default)
+         * 1 - QS Header
+         * @hide
+         */
+        public static final String NETWORK_TRAFFIC_VIEW_LOCATION = "network_traffic_view_location";
+
+        /**
          * Adaptive playback
          * Automatically pause media when the volume is muted and
          * will resume automatically when volume is restored.
@@ -6814,6 +6814,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(STOCK_STATUSBAR_IN_HIDE);
             PRIVATE_SETTINGS.add(HIDE_SMART_REPLIES);
             PRIVATE_SETTINGS.add(FORCE_FULLSCREEN_CUTOUT_APPS);
+            PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_VIEW_LOCATION);
         }
 
         /**
