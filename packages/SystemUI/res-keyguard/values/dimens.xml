@@ -81,8 +81,4 @@
 
     <!-- The translation for disappearing security views after having solved them. -->
     <dimen name="disappear_y_translation">-32dp</dimen>
-
-    <!-- Custom text clock -->
-    <dimen name="custom_clock_left_padding">55dp</dimen>
-    <dimen name="custom_clock_top_margin">62dp</dimen>
 </resources>
