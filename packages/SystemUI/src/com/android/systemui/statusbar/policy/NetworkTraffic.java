@@ -1,8 +1,20 @@
-package com.android.systemui.statusbar.policy;
+/*
+ * Copyright (C) 2019 The PixelDust Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-import static com.android.systemui.statusbar.StatusBarIconView.STATE_DOT;
-import static com.android.systemui.statusbar.StatusBarIconView.STATE_HIDDEN;
-import static com.android.systemui.statusbar.StatusBarIconView.STATE_ICON;
+package com.android.systemui.statusbar.policy;
 
 import java.text.DecimalFormat;
 
@@ -30,12 +42,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.android.internal.util.du.Utils;
-import com.android.systemui.Dependency;
 import com.android.systemui.R;
-import com.android.systemui.plugins.DarkIconDispatcher;
-import com.android.systemui.plugins.DarkIconDispatcher.DarkReceiver;
-import com.android.systemui.statusbar.StatusIconDisplayable;
 
 /*
 *
@@ -43,9 +50,7 @@ import com.android.systemui.statusbar.StatusIconDisplayable;
 * to only use it for a single boolean. 32-bits is plenty of room for what we need it to do.
 *
 */
-public class NetworkTrafficSB extends TextView implements StatusIconDisplayable {
-
-    public static final String SLOT = "networktraffic";
+public class NetworkTraffic extends TextView {
 
     private static final int INTERVAL = 1500; //ms
     private static final int BOTH = 0;
@@ -74,10 +79,6 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
     private boolean mShowArrow;
     private int mAutoHideThreshold;
     private int mTintColor;
-    private int mVisibleState = -1;
-    private boolean mTrafficVisible = false;
-    private boolean mSystemIconVisible = true;
-
     private boolean mScreenOn = true;
 
     private Handler mTrafficHandler = new Handler() {
@@ -105,7 +106,7 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
 
             if (shouldHide(rxData, txData, timeDelta)) {
                 setText("");
-                mTrafficVisible = false;
+                setVisibility(View.GONE);
             } else {
                      String output;
 
@@ -126,12 +127,9 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
                     setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
                     setText(output);
                 }
-                mTrafficVisible = true;
+                setVisibility(View.VISIBLE);
+				updateTextSize();
             }
-	   updateVisibility();
-	   updateTextSize();
-            if (mShowArrow)
-                updateTrafficDrawable();
 
             // Post delayed message to refresh in ~1000ms
             totalRxBytes = newTotalRxBytes;
@@ -208,21 +206,21 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
     /*
      *  @hide
      */
-    public NetworkTrafficSB(Context context) {
+    public NetworkTraffic(Context context) {
         this(context, null);
     }
 
     /*
      *  @hide
      */
-    public NetworkTrafficSB(Context context, AttributeSet attrs) {
+    public NetworkTraffic(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
     /*
      *  @hide
      */
-    public NetworkTrafficSB(Context context, AttributeSet attrs, int defStyle) {
+    public NetworkTraffic(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         final Resources resources = getResources();
         txtImgPadding = resources.getDimensionPixelSize(R.dimen.net_traffic_txt_img_padding);
@@ -245,7 +243,6 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
             filter.addAction(Intent.ACTION_SCREEN_ON);
             mContext.registerReceiver(mIntentReceiver, filter, null, getHandler());
         }
-        Dependency.get(DarkIconDispatcher.class).addDarkReceiver(this);
         updateSettings();
     }
 
@@ -256,7 +253,6 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
             mContext.unregisterReceiver(mIntentReceiver);
             mAttached = false;
         }
-        Dependency.get(DarkIconDispatcher.class).removeDarkReceiver(this);
     }
 
     private final BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
@@ -285,8 +281,7 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
     }
 
     private void updateSettings() {
-        updateVisibility();
-        updateTextSize();
+ 	    updateTextSize();
         if (mIsEnabled) {
             if (mAttached) {
                 totalRxBytes = TrafficStats.getTotalRxBytes();
@@ -298,6 +293,7 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
         } else {
             clearHandlerCallbacks();
         }
+        setVisibility(View.GONE);
     }
 
     private void setMode() {
@@ -313,7 +309,7 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
                 UserHandle.USER_CURRENT);
         mShowArrow = Settings.System.getIntForUser(resolver,
                 Settings.System.NETWORK_TRAFFIC_ARROW, 1,
-                UserHandle.USER_CURRENT) == 1;
+	        UserHandle.USER_CURRENT) == 1;
     }
 
     private void clearHandlerCallbacks() {
@@ -364,69 +360,7 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
         final Resources resources = getResources();
         txtImgPadding = resources.getDimensionPixelSize(R.dimen.net_traffic_txt_img_padding);
         setCompoundDrawablePadding(txtImgPadding);
-        setGravity(Gravity.RIGHT);
-	updateTextSize();
-    }
-
-    @Override
-    public void onDarkChanged(Rect area, float darkIntensity, int tint) {
-        mTintColor = DarkIconDispatcher.getTint(area, this, tint);
-        setTextColor(mTintColor);
-        updateTrafficDrawable();
-    }
-
-    @Override
-    public String getSlot() {
-        return SLOT;
-    }
-
-    @Override
-    public boolean isIconVisible() {
-        return mIsEnabled;
-    }
-
-    @Override
-    public int getVisibleState() {
-        return mVisibleState;
-    }
-
-    @Override
-    public void setVisibleState(int state, boolean animate) {
-        if (state == mVisibleState) {
-            return;
-        }
-        mVisibleState = state;
-
-        switch (state) {
-            case STATE_ICON:
-                mSystemIconVisible = true;
-                break;
-            case STATE_DOT:
-            case STATE_HIDDEN:
-            default:
-                mSystemIconVisible = false;
-                break;
-        }
-        updateVisibility();
-    }
-
-    private void updateVisibility() {
-        if (!Utils.hasNotch(mContext) && mIsEnabled &&
-                mTrafficVisible && mSystemIconVisible) {
-            setVisibility(View.VISIBLE);
-        } else {
-            setVisibility(View.GONE);
-        }
-    }
-
-    @Override
-    public void setStaticDrawableColor(int color) {
-        mTintColor = color;
-        setTextColor(mTintColor);
-        updateTrafficDrawable();
-    }
-
-    @Override
-    public void setDecorColor(int color) {
+	    updateTextSize();
     }
 }
+
