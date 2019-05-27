@@ -585,6 +585,8 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     private VisualizerView mVisualizerView;
 
+    private boolean mChargingAnimation;
+
     private boolean mWallpaperSupportsAmbientMode;
 
     // LS visualizer on Ambient Display
@@ -2280,6 +2282,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.BACK_SWIPE_EXTENDED),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.LOCKSCREEN_CHARGING_ANIMATION),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -2319,6 +2324,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             } else if (uri.equals(Settings.System.getUriFor(Settings.System.GAMING_MODE_ACTIVE)) ||
                     uri.equals(Settings.System.getUriFor(Settings.System.GAMING_MODE_HEADSUP_TOGGLE))) {
                 updateGamingPeekMode();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.LOCKSCREEN_CHARGING_ANIMATION))) {
+                updateChargingAnimation();
             }
             update();
         }
@@ -2343,6 +2351,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         updateTickerTickDuration();
         updateKeyguardStatusSettings();
         updateNavigationBarVisibility();
+        updateChargingAnimation();
         }
     }
 
@@ -2508,6 +2517,14 @@ public class StatusBar extends SystemUI implements DemoMode,
     private void setGestureNavOptions() {
         if (getNavigationBarView() != null) {
             getNavigationBarView().setLongSwipeOptions();
+        }
+    }
+
+    private void updateChargingAnimation() {
+        mChargingAnimation = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.LOCKSCREEN_CHARGING_ANIMATION, 1, UserHandle.USER_CURRENT) == 1;
+        if (mKeyguardIndicationController != null) {
+            mKeyguardIndicationController.updateChargingIndication(mChargingAnimation);
         }
     }
 
