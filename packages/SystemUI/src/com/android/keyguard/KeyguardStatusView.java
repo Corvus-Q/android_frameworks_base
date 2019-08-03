@@ -35,6 +35,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Slog;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
@@ -306,11 +307,11 @@ public class KeyguardStatusView extends GridLayout implements
             mClockView.setFormat12Hour("hh\nmm");
             mClockView.setFormat24Hour("kk\nmm");
         } else if (mClockSelection == 6) {
-            mClockView.setFormat12Hour(Html.fromHtml("<font color=" + getResources().getColor(R.color.accent_device_default_light) + ">hh</font><br>mm"));
-            mClockView.setFormat24Hour(Html.fromHtml("<font color=" + getResources().getColor(R.color.accent_device_default_light) + ">kk</font><br>mm"));
+            mClockView.setFormat12Hour(Html.fromHtml("<font color=" + getResources().getColor(R.color.custom_text_clock_top_color) + ">hh</font><br>mm"));
+            mClockView.setFormat24Hour(Html.fromHtml("<font color=" + getResources().getColor(R.color.custom_text_clock_top_color) + ">kk</font><br>mm"));
         } else if (mClockSelection == 7) {
-            mClockView.setFormat12Hour(Html.fromHtml("hh<br><font color=" + getResources().getColor(R.color.accent_device_default_light) + ">mm</font>"));
-            mClockView.setFormat24Hour(Html.fromHtml("kk<br><font color=" + getResources().getColor(R.color.accent_device_default_light) + ">mm</font>"));
+            mClockView.setFormat12Hour(Html.fromHtml("hh<br><font color=" + getResources().getColor(R.color.custom_text_clock_top_color) + ">mm</font>"));
+            mClockView.setFormat24Hour(Html.fromHtml("kk<br><font color=" + getResources().getColor(R.color.custom_text_clock_top_color) + ">mm</font>"));
         } else if (mClockSelection == 8) {
             mTextClock.onTimeChanged();
         } else {
@@ -727,6 +728,14 @@ public class KeyguardStatusView extends GridLayout implements
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)
                 mKeyguardSlice.getLayoutParams();
 
+        RelativeLayout.LayoutParams textClockParams = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
+        textClockParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+
+        int leftPadding = (int) getResources().getDimension(R.dimen.custom_clock_left_padding);
+        int topPadding = (int) getResources().getDimension(R.dimen.custom_clock_top_margin);
+
         mSmallClockView = findViewById(R.id.clock_view);
         mDefaultClockView = findViewById(R.id.default_clock_view);
         mTextClock = findViewById(R.id.custom_text_clock_view);
@@ -777,6 +786,13 @@ public class KeyguardStatusView extends GridLayout implements
                 params.addRule(RelativeLayout.BELOW, R.id.custom_text_clock_view);
                 break;
         }
+        if (mTextClock != null) {
+	    mTextClock.setGravity(Gravity.CENTER);
+	    mTextClock.setLayoutParams(textClockParams);
+	    mTextClock.setPaddingRelative(0, topPadding, 0, 0);
+	} else {
+	    mTextClock.setPaddingRelative(leftPadding, topPadding, 0, 0);
+	}
     }
 
     private void updateDateStyles() {
