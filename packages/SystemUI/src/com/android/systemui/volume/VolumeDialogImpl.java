@@ -168,6 +168,7 @@ public class VolumeDialogImpl implements VolumeDialog,
     private View mODICaptionsTooltipView = null;
 
     private boolean mLeftVolumeRocker;
+    private boolean mHasAlertSlider;
 
     private boolean isMediaShowing = false;
     private boolean isRingerShowing = false;
@@ -230,6 +231,7 @@ public class VolumeDialogImpl implements VolumeDialog,
         mShowActiveStreamOnly = showActiveStreamOnly();
         mHasSeenODICaptionsTooltip =
                 Prefs.getBoolean(context, Prefs.Key.HAS_SEEN_ODI_CAPTIONS_TOOLTIP, false);
+        mHasAlertSlider = mContext.getResources().getBoolean(com.android.internal.R.bool.config_hasAlertSlider);
 
         settingsObserver = new SettingsObserver(mHandler);
         settingsObserver.observe();
@@ -342,13 +344,13 @@ public class VolumeDialogImpl implements VolumeDialog,
         if (mHasSeenODICaptionsTooltip && mODICaptionsTooltipViewStub != null) {
             mDialogView.removeView(mODICaptionsTooltipViewStub);
             mODICaptionsTooltipViewStub = null;
-        }else if (mODICaptionsTooltipViewStub != null){
-            if(!mLeftVolumeRocker) {
-                mRinger.setForegroundGravity(Gravity.BOTTOM | Gravity.RIGHT);
-            } else {
-                mRinger.setForegroundGravity(Gravity.BOTTOM | Gravity.LEFT);
-            }
-
+        if (mHasAlertSlider) {
+            mRinger.setVisibility(View.GONE);
+        }
+        if(!mLeftVolumeRocker) {
+            mRinger.setForegroundGravity(Gravity.BOTTOM | Gravity.RIGHT);
+        } else {
+            mRinger.setForegroundGravity(Gravity.BOTTOM | Gravity.LEFT);
         }
 
         mSettingsView = mDialog.findViewById(R.id.settings_container);
