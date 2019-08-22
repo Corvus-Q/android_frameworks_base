@@ -210,4 +210,7 @@
     <string name="animation_random">Random</string>
     <string name="action_null">Blank</string>
     <string name="animation_ethans">Ethans</string>
+
+    <!-- Whether device supports internal audio recording -->
+    <bool name="config_hasInternalAudioRecordingSupport">true</bool>
 </resources>
