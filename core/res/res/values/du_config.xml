@@ -188,4 +188,7 @@
 
     <!-- Whether to use scaled brightness (set -1 to disable) -->
     <integer name="config_useScaleBrightness">-1</integer>
+
+    <!-- Whether to send camera status intent -->
+    <bool name="config_sendCameraStatusIntent">false</bool>
 </resources>
