@@ -22,12 +22,21 @@
     android:layout_height="@*android:dimen/quick_qs_offset_height"
     android:clipChildren="false"
     android:clipToPadding="false"
+    android:gravity="center"
     android:orientation="horizontal"
     android:clickable="true"
     android:paddingStart="@dimen/status_bar_padding_start"
     android:paddingEnd="@dimen/status_bar_padding_end"
     android:paddingTop="@dimen/status_bar_padding_top" 
     android:background="@android:color/transparent" >
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center_vertical|start" >
 
     <com.android.systemui.statusbar.policy.Clock
         android:id="@+id/clock"
@@ -40,13 +49,17 @@
         android:singleLine="true"
         android:textAppearance="@style/TextAppearance.StatusBar.Clock"
         systemui:showDark="false" />
+    </LinearLayout>
 
     <android.widget.Space
         android:id="@+id/space"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:gravity="center_vertical|center_horizontal" />
+        android:gravity="center_vertical|center_horizontal"
+        android:visibility="gone" />
+
+        <include layout="@layout/ongoing_privacy_chip" />
 
     <com.android.systemui.statusbar.policy.NetworkTrafficQS
         android:id="@+id/networkTraffic"
