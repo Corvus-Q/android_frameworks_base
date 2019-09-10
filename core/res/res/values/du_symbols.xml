@@ -95,4 +95,7 @@
   <!-- Alternative keyhandler -->
   <java-symbol type="string" name="config_alternativeDeviceKeyHandlerLib" />
   <java-symbol type="string" name="config_alternativeDeviceKeyHandlerClass" />
+
+  <!-- Post reset runnable for all clients -->
+  <java-symbol type="bool" name="config_fingerprintPostResetRunnableForAllClients" />
 </resources>
