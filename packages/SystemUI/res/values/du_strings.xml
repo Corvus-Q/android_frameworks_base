@@ -205,4 +205,10 @@
     <string name="quick_settings_network_adb_enabled_label">ADB over Network</string>
     <string name="quick_settings_network_adb_disabled_label">ADB over Network</string>
     <string name="adb_network_forced_tcp_warn">ADB network forced enabled on port: <xliff:g id="port">%1$s</xliff:g></string>
+
+    <!-- HW Keys Tile -->
+    <string name="accessibility_quick_settings_hwkeys_on">HW keys on</string>
+    <string name="accessibility_quick_settings_hwkeys_off">HW keys off</string>
+    <string name="quick_settings_hwkeys_label">HW Keys</string>
+
 </resources>

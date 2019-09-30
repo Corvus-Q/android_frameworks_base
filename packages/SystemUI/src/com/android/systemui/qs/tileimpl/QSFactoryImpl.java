@@ -43,6 +43,7 @@ import com.android.systemui.qs.tiles.FlashlightTile;
 import com.android.systemui.qs.tiles.GamingModeTile;
 import com.android.systemui.qs.tiles.HeadsUpTile;
 import com.android.systemui.qs.tiles.HotspotTile;
+import com.android.systemui.qs.tiles.HWKeysTile;
 import com.android.systemui.qs.tiles.ImmersiveTile;
 import com.android.systemui.qs.tiles.IntentTile;
 import com.android.systemui.qs.tiles.LocationTile;
@@ -103,6 +104,7 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<CaffeineTile> mCaffeineTileProvider;
     private final Provider<ScreenStabilizationTile> mScreenStabilizationTileProvider;
     private final Provider<AdbOverNetworkTile> mAdbOverNetworkTileProvider;
+    private final Provider<HWKeysTile> mHWKeysTileProvider;
 
     private QSTileHost mHost;
 
@@ -138,7 +140,8 @@ public class QSFactoryImpl implements QSFactory {
             Provider<ImmersiveTile> immersiveTileProvider,
             Provider<CaffeineTile> caffeineTileProvider,
             Provider<ScreenStabilizationTile> screenStabilizationTileProvider,
-            Provider<AdbOverNetworkTile> adbOverNetworkTileProvider) {
+            Provider<AdbOverNetworkTile> adbOverNetworkTileProvider,
+            Provider<HWKeysTile> hWKeysTileProvider) {
         mWifiTileProvider = wifiTileProvider;
         mBluetoothTileProvider = bluetoothTileProvider;
         mCellularTileProvider = cellularTileProvider;
@@ -171,6 +174,7 @@ public class QSFactoryImpl implements QSFactory {
         mCaffeineTileProvider = caffeineTileProvider;
         mScreenStabilizationTileProvider = screenStabilizationTileProvider;
         mAdbOverNetworkTileProvider = adbOverNetworkTileProvider;
+        mHWKeysTileProvider = hWKeysTileProvider;
     }
 
     public void setHost(QSTileHost host) {
@@ -254,6 +258,8 @@ public class QSFactoryImpl implements QSFactory {
                 return mScreenStabilizationTileProvider.get();
             case "adb_network":
                 return mAdbOverNetworkTileProvider.get();
+            case "hwkeys":
+                return mHWKeysTileProvider.get();
         }
 
         // Intent tiles.
