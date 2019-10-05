@@ -130,4 +130,7 @@
   <!-- True if the notification's dynamic app icon and text tint should be optimised for dark
        backgrounds -->
   <java-symbol type="bool" name="config_useDarkBgNotificationIconTextTinting" />
+
+  <!-- Pulse brightness -->
+  <java-symbol type="integer" name="config_screenBrightnessPulse" />
 </resources>
