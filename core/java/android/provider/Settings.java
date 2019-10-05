@@ -5004,6 +5004,13 @@ public final class Settings {
                 "double_tap_sleep_lockscreen";
 
         /**
+         * Unlock keystore with fingerprint after reboot
+         * @hide
+         */
+        public static final String FP_UNLOCK_KEYSTORE = "fp_unlock_keystore";
+
+
+        /**
          * Whether to show battery percent on ambient bottom
          * @hide
          */
