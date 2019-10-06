@@ -40,6 +40,7 @@ import com.android.systemui.shared.system.QuickStepContract;
 import com.android.systemui.statusbar.phone.ReverseLinearLayout.ReverseRelativeLayout;
 import com.android.systemui.statusbar.policy.KeyButtonView;
 import com.android.systemui.tuner.TunerService;
+import com.android.systemui.tuner.TunerService.Tunable;
 
 import java.util.Objects;
 
@@ -156,6 +157,7 @@ public class NavigationBarInflaterView extends FrameLayout
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         Dependency.get(TunerService.class).addTunable(this, NAV_BAR_INVERSE);
+        Dependency.get(TunerService.class).addTunable(this, NAV_BAR_VIEWS);
     }
 
     @Override
@@ -170,6 +172,9 @@ public class NavigationBarInflaterView extends FrameLayout
         if (NAV_BAR_INVERSE.equals(key)) {
             mInverseLayout = TunerService.parseIntegerSwitch(newValue, false);
             updateLayoutInversion();
+        }
+        if (NAV_BAR_VIEWS.equals(key)) {
+            setNavigationBarLayout(newValue);
         }
     }
 
