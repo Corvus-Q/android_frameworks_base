@@ -6397,6 +6397,61 @@ public final class Settings {
         public static final String STATUS_BAR_SHOW_BATTERY_PERCENT = "status_bar_show_battery_percent";
 
         /**
+         * Whether to enable PULSE Edge lights
+         * @hide
+         */
+        public static final String PULSE_AMBIENT_LIGHT = "pulse_ambient_light";
+
+        private static final Validator PULSE_AMBIENT_LIGHT_VALIDATOR = BOOLEAN_VALIDATOR;
+
+        /**
+         * Whether to enable Ambient Edge lights
+         * @hide
+         */
+        public static final String AMBIENT_NOTIFICATION_LIGHT_ENABLED = "ambient_notification_light_enabled";
+
+        private static final Validator AMBIENT_NOTIFICATION_LIGHT_ENABLED_VALIDATOR = BOOLEAN_VALIDATOR;
+
+        /**
+         * Whether to enable Ambient Edge lights
+         * @hide
+         */
+        public static final String AMBIENT_NOTIFICATION_LIGHT = "ambient_notification_light";
+
+        private static final Validator AMBIENT_NOTIFICATION_LIGHT_VALIDATOR = BOOLEAN_VALIDATOR;
+
+        /**
+         * Whether Ambient Edge lights are activated
+         * @hide
+         */
+        public static final String AMBIENT_NOTIFICATION_LIGHT_ACTIVATED = "ambient_notification_light_activated";
+
+        private static final Validator AMBIENT_NOTIFICATION_LIGHT_ACTIVATED_VALIDATOR = BOOLEAN_VALIDATOR;
+
+        /**
+         * Whether hide everything on aod when  ambient lights are enabled
+         * @hide
+         */
+        public static final String AMBIENT_NOTIFICATION_LIGHT_HIDE_AOD = "ambient_notification_light_hide_aod";
+
+        private static final Validator AMBIENT_NOTIFICATION_LIGHT_HIDE_AOD_VALIDATOR = BOOLEAN_VALIDATOR;
+
+        /**
+         * Whether to use accent color for pulse
+         * @hide
+         */
+        public static final String AMBIENT_NOTIFICATION_LIGHT_ACCENT = "ambient_notification_light_accent";
+
+        private static final Validator AMBIENT_NOTIFICATION_LIGHT_ACCENT_VALIDATOR = BOOLEAN_VALIDATOR;
+
+        /**
+         * helper setting to contain the current pulse reason so we can check
+         * if it has been triggered from a notification or a gesture
+         * @hide
+         */
+        public static final String PULSE_TRIGGER_REASON = "pulse_trigger_reason";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -6533,6 +6588,12 @@ public final class Settings {
             HEADSET_CONNECT_PLAYER,
             NOTIFICATION_HEADERS,
             NAVIGATION_HANDLE_WIDTH,
+            PULSE_AMBIENT_LIGHT,
+            AMBIENT_NOTIFICATION_LIGHT,
+            AMBIENT_NOTIFICATION_LIGHT_ACTIVATED,
+            AMBIENT_NOTIFICATION_LIGHT_ENABLED,
+            AMBIENT_NOTIFICATION_LIGHT_HIDE_AOD,
+            AMBIENT_NOTIFICATION_LIGHT_ACCENT,
         };
 
         /**
@@ -6740,6 +6801,8 @@ public final class Settings {
             PRIVATE_SETTINGS.add(HEADSET_CONNECT_PLAYER);
             PRIVATE_SETTINGS.add(QS_PANEL_BG_USE_NEW_TINT);
             PRIVATE_SETTINGS.add(NAVIGATION_HANDLE_WIDTH);
+            PRIVATE_SETTINGS.add(PULSE_AMBIENT_LIGHT);
+            PRIVATE_SETTINGS.add(AMBIENT_NOTIFICATION_LIGHT_ENABLED);
         }
 
         /**
@@ -6921,6 +6984,12 @@ public final class Settings {
             VALIDATORS.put(NOTIFICATION_HEADERS, NOTIFICATION_HEADERS_VALIDATOR);
             VALIDATORS.put(QS_PANEL_BG_USE_NEW_TINT, QS_PANEL_BG_USE_NEW_TINT_VALIDATOR);
             VALIDATORS.put(NAVIGATION_HANDLE_WIDTH, NAVIGATION_HANDLE_WIDTH_VALIDATOR);
+            VALIDATORS.put(PULSE_AMBIENT_LIGHT, PULSE_AMBIENT_LIGHT_VALIDATOR);
+            VALIDATORS.put(AMBIENT_NOTIFICATION_LIGHT, AMBIENT_NOTIFICATION_LIGHT_VALIDATOR);
+            VALIDATORS.put(AMBIENT_NOTIFICATION_LIGHT_ACTIVATED, AMBIENT_NOTIFICATION_LIGHT_ACTIVATED_VALIDATOR);
+            VALIDATORS.put(AMBIENT_NOTIFICATION_LIGHT_ENABLED, AMBIENT_NOTIFICATION_LIGHT_ENABLED_VALIDATOR);
+            VALIDATORS.put(AMBIENT_NOTIFICATION_LIGHT_HIDE_AOD, AMBIENT_NOTIFICATION_LIGHT_HIDE_AOD_VALIDATOR);
+            VALIDATORS.put(AMBIENT_NOTIFICATION_LIGHT_ACCENT, AMBIENT_NOTIFICATION_LIGHT_ACCENT_VALIDATOR);
         }
 
         /**

@@ -254,5 +254,7 @@
 
   <!-- The location of the devices physical tri state switch -->
   <java-symbol type="integer" name="config_alertSliderLocation" />
-  
+
+  <!-- Ambient Pulse Light -->
+  <java-symbol type="integer" name="config_AmbientPulseLightColor" />  
 </resources>
