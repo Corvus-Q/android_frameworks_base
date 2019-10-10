@@ -6335,6 +6335,12 @@ public final class Settings {
          */
         public static final String DISMISS_ALL_BUTTON = "dismiss_all_button";
 
+        /** 
+         * Use doubletap as doze pulse triggers
+         * @hide
+         */
+        public static final String DOZE_TRIGGER_DOUBLETAP = "doze_trigger_doubletap";
+
         /**
          * Control how to handle the display cutout
          * @hide
