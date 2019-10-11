@@ -18,7 +18,6 @@
     <dimen name="screenrecord_dot_size">48dp</dimen>
 
     <!-- Network traffic monitor -->
-    <dimen name="net_traffic_multi_text_size">11dp</dimen>
     <dimen name="net_traffic_txt_img_padding">1dp</dimen>
 
     <!-- Custom Carrier Label -->
