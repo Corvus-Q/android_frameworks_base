@@ -246,4 +246,13 @@
 
   <!-- Bootleg unneccesary gradient declaration | Just for our shishu bars -->
   <java-symbol type="color" name="bootleg_accent_gradient_end_color" />
+
+  <!-- Pocket Lock -->
+  <java-symbol type="layout" name="pocket_lock_view_layout" />
+  <java-symbol type="id" name="pocket_hint_container" />
+  <java-symbol type="id" name="pocket_hint_image" />
+  <java-symbol type="id" name="pocket_hint_message" />
+
+  <!-- Pocket bridge -->
+  <java-symbol type="string" name="config_pocketBridgeSysfsInpocket" />
 </resources>
