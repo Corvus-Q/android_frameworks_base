@@ -1209,7 +1209,6 @@ public class NetworkControllerImpl extends BroadcastReceiver
                         b.getInt(CarrierConfigManager.KEY_5G_ICON_DISPLAY_GRACE_PERIOD_SEC_INT),
                         config);
             }
-
             config.showVolteIcon = res.getBoolean(R.bool.config_display_volte);
             return config;
         }
