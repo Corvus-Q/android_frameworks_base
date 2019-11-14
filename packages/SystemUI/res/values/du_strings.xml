@@ -24,6 +24,13 @@
     <!-- Label for header of customize QS -->
     <string name="drag_or_tap_to_rearrange_tiles">Hold &amp; drag to rearrange or tap to remove</string>
 
+    <!-- Name of the camera status bar icon. -->
+    <string name="status_bar_camera">Camera</string>
+    <!-- Name of the location status bar icon. -->
+    <string name="status_bar_location">Location</string>
+    <!-- Name of the microphone status bar icon. -->
+    <string name="status_bar_microphone">Microphone</string>
+
     <!-- Screen record -->
     <string name="screenrecord_dialog_title">Start recording?</string>
     <string name="screenrecord_dialog_summary">While recording, Android system can capture any sensitive information that\'s visible on your screen or played on your device. This includes passwords, payment info, photos, messages, and audio.</string>
