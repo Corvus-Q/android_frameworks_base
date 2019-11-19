@@ -267,7 +267,7 @@ public class AssistManager {
     }
 
     protected boolean shouldShowOrb() {
-        return false;
+        return true;
     }
 
     public void startAssist(Bundle args) {
