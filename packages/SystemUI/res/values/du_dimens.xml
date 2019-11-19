@@ -14,5 +14,9 @@
      limitations under the License.
 -->
 <resources>
+    <!-- Network traffic monitor -->
+    <dimen name="net_traffic_multi_text_size">8dp</dimen>
+    <dimen name="net_traffic_txt_img_padding">2dp</dimen>
+
     <dimen name="screenrecord_dot_size">48dp</dimen>
 </resources>
