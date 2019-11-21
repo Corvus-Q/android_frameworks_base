@@ -331,6 +331,8 @@ public final class SystemServer {
     private Future<?> mSensorServiceStart;
     private Future<?> mZygotePreload;
 
+    public boolean safeMode = false;
+
     private int mForcedTcp = -1;
 
     /**
@@ -1116,7 +1118,9 @@ public final class SystemServer {
 
         // Before things start rolling, be sure we have decided whether
         // we are in safe mode.
-        final boolean safeMode = wm.detectSafeMode();
+        if(wm != null) {
+            safeMode = wm.detectSafeMode();
+        }
         if (safeMode) {
             // If yes, immediately turn on the global setting for airplane mode.
             // Note that this does not send broadcasts at this stage because
@@ -1846,6 +1850,7 @@ public final class SystemServer {
 
             traceBeginAndSlog("StartCrossProfileAppsService");
             mSystemServiceManager.startService(CrossProfileAppsService.class);
+            traceEnd();
 
             traceBeginAndSlog("StartPocketService");
             mSystemServiceManager.startService(PocketService.class);
