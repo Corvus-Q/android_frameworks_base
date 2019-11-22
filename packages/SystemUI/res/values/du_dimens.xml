@@ -62,4 +62,7 @@
     <dimen name="config_customCutoutTopHeight">0.0px</dimen>
     <dimen name="config_customCutoutBottomWidth">0.0px</dimen>
     <dimen name="config_customCutoutBottomHeight">0.0px</dimen>
+
+    <!-- The starting padding for the clock in the status bar. -->
+    <dimen name="status_bar_right_clock_starting_padding">2dp</dimen>
 </resources>
