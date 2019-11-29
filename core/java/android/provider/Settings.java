@@ -5362,6 +5362,12 @@ public final class Settings {
         private static final Validator STATUS_BAR_FILE_HEADER_IMAGE_VALIDATOR = ANY_STRING_VALIDATOR;
 
         /**
+         * Whether to show battery estimates in QS
+         * @hide
+         */
+        public static final String QS_SHOW_BATTERY_ESTIMATE = "qs_show_battery_estimate";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
