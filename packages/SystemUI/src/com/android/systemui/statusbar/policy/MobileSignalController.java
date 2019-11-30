@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.database.ContentObserver;
+import android.graphics.drawable.Drawable;
 import android.net.NetworkCapabilities;
 import android.net.Uri;
 import android.os.Handler;
@@ -106,11 +107,12 @@ public class MobileSignalController extends SignalController<
     private int mCallState = TelephonyManager.CALL_STATE_IDLE;
 
     private boolean mShow4gForLte;
+    private boolean mDataDisabledIcon;
+    private boolean mRoamingIconAllowed;
 
     // Volte Icon
     private boolean mVoLTEicon;
-    private boolean mDataDisabledIcon;
-    private boolean mRoamingIconAllowed;
+    private int mVoLTEstyle;
 
     // TODO: Reduce number of vars passed in, if we have the NetworkController, probably don't
     // need listener lists anymore.
@@ -201,6 +203,9 @@ public class MobileSignalController extends SignalController<
             resolver.registerContentObserver(
                     Settings.System.getUriFor(Settings.System.ROAMING_INDICATOR_ICON), false,
                     this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(
+	           Settings.System.getUriFor(Settings.System.VOLTE_ICON_STYLE), false,
+		  this, UserHandle.USER_ALL);
             updateSettings();
         }
 
@@ -228,9 +233,12 @@ public class MobileSignalController extends SignalController<
         mRoamingIconAllowed = Settings.System.getIntForUser(resolver,
                 Settings.System.ROAMING_INDICATOR_ICON, 1,
                 UserHandle.USER_CURRENT) == 1;
-
+        mVoLTEstyle = Settings.System.getIntForUser(resolver,
+                Settings.System.VOLTE_ICON_STYLE, 0,
+                UserHandle.USER_CURRENT);
         mapIconSets();
         updateTelephony();
+        notifyListeners();
     }
 
     public void setConfiguration(Config config) {
@@ -416,8 +424,26 @@ public class MobileSignalController extends SignalController<
     private int getVolteResId() {
         int resId = 0;
 
-        if ( mCurrentState.isVolteRegistered && mVoLTEicon) {
-            resId = R.drawable.ic_volte;
+        if (mCurrentState.isVolteRegistered && mVoLTEicon) {
+            switch(mVoLTEstyle) {
+                // VoLTE
+                case 1:
+                    resId = R.drawable.ic_volte1;
+                    break;
+                // OOS VoLTE
+                case 2:
+                    resId = R.drawable.ic_volte2;
+                    break;
+                // HD Icon
+                case 3:
+                    resId = R.drawable.ic_hd_volte;
+                    break;
+ 	        //Vo
+                case 0:
+                default:
+                    resId = R.drawable.ic_volte;
+                    break;
+            }
         }
         return resId;
     }
