@@ -190,6 +190,19 @@ public class Utils {
                 }
             }
         }
+
+        public static void setPartialScreenshot(boolean active) {
+            IStatusBarService service = getStatusBarService();
+            if (service != null) {
+                try {
+                    service.setPartialScreenshot(active);
+                } catch (RemoteException e) {}
+            }
+        }
+    }
+
+    public static void setPartialScreenshot(boolean active) {
+        FireActions.setPartialScreenshot(active);
     }
 
     // Method to check if task is in lock task mode

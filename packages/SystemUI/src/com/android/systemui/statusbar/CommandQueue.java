@@ -118,6 +118,7 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController<
     private static final int MSG_RECENTS_ANIMATION_STATE_CHANGED = 47 << MSG_SHIFT;
     private static final int MSG_TOGGLE_CAMERA_FLASH           = 48 << MSG_SHIFT;
     private static final int MSG_RESTART_UI                    = 49 << MSG_SHIFT;
+    private static final int MSG_PARTIAL_SCREENSHOT_ACTIVE           = 91 << MSG_SHIFT;
 
     public static final int FLAG_EXCLUDE_NONE = 0;
     public static final int FLAG_EXCLUDE_SEARCH_PANEL = 1 << 0;
@@ -279,8 +280,9 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController<
         default void onBiometricHelp(String message) { }
         default void onBiometricError(String error) { }
         default void hideBiometricDialog() { }
-	default void toggleCameraFlash() { }
-	default void restartUI() { }
+        default void toggleCameraFlash() { }
+        default void restartUI() { }
+        default void setPartialScreenshot(boolean active) { }
 
         /**
          * @see IStatusBar#onDisplayReady(int)
@@ -844,6 +846,14 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController<
         }
     }
 
+    @Override
+    public void setPartialScreenshot(boolean active) {
+        synchronized (mLock) {
+            mHandler.removeMessages(MSG_PARTIAL_SCREENSHOT_ACTIVE);
+            mHandler.obtainMessage(MSG_PARTIAL_SCREENSHOT_ACTIVE, active).sendToTarget();
+        }
+    }
+
     private final class H extends Handler {
         private H(Looper l) {
             super(l);
@@ -1117,6 +1127,11 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController<
                 case MSG_RESTART_UI:
                     for (int i = 0; i < mCallbacks.size(); i++) {
                         mCallbacks.get(i).restartUI();
+                    }
+                    break;
+                case MSG_PARTIAL_SCREENSHOT_ACTIVE:
+                    for (int i = 0; i < mCallbacks.size(); i++) {
+                        mCallbacks.get(i).setPartialScreenshot((Boolean) msg.obj);
                     }
                     break;
             }
