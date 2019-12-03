@@ -206,6 +206,9 @@ public class MobileSignalController extends SignalController<
             resolver.registerContentObserver(
 	           Settings.System.getUriFor(Settings.System.VOLTE_ICON_STYLE), false,
 		  this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(
+                    Settings.System.getUriFor(Settings.System.USE_OLD_MOBILETYPE), false,
+                    this, UserHandle.USER_ALL);
             updateSettings();
         }
 
