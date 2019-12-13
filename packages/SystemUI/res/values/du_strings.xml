@@ -116,6 +116,8 @@
     <!-- Navbar -->
     <string name="systemui_tuner_navbar_title">Layout</string>
     <string name="navigation_bar_format_title">Navbar format</string>
+    <string name="navigation_bar_accessibility_dpad_left">Cursor left</string>
+    <string name="navigation_bar_accessibility_dpad_right">Cursor right</string>
 
     <!-- Theme tile -->
     <string name="system_theme_style_title">Theme</string>
