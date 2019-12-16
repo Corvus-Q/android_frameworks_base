@@ -38,6 +38,7 @@ import android.graphics.Point;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.os.Looper;
+import android.os.PowerManager;
 import android.os.RemoteException;
 import android.provider.Settings;
 import android.view.Display;
@@ -92,6 +93,9 @@ public class FODCircleView extends ImageView {
     private LockPatternUtils mLockPatternUtils;
 
     private Timer mBurnInProtectionTimer;
+
+    private PowerManager mPowerManager;
+    private PowerManager.WakeLock mWakeLock;
 
     private FODAnimation mFODAnimation;
     private boolean mIsRecognizingAnimEnabled;
@@ -277,13 +281,15 @@ public class FODCircleView extends ImageView {
         updateStyle();
         updatePosition();
         hide();
-        
+
         mLockPatternUtils = new LockPatternUtils(mContext);
 
         mUpdateMonitor = KeyguardUpdateMonitor.getInstance(context);
         mUpdateMonitor.registerCallback(mMonitorCallback);
-        
-        mCanUnlockWithFp = canUnlockWithFp();
+
+        mPowerManager = context.getSystemService(PowerManager.class);
+        mWakeLock = mPowerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+                FODCircleView.class.getSimpleName());
 
         mFODAnimation = new FODAnimation(context, mPositionX, mPositionY);
     }
@@ -384,6 +390,10 @@ public class FODCircleView extends ImageView {
         mIsCircleShowing = true;
 
         setKeepScreenOn(true);
+
+        if (mIsDreaming) {
+            mWakeLock.acquire(300);
+        }
 
         setDim(true);
         dispatchPress();
