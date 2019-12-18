@@ -17,6 +17,7 @@
 package com.android.internal.util.du;
 
 import android.Manifest;
+import android.app.ActivityManagerNative;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -168,6 +169,15 @@ public class Utils {
                     // do nothing.
                 }
             }
+        }
+    }
+
+    // Method to check if task is in lock task mode
+    public static boolean isInLockTaskMode() {
+        try {
+            return ActivityManagerNative.getDefault().isInLockTaskMode();
+        } catch (RemoteException e) {
+            return false;
         }
     }
 }
