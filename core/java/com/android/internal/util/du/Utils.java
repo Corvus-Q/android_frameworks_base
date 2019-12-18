@@ -262,4 +262,15 @@ public class Utils {
         int mode = mUiModeManager.getNightMode();
         return (mode == UiModeManager.MODE_NIGHT_YES);
     }
+
+    // Method to detect navigation bar is in use
+    public static boolean hasNavigationBar(Context context) {
+        boolean hasNavbar = false;
+        IWindowManager wm = WindowManagerGlobal.getWindowManagerService();
+        try {
+            hasNavbar = wm.hasNavigationBar(context.getDisplayId());
+        } catch (RemoteException ex) {
+        }
+        return hasNavbar;
+    }
 }
