@@ -5523,6 +5523,20 @@ public final class Settings {
         private static final Validator PULSE_AMBIENT_LIGHT_DURATION_VALIDATOR = ANY_INTEGER_VALIDATOR;
 
         /**
+         ** Change fonts for the system lockscreen clock widget
+         **
+         ** @hide
+         **/
+        public static final String CUSTOM_TEXT_CLOCK_FONTS = "custom_text_clock_fonts";
+
+        /**
+         * Change font size for the lockscreen text clock widget
+         *
+         * @hide
+         */
+        public static final String CUSTOM_TEXT_CLOCK_FONT_SIZE = "custom_text_clock_font_size";
+
+        /**
          * Change fonts for the system lockscreen clock widget
          *
          * @hide
