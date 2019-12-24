@@ -38,7 +38,7 @@ LOCAL_REQUIRED_MODULES := \
 	FontSonySketchSourceOverlay \
 	FontSurferSourceOverlay \
 	FontCircularStdOverlay \
-	FontOnePlusSlateOverlay \
+	FontSlateForOnePlusOverlay \
 	IconPackCircularAndroidOverlay \
 	IconPackCircularLauncherOverlay \
 	IconPackCircularSettingsOverlay \
