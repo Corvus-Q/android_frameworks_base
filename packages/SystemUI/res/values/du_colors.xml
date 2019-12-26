@@ -22,6 +22,8 @@
     <color name="config_fodColor">#00ff00</color>
 
     <color name="accent_device_default_light">@*android:color/accent_device_default_light</color>
+    <color name="recents_dismiss_all_background_color">@android:color/white</color>
+    <color name="recents_dismiss_all_icon_color">#8a000000</color>
 
     <!-- Power Menu -->
     <color name="powermenu_icon_tint">@*android:color/accent_device_default_light</color>
@@ -63,5 +65,6 @@
     <color name="quick_settings_theme_tile_red">#FF990C04</color>
     <color name="quick_settings_theme_tile_teal">#FF009688</color>
     <color name="quick_settings_theme_tile_yellow">#FFFFEB3B</color>
+
 </resources>
 
