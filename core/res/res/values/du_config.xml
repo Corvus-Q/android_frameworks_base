@@ -160,4 +160,7 @@
         <item>com.trtf.blue</item>   
         <item>com.facebook.katana.LoginActivity</item> 
     </string-array>
+
+    <!-- Soli -->
+    <bool name="config_has_Soli">false</bool>
 </resources>
