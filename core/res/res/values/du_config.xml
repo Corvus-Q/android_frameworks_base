@@ -55,5 +55,6 @@
         <item>restart</item>
         <item>recovery</item>
         <item>screenshot</item>
+        <item>screenrecord</item>
     </string-array>
 </resources>
