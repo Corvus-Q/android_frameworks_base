@@ -245,7 +245,6 @@ import com.android.systemui.statusbar.phone.BarTransitions.BarBackgroundDrawable
 import com.android.systemui.statusbar.phone.UnlockMethodCache.OnUnlockMethodChangedListener;
 import com.android.systemui.statusbar.policy.BatteryController;
 import com.android.systemui.statusbar.policy.BatteryController.BatteryStateChangeCallback;
-import com.android.systemui.statusbar.policy.BrightnessMirrorController;
 import com.android.systemui.statusbar.policy.BurnInProtectionController;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener;
@@ -385,8 +384,6 @@ public class StatusBar extends SystemUI implements DemoMode,
     private StatusBarSignalPolicy mSignalPolicy;
 
     private VolumeComponent mVolumeComponent;
-    private BrightnessMirrorController mBrightnessMirrorController;
-    private boolean mBrightnessMirrorVisible;
     protected BiometricUnlockController mBiometricUnlockController;
     protected LightBarController mLightBarController;
     @Nullable
@@ -1463,17 +1460,12 @@ public class StatusBar extends SystemUI implements DemoMode,
                             .withPlugin(QS.class)
                             .withDefault(this::createDefaultQSFragment)
                             .build());
-            mBrightnessMirrorController = new BrightnessMirrorController(mContext, mStatusBarWindow,
-                    (visible) -> {
-                        mBrightnessMirrorVisible = visible;
-                        updateScrimController();
-                    });
             fragmentHostManager.addTagListener(QS.TAG, (tag, f) -> {
                 QS qs = (QS) f;
                 if (qs instanceof QSFragment) {
                     mQSBarHeader = ((QSFragment) qs).getHeader();
                     mQSPanel = ((QSFragment) qs).getQsPanel();
-                    mQSPanel.setBrightnessMirror(mBrightnessMirrorController);
+                    mQuickQSPanel = ((QSFragment) qs).getQuickQsPanel();
                 }
             });
         }
@@ -1545,10 +1537,6 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     @Override
     public void onDensityOrFontScaleChanged() {
-        // TODO: Remove this.
-        if (mBrightnessMirrorController != null) {
-            mBrightnessMirrorController.onDensityOrFontScaleChanged();
-        }
         // TODO: Bring these out of StatusBar.
         ((UserInfoControllerImpl) Dependency.get(UserInfoController.class))
                 .onDensityOrFontScaleChanged();
@@ -1573,20 +1561,10 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     @Override
     public void onOverlayChanged() {
-        if (mBrightnessMirrorController != null) {
-            mBrightnessMirrorController.onOverlayChanged();
-        }
         // We need the new R.id.keyguard_indication_area before recreating
         // mKeyguardIndicationController
         mNotificationPanel.onThemeChanged();
         onThemeChanged();
-    }
-
-    @Override
-    public void onUiModeChanged() {
-        if (mBrightnessMirrorController != null) {
-            mBrightnessMirrorController.onUiModeChanged();
-        }
     }
 
     protected void createUserSwitcher() {
@@ -3766,9 +3744,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         if (mNotificationPanel != null) {
             mNotificationPanel.updateResources();
         }
-        if (mBrightnessMirrorController != null) {
-            mBrightnessMirrorController.updateResources();
-        }
     }
 
     protected void loadDimens() {
@@ -5071,8 +5046,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         } else if (isInLaunchTransition() || mLaunchCameraWhenFinishedWaking
                 || launchingAffordanceWithPreview) {
             mScrimController.transitionTo(ScrimState.UNLOCKED, mUnlockScrimCallback);
-        } else if (mBrightnessMirrorVisible) {
-            mScrimController.transitionTo(ScrimState.BRIGHTNESS_MIRROR);
         } else if (isPulsing()) {
             mScrimController.transitionTo(ScrimState.PULSING,
                     mDozeScrimController.getScrimCallback());
