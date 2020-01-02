@@ -123,4 +123,11 @@
   <java-symbol type="string" name="gaming_mode_notification_content" />
   <java-symbol type="string" name="gaming_mode_enabled_toast" />
   <java-symbol type="string" name="gaming_mode_disabled_toast" />
+
+  <!-- True if the notification's should dynamically tint the app icon and text -->
+  <java-symbol type="bool" name="config_allowNotificationIconTextTinting" />
+
+  <!-- True if the notification's dynamic app icon and text tint should be optimised for dark
+       backgrounds -->
+  <java-symbol type="bool" name="config_useDarkBgNotificationIconTextTinting" />
 </resources>
