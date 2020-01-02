@@ -2052,6 +2052,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_TICKER_TICK_DURATION),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.Secure.getUriFor(
+                    Settings.Secure.LOCKSCREEN_CLOCK_SELECTION),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -2074,6 +2077,8 @@ public class StatusBar extends SystemUI implements DemoMode,
             } else if (uri.equals(Settings.Secure.getUriFor(
                     Settings.Secure.AMBIENT_VISUALIZER_ENABLED))) {
                 setAmbientVis();
+            } else if (uri.equals(Settings.Secure.getUriFor(Settings.Secure.LOCKSCREEN_CLOCK_SELECTION))) {
+                updateKeyguardStatusSettings();
             }
             update();
         }
@@ -2093,6 +2098,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         updateCutoutOverlay();
         updateTickerAnimation();
         updateTickerTickDuration();
+        updateKeyguardStatusSettings();
         }
     }
 
@@ -2204,6 +2210,10 @@ public class StatusBar extends SystemUI implements DemoMode,
         if (mTicker != null) {
             mTicker.updateTickDuration(mTickerTickDuration);
         }
+    }
+
+    private void updateKeyguardStatusSettings() {
+        mNotificationPanel.updateKeyguardStatusSettings();
     }
 
     /**
