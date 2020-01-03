@@ -123,10 +123,6 @@
         <item>com.android.wallpaper.livepicker</item>
     </string-array>
 
-    <!-- Time to give to the proximity sensor before toggling the flashlight with the Power button.
-    Set to -1 to disable the proximity sensor check at all-->
-    <integer name="config_flashlightProximityTimeout">300</integer>
-
     <!-- Any package that has one of the package names defined below will be prevented
          from using specific sensors in order to stop battery drain -->
     <string-array name="config_blockPackagesSensorDrain">

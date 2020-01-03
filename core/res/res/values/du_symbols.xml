@@ -20,7 +20,7 @@
   <java-symbol type="string" name="reboot_to_bootloader_message" />
   <java-symbol type="string" name="reboot_title" />
   <java-symbol type="string" name="reboot_message" />
-    <java-symbol type="array" name="config_custom_globalActionsList" />
+  <java-symbol type="array" name="config_custom_globalActionsList" />
 
   <!-- Rotation sensor -->
   <java-symbol type="bool" name="config_useSystemClockforRotationSensor" />
@@ -100,8 +100,6 @@
   <java-symbol type="bool" name="config_fingerprintPostResetRunnableForAllClients" />
 
   <java-symbol type="array" name="config_customPermissionsList" />
-
-  <java-symbol type="integer" name="config_flashlightProximityTimeout" />
 
   <java-symbol type="array" name="config_blockPackagesSensorDrain" />
 </resources>
