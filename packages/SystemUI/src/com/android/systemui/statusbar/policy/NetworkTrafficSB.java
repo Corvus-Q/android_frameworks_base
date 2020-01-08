@@ -33,14 +33,9 @@ import android.widget.TextView;
 import com.android.internal.util.du.Utils;
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
-import com.android.systemui.statusbar.StatusIconDisplayable;
 import com.android.systemui.plugins.DarkIconDispatcher;
 import com.android.systemui.plugins.DarkIconDispatcher.DarkReceiver;
-import android.view.View;
-import android.widget.TextView;
-
-import com.android.systemui.Dependency;
-import com.android.systemui.R;
+import com.android.systemui.statusbar.StatusIconDisplayable;
 
 /*
 *
@@ -60,6 +55,7 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
     private static final int MB = KB * KB;
     private static final int GB = MB * KB;
     private static final String symbol = "B/s";
+    private int mNetTrafSize = 21;
 
     private static DecimalFormat decimalFormat = new DecimalFormat("##0.#");
     static {
@@ -69,7 +65,6 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
 
     private boolean mIsEnabled;
     private boolean mAttached;
-    private boolean mTrafficInHeaderView;
     private long totalRxBytes;
     private long totalTxBytes;
     private long lastUpdateTime;
@@ -78,11 +73,11 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
     private int mTrafficType;
     private boolean mHideArrow;
     private int mAutoHideThreshold;
-    private int mNetTrafSize;
     private int mTintColor;
     private int mVisibleState = -1;
     private boolean mTrafficVisible = false;
     private boolean mSystemIconVisible = true;
+
     private boolean mScreenOn = true;
 
     private Handler mTrafficHandler = new Handler() {
@@ -196,12 +191,6 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
             resolver.registerContentObserver(Settings.System
                     .getUriFor(Settings.System.NETWORK_TRAFFIC_HIDEARROW), false,
                     this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System
-                    .getUriFor(Settings.System.NETWORK_TRAFFIC_VIEW_LOCATION), false,
-                    this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System
-                    .getUriFor(Settings.System.NETWORK_TRAFFIC_FONT_SIZE), false,
-                    this, UserHandle.USER_ALL);
         }
 
         /*
@@ -234,9 +223,6 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
     public NetworkTrafficSB(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         final Resources resources = getResources();
-        txtSize = (mTrafficType == BOTH)
-                    ? resources.getDimensionPixelSize(R.dimen.net_traffic_multi_text_size)
-                    : mNetTrafSize;
         txtImgPadding = resources.getDimensionPixelSize(R.dimen.net_traffic_txt_img_padding);
         mTintColor = resources.getColor(android.R.color.white);
         Handler mHandler = new Handler();
@@ -297,12 +283,8 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
     }
 
     private void updateSettings() {
-        final ContentResolver resolver = getContext().getContentResolver();
-        mTrafficInHeaderView = Settings.System.getIntForUser(resolver,
-                Settings.System.NETWORK_TRAFFIC_VIEW_LOCATION, 0,
-                UserHandle.USER_CURRENT) == 1;
         updateVisibility();
-        updateTextSize();
+	updateTextSize();
         if (mIsEnabled) {
             if (mAttached) {
                 totalRxBytes = TrafficStats.getTotalRxBytes();
@@ -330,12 +312,6 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
         mHideArrow = Settings.System.getIntForUser(resolver,
                 Settings.System.NETWORK_TRAFFIC_HIDEARROW, 0,
 	        UserHandle.USER_CURRENT) == 1;
-        mTrafficInHeaderView = Settings.System.getIntForUser(resolver,
-                Settings.System.NETWORK_TRAFFIC_VIEW_LOCATION, 0,
-                UserHandle.USER_CURRENT) == 1;
-        mNetTrafSize = Settings.System.getIntForUser(resolver,
-                Settings.System.NETWORK_TRAFFIC_FONT_SIZE, 21,
-                UserHandle.USER_CURRENT);
     }
 
     private void clearHandlerCallbacks() {
@@ -369,6 +345,11 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
     }
 
     private void updateTextSize() {
+        int txtSize;
+
+        mNetTrafSize = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.NETWORK_TRAFFIC_FONT_SIZE, 21);
+
         if (mTrafficType == BOTH) {
             txtSize = getResources().getDimensionPixelSize(R.dimen.net_traffic_multi_text_size);
         } else {
@@ -379,12 +360,8 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
 
     public void onDensityOrFontScaleChanged() {
         final Resources resources = getResources();
-        txtSize = (mTrafficType == BOTH)
-		    ? resources.getDimensionPixelSize(R.dimen.net_traffic_multi_text_size)
-		    : mNetTrafSize;
         txtImgPadding = resources.getDimensionPixelSize(R.dimen.net_traffic_txt_img_padding);
         setCompoundDrawablePadding(txtImgPadding);
-        setTextSize(TypedValue.COMPLEX_UNIT_PX, (float)txtSize);
         setGravity(Gravity.RIGHT);
 	updateTextSize();
     }
@@ -432,8 +409,9 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
     }
 
     private void updateVisibility() {
-        if (mIsEnabled && mTrafficVisible && mSystemIconVisible && !mTrafficInHeaderView) {
-			setVisibility(View.VISIBLE);
+        if (!Utils.hasNotch(mContext) && mIsEnabled &&
+                mTrafficVisible && mSystemIconVisible) {
+            setVisibility(View.VISIBLE);
         } else {
             setVisibility(View.GONE);
         }
