@@ -66,4 +66,6 @@
 
     <!-- The starting padding for the clock in the status bar. -->
     <dimen name="status_bar_right_clock_starting_padding">2dp</dimen>
+
+    <dimen name="qs_tiles_extra_margin_top">2dp</dimen>
 </resources>
