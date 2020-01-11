@@ -61,6 +61,7 @@
   <!-- Whether device has a big physical display cutout -->
   <java-symbol type="bool" name="config_bigPhysicalDisplayCutout" />
 
+  <!-- Led Notification -->
   <java-symbol type="bool" name="config_hasNotificationLed" />
   <java-symbol type="bool" name="config_intrusiveBatteryLed" />
   <java-symbol type="bool" name="config_multiColorBatteryLed" />
@@ -80,7 +81,7 @@
        config to 7. -->
   <integer name="config_deviceHardwareKeys">64</integer>
 
-    <!-- Package Manager -->
+  <!-- Package Manager -->
   <java-symbol type="array" name="config_deviceDisabledComponents" />
   <java-symbol type="array" name="config_globallyDisabledComponents" />
   <java-symbol type="array" name="config_forceEnabledComponents" />
@@ -99,8 +100,10 @@
   <!-- Post reset runnable for all clients -->
   <java-symbol type="bool" name="config_fingerprintPostResetRunnableForAllClients" />
 
+  <!-- Custom permission -->
   <java-symbol type="array" name="config_customPermissionsList" />
 
+  <!-- Sensor packages -->
   <java-symbol type="array" name="config_blockPackagesSensorDrain" />
 
   <!-- Themes -->
@@ -133,4 +136,7 @@
 
   <!-- Pulse brightness -->
   <java-symbol type="integer" name="config_screenBrightnessPulse" />
+
+  <!-- Oneplus haptic -->
+  <java-symbol type="bool" name="config_hasOnePlusHapticMotor" />
 </resources>
