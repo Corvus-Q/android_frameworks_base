@@ -227,6 +227,7 @@ import com.android.systemui.statusbar.StatusBarState;
 import com.android.systemui.statusbar.SysuiStatusBarStateController;
 import com.android.systemui.statusbar.VibratorHelper;
 import com.android.systemui.statusbar.VisualizerView;
+import com.android.systemui.statusbar.info.DataUsageView;
 import com.android.systemui.statusbar.notification.ActivityLaunchAnimator;
 import com.android.systemui.statusbar.notification.BypassHeadsUpNotifier;
 import com.android.systemui.statusbar.notification.DynamicPrivacyController;
@@ -533,6 +534,8 @@ public class StatusBar extends SystemUI implements DemoMode,
             mLinger = BRIGHTNESS_CONTROL_LINGER_THRESHOLD + 1;
         }
     };
+
+    private boolean dataupdated = false;
 
     public void resetTrackInfo() {
         if (mTicker != null) {
@@ -1216,12 +1219,15 @@ public class StatusBar extends SystemUI implements DemoMode,
         float QSBlurAlpha = mNotificationPanel.getExpandedFraction() * (float)((float) QSUserAlpha / 100.0);
         boolean enoughBlurData = (QSBlurAlpha > 0 && qsBlurIntensity() > 0);
 
-        if (enoughBlurData && !blurperformed && !mIsKeyguard && isQSBlurEnabled()) {
+        if (enoughBlurData && !blurperformed && !dataupdated && !mIsKeyguard && isQSBlurEnabled()) {
             drawBlurView();
+            DataUsageView.updateUsage();
+            dataupdated = true;
             blurperformed = true;
             mQSBlurView.setVisibility(View.VISIBLE);
         } else if (!enoughBlurData || mState == StatusBarState.KEYGUARD) {
             blurperformed = false;
+            dataupdated = false;
             mQSBlurView.setVisibility(View.GONE);
         }
         mQSBlurView.setAlpha(QSBlurAlpha);
