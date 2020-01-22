@@ -1327,6 +1327,10 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
     }
 
+    public static void setHasClearableNotifications(boolean state) {
+        mClearableNotifications = state;
+    }
+
     public static void setDismissAllVisible(boolean visible) {
 
         if(mClearableNotifications && mState != StatusBarState.KEYGUARD && visible && isDismissAllButtonEnabled()) {
