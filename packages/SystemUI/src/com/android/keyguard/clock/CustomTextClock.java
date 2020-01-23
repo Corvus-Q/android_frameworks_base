@@ -325,6 +325,42 @@ public class CustomTextClock extends TextView implements ColorExtractor.OnColors
         if (lockClockFont == 35) {
             setTypeface(Typeface.create("phantombold-sys", Typeface.NORMAL));
         }
+        if (lockClockFont == 36) {
+            setTypeface(Typeface.create("sourcesanspro-sys", Typeface.NORMAL));
+        }
+        if (lockClockFont == 37) {
+            setTypeface(Typeface.create("circularstd-sys", Typeface.NORMAL));
+        }
+        if (lockClockFont == 38) {
+            setTypeface(Typeface.create("oneplusslate-sys", Typeface.NORMAL));
+        }
+        if (lockClockFont == 39) {
+            setTypeface(Typeface.create("aclonica-sys", Typeface.NORMAL));
+        }
+        if (lockClockFont == 40) {
+            setTypeface(Typeface.create("amarante-sys", Typeface.NORMAL));
+        }
+        if (lockClockFont == 41) {
+            setTypeface(Typeface.create("bariol-sys", Typeface.NORMAL));
+        }
+        if (lockClockFont == 42) {
+            setTypeface(Typeface.create("cagliostro-sys", Typeface.NORMAL));
+        }
+        if (lockClockFont == 43) {
+            setTypeface(Typeface.create("coolstory-sys", Typeface.NORMAL));
+        }
+        if (lockClockFont == 44) {
+            setTypeface(Typeface.create("lgsmartgothic-sys", Typeface.NORMAL));
+        }
+        if (lockClockFont == 45) {
+            setTypeface(Typeface.create("rosemary-sys", Typeface.NORMAL));
+        }
+        if (lockClockFont == 46) {
+            setTypeface(Typeface.create("sonysketch-sys", Typeface.NORMAL));
+        }
+        if (lockClockFont == 47) {
+            setTypeface(Typeface.create("surfer-sys", Typeface.NORMAL));
+        }
     }
 
     public void updateClockSize() {
