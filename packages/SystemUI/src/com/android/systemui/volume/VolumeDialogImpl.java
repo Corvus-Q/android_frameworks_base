@@ -192,12 +192,14 @@ public class VolumeDialogImpl implements VolumeDialog,
             mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.AUDIO_PANEL_VIEW_BT_SCO), false, this, UserHandle.USER_ALL);
             mContext.getContentResolver().registerContentObserver(Settings.Secure.getUriFor(Settings.Secure.VOLUME_LINK_NOTIFICATION), false, this, UserHandle.USER_ALL);
             mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.VOLUME_DIALOG_TIMEOUT), false, this, UserHandle.USER_ALL);
+            mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.AUDIO_PANEL_VIEW_POSITION), false, this, UserHandle.USER_ALL);
             update();
         }
 
         @Override
         public void onChange(boolean selfChange) {
             update();
+            initDialog();
             updateRowsH(getActiveRow());
         }
 
@@ -210,6 +212,8 @@ public class VolumeDialogImpl implements VolumeDialog,
              isBTSCOShowing = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.AUDIO_PANEL_VIEW_BT_SCO, 0, UserHandle.USER_CURRENT) == 1;
             isNotificationLinked = Settings.Secure.getIntForUser(mContext.getContentResolver(), Settings.Secure.VOLUME_LINK_NOTIFICATION, 1, UserHandle.USER_CURRENT) == 1;
             mTimeOut = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.VOLUME_DIALOG_TIMEOUT, 3, UserHandle.USER_CURRENT);
+            mLeftVolumeRocker = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.AUDIO_PANEL_VIEW_POSITION, isAudioPanelOnLeftSide() ? 1 : 0, UserHandle.USER_CURRENT) == 1;
         }
     }
 
@@ -226,7 +230,6 @@ public class VolumeDialogImpl implements VolumeDialog,
         mShowActiveStreamOnly = showActiveStreamOnly();
         mHasSeenODICaptionsTooltip =
                 Prefs.getBoolean(context, Prefs.Key.HAS_SEEN_ODI_CAPTIONS_TOOLTIP, false);
-        mLeftVolumeRocker = mContext.getResources().getBoolean(R.bool.config_audioPanelOnLeftSide);
 
         settingsObserver = new SettingsObserver(mHandler);
         settingsObserver.observe();
@@ -256,6 +259,8 @@ public class VolumeDialogImpl implements VolumeDialog,
     }
 
     private void initDialog() {
+        if(mDialog!=null) mDialog.dismiss();
+
         mDialog = new CustomDialog(mContext);
 
         mConfigurableTexts = new ConfigurableTexts(mContext);
@@ -278,7 +283,7 @@ public class VolumeDialogImpl implements VolumeDialog,
         lp.format = PixelFormat.TRANSLUCENT;
         lp.setTitle(VolumeDialogImpl.class.getSimpleName());
         lp.windowAnimations = -1;
-        if(!isAudioPanelOnLeftSide()){
+        if(!mLeftVolumeRocker){
             lp.gravity = Gravity.RIGHT | Gravity.CENTER_VERTICAL;
         } else {
             lp.gravity = Gravity.LEFT | Gravity.CENTER_VERTICAL;
@@ -291,7 +296,7 @@ public class VolumeDialogImpl implements VolumeDialog,
         mDialogView.setAlpha(0);
         mDialog.setCanceledOnTouchOutside(true);
         mDialog.setOnShowListener(dialog -> {
-            if (!isLandscape()) mDialogView.setTranslationX((mDialogView.getWidth() / 2.0f)*(!isAudioPanelOnLeftSide() ? 1 : -1));
+            if (!isLandscape()) mDialogView.setTranslationX((mDialogView.getWidth() / 2.0f)*(!mLeftVolumeRocker ? 1 : -1));
             mDialogView.setAlpha(0);
             mDialogView.animate()
                     .alpha(1)
@@ -322,7 +327,7 @@ public class VolumeDialogImpl implements VolumeDialog,
         if (mRinger != null) {
             mRingerIcon = mRinger.findViewById(R.id.ringer_icon);
             mZenIcon = mRinger.findViewById(R.id.dnd_icon);
-            if(!isAudioPanelOnLeftSide()) {
+            if(!mLeftVolumeRocker) {
                 mRinger.setForegroundGravity(Gravity.RIGHT);
             } else {
                 mRinger.setForegroundGravity(Gravity.LEFT);
@@ -338,7 +343,7 @@ public class VolumeDialogImpl implements VolumeDialog,
             mDialogView.removeView(mODICaptionsTooltipViewStub);
             mODICaptionsTooltipViewStub = null;
         }else if (mODICaptionsTooltipViewStub != null){
-            if(!isAudioPanelOnLeftSide()) {
+            if(!mLeftVolumeRocker) {
                 mRinger.setForegroundGravity(Gravity.BOTTOM | Gravity.RIGHT);
             } else {
                 mRinger.setForegroundGravity(Gravity.BOTTOM | Gravity.LEFT);
@@ -424,7 +429,7 @@ public class VolumeDialogImpl implements VolumeDialog,
         if (D.BUG) Slog.d(TAG, "Adding row for stream " + stream);
         VolumeRow row = new VolumeRow();
         initRow(row, stream, iconRes, iconMuteRes, important, defaultStream);
-        if(!isAudioPanelOnLeftSide()){
+        if(!mLeftVolumeRocker){
             mDialogRowsView.addView(row.view, 0);
         } else {
             mDialogRowsView.addView(row.view);
@@ -439,7 +444,7 @@ public class VolumeDialogImpl implements VolumeDialog,
             final VolumeRow row = mRows.get(i);
             initRow(row, row.stream, row.iconRes, row.iconMuteRes, row.important,
                     row.defaultStream);
-            if(!isAudioPanelOnLeftSide()){
+            if(!mLeftVolumeRocker){
                 mDialogRowsView.addView(row.view, 0);
             } else {
                 mDialogRowsView.addView(row.view);
@@ -839,7 +844,7 @@ public class VolumeDialogImpl implements VolumeDialog,
                     mDialog.dismiss();
                     tryToRemoveCaptionsTooltip();
                 }, 50));
-        if (!isLandscape()) animator.translationX((mDialogView.getWidth() / 2.0f)*(!isAudioPanelOnLeftSide() ? 1 : -1));
+        if (!isLandscape()) animator.translationX((mDialogView.getWidth() / 2.0f)*(!mLeftVolumeRocker ? 1 : -1));
         animator.start();
         checkODICaptionsTooltip(true);
         mController.notifyVisible(false);
@@ -1578,7 +1583,7 @@ public class VolumeDialogImpl implements VolumeDialog,
     }
 
     private boolean isAudioPanelOnLeftSide() {
-        return mLeftVolumeRocker;
+        return mContext.getResources().getBoolean(R.bool.config_audioPanelOnLeftSide);
     }
 
     private static class VolumeRow {
