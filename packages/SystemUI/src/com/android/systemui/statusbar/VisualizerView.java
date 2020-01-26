@@ -65,7 +65,10 @@ public class VisualizerView extends View
     private boolean mOccluded = false;
     private boolean mAmbientVisualizerEnabled = false;
 
-    private int mColor;
+    private boolean mUseCustomColor;
+    private int mColorToUse;
+    private int mDefaultColor;
+    private int mCustomColor;
     private Bitmap mCurrentBitmap;
 
     private ColorAnimator mLavaLamp;
@@ -172,10 +175,13 @@ public class VisualizerView extends View
         super(context, attrs, defStyle);
         mContext = context;
 
-        mColor = Color.TRANSPARENT;
+        mDefaultColor = Color.TRANSPARENT;
+        updateColorSettings();
+        mColorToUse = mUseCustomColor ? mCustomColor : mDefaultColor;
 
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
+        mPaint.setColor(mColorToUse);
 
         mFFTPoints = new float[mUnits * 4];
 
@@ -409,7 +415,10 @@ public class VisualizerView extends View
         mCurrentBitmap = bitmap;
 
         if (mCurrentBitmap == null) {
-            setColor(Color.TRANSPARENT);
+            mDefaultColor = Color.TRANSPARENT;
+            if (!mUseCustomColor) {
+                setColor(mDefaultColor);
+            }
         } else if (mAutoColorEnabled && !mLavaLampEnabled) {
             Palette.generateAsync(mCurrentBitmap, this);
         }
@@ -427,7 +436,10 @@ public class VisualizerView extends View
             }
         }
 
-        setColor(color);
+        mDefaultColor = color;
+        if (!mUseCustomColor) {
+            setColor(mDefaultColor);
+        }
     }
 
     private void setColor(int color) {
@@ -435,10 +447,10 @@ public class VisualizerView extends View
             color = Color.WHITE;
         }
 
-        color = Color.argb(mOpacity, Color.red(color), Color.green(color), Color.blue(color));
+        color = (mOpacity << 24) | (color & 0x00ffffff);
 
-        if (mColor != color) {
-            mColor = color;
+        if (mColorToUse != color) {
+            mColorToUse = color;
 
             if (mVisualizer != null && shouldAnimate) {
                 shouldAnimate = false;
@@ -448,18 +460,19 @@ public class VisualizerView extends View
                 }
 
                 mVisualizerColorAnimator = ObjectAnimator.ofArgb(mPaint, "color",
-                        mPaint.getColor(), mColor);
+                        mPaint.getColor(), mColorToUse);
                 mVisualizerColorAnimator.setStartDelay(600);
                 mVisualizerColorAnimator.setDuration(1200);
                 mVisualizerColorAnimator.start();
             }
-            mPaint.setColor(mColor);
+                mPaint.setColor(mColorToUse);
         }
     }
 
     private void checkStateChanged() {
         boolean isVisible = getVisibility() == View.VISIBLE;
-        if (isVisible && mVisible && mPlaying && mDozing && mAmbientVisualizerEnabled && !mPowerSaveMode && mVisualizerEnabled && !mOccluded) {
+        if (isVisible && mVisible && mPlaying && mDozing && !mPowerSaveMode
+                && mVisualizerEnabled && mAmbientVisualizerEnabled && !mOccluded) {
             if (!mDisplaying) {
                 mDisplaying = true;
                 AsyncTask.execute(mLinkVisualizer);
@@ -467,12 +480,13 @@ public class VisualizerView extends View
                         .alpha(0.40f)
                         .setDuration(800);
             } else {
-                mPaint.setColor(mColor);
+                mPaint.setColor(mColorToUse);
                 animate()
                         .alpha(0.40f)
                         .setDuration(800);
             }
-        } else if (isVisible && mVisible && mPlaying && !mDozing && !mPowerSaveMode && mVisualizerEnabled && !mOccluded) {
+        } else if (isVisible && mVisible && mPlaying && !mDozing && !mPowerSaveMode
+                && mVisualizerEnabled && !mOccluded) {
             if (!mDisplaying) {
                 mDisplaying = true;
                 AsyncTask.execute(mLinkVisualizer);
@@ -481,7 +495,7 @@ public class VisualizerView extends View
                         .setDuration(800);
                 if (mLavaLampEnabled) mLavaLamp.start();
             } else {
-                mPaint.setColor(mColor);
+                mPaint.setColor(mColorToUse);
                 animate()
                         .alpha(1f)
                         .setDuration(800);
@@ -503,6 +517,17 @@ public class VisualizerView extends View
                 }
             }
         }
+    }
+
+    private void updateColorSettings() {
+        ContentResolver resolver = mContext.getContentResolver();
+        mUseCustomColor = Settings.System.getInt(resolver,
+                Settings.System.LOCK_SCREEN_VISUALIZER_USE_CUSTOM_COLOR, 0) == 1;
+        final int color = Settings.System.getInt(resolver,
+                Settings.System.LOCK_SCREEN_VISUALIZER_CUSTOM_COLOR, 0xff1976D2);
+
+        // make sure custom color always has the right transparency
+        mCustomColor = (140 << 24) | (color & 0x00ffffff);
     }
 
     private class SettingsObserver extends ContentObserver {
@@ -537,6 +562,12 @@ public class VisualizerView extends View
             resolver.registerContentObserver(Settings.Secure.getUriFor(
                     Settings.Secure.LOCKSCREEN_SOLID_UNITS_OPACITY),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                Settings.System.LOCK_SCREEN_VISUALIZER_USE_CUSTOM_COLOR),
+                false, this);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                Settings.System.LOCK_SCREEN_VISUALIZER_CUSTOM_COLOR),
+                false, this);
             update();
         }
 
@@ -571,14 +602,20 @@ public class VisualizerView extends View
             } else if (uri.equals(Settings.Secure.getUriFor(
                     Settings.Secure.AMBIENT_VISUALIZER_ENABLED))) {
                 setAmbientVisualizerEnabled();
-                checkStateChanged();
-                updateViewVisibility();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.LOCK_SCREEN_VISUALIZER_USE_CUSTOM_COLOR))
+                || uri.equals(Settings.System.getUriFor(
+                    Settings.System.LOCK_SCREEN_VISUALIZER_CUSTOM_COLOR))) {
+                updateColorSettings();
+                setColor(mUseCustomColor ? mCustomColor : mDefaultColor);
             }
         }
 
         protected void update() {
+            setColor(mUseCustomColor ? mCustomColor : mDefaultColor);
             setVisualizerEnabled();
             setAmbientVisualizerEnabled();
+            updateColorSettings();
             setLavaLampEnabled();
             setLavaLampSpeed();
             setAutoColorEnabled();
