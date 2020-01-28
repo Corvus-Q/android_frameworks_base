@@ -23,5 +23,10 @@
 
     <!-- QS date color-->
     <color name="qs_date_color">#FF4C4C4C</color>
+
+    <!-- Partial screenshot -->
+    <color name="screenshot_partial_layout_background">#20000000</color>
+    <color name="screenshot_partial_capture_background">@*android:color/accent_device_default_light</color>
+    <color name="screenshot_partial_cancel_background">#a0000000</color>
 </resources>
 
