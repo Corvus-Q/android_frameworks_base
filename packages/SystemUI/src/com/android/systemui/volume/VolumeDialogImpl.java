@@ -176,6 +176,7 @@ public class VolumeDialogImpl implements VolumeDialog,
     private boolean isVoiceShowing = false;
     private boolean isBTSCOShowing = false;
     private boolean isNotificationLinked = true;
+    private int mTimeOut = 3;
 
     private class SettingsObserver extends ContentObserver {
         SettingsObserver(Handler handler) {
@@ -190,6 +191,7 @@ public class VolumeDialogImpl implements VolumeDialog,
             mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.AUDIO_PANEL_VIEW_VOICE), false, this, UserHandle.USER_ALL);
             mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.AUDIO_PANEL_VIEW_BT_SCO), false, this, UserHandle.USER_ALL);
             mContext.getContentResolver().registerContentObserver(Settings.Secure.getUriFor(Settings.Secure.VOLUME_LINK_NOTIFICATION), false, this, UserHandle.USER_ALL);
+            mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.VOLUME_DIALOG_TIMEOUT), false, this, UserHandle.USER_ALL);
             update();
         }
 
@@ -207,6 +209,7 @@ public class VolumeDialogImpl implements VolumeDialog,
              isVoiceShowing = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.AUDIO_PANEL_VIEW_VOICE, 0, UserHandle.USER_CURRENT) == 1;
              isBTSCOShowing = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.AUDIO_PANEL_VIEW_BT_SCO, 0, UserHandle.USER_CURRENT) == 1;
             isNotificationLinked = Settings.Secure.getIntForUser(mContext.getContentResolver(), Settings.Secure.VOLUME_LINK_NOTIFICATION, 1, UserHandle.USER_CURRENT) == 1;
+            mTimeOut = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.VOLUME_DIALOG_TIMEOUT, 3, UserHandle.USER_CURRENT);
         }
     }
 
@@ -806,9 +809,7 @@ public class VolumeDialogImpl implements VolumeDialog,
                     AccessibilityManager.FLAG_CONTENT_TEXT
                             | AccessibilityManager.FLAG_CONTENT_CONTROLS);
         }
-        int volumeDialogTimeout = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.VOLUME_DIALOG_TIMEOUT, 3000);
-        return volumeDialogTimeout;
+        return mTimeOut * 1000;
     }
 
     protected void dismissH(int reason) {
