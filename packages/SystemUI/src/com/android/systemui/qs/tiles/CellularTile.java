@@ -48,8 +48,6 @@ import com.android.systemui.qs.QSHost;
 import com.android.systemui.qs.SignalTileView;
 import com.android.systemui.qs.tileimpl.QSTileImpl;
 import com.android.systemui.statusbar.phone.SystemUIDialog;
-import com.android.systemui.statusbar.phone.UnlockMethodCache;
-import com.android.systemui.statusbar.policy.KeyguardMonitor;
 import com.android.systemui.statusbar.policy.NetworkController;
 import com.android.systemui.statusbar.policy.NetworkController.IconState;
 import com.android.systemui.statusbar.policy.NetworkController.SignalCallback;
@@ -67,20 +65,16 @@ public class CellularTile extends QSTileImpl<SignalState> {
 
     private final CellSignalCallback mSignalCallback = new CellSignalCallback();
     private final ActivityStarter mActivityStarter;
-    private final KeyguardMonitor mKeyguardMonitor;
-    private final UnlockMethodCache mUnlockMethodCache;
 
     private final KeyguardMonitor mKeyguard;
     private final KeyguardCallback mKeyguardCallback = new KeyguardCallback();
 
     @Inject
     public CellularTile(QSHost host, NetworkController networkController,
-            ActivityStarter activityStarter, KeyguardMonitor keyguardMonitor) {
+            ActivityStarter activityStarter) {
         super(host);
         mController = networkController;
         mActivityStarter = activityStarter;
-        mKeyguardMonitor = keyguardMonitor;
-        mUnlockMethodCache = UnlockMethodCache.getInstance(mContext);
         mDataController = mController.getMobileDataController();
         mDetailAdapter = new CellularDetailAdapter();
         mKeyguard = Dependency.get(KeyguardMonitor.class);
@@ -165,12 +159,9 @@ public class CellularTile extends QSTileImpl<SignalState> {
 
     @Override
     protected void handleSecondaryClick() {
-        if (getState().state == Tile.STATE_UNAVAILABLE) {
-            return;
-        }
         if (mDataController.isMobileDataSupported()) {
-            if (mKeyguardMonitor.isSecure() && !mUnlockMethodCache.canSkipBouncer()) {
-                mActivityStarter.postQSRunnableDismissingKeyguard(() -> {
+            if (mKeyguard.isSecure() && mKeyguard.isShowing()) {
+                Dependency.get(ActivityStarter.class).postQSRunnableDismissingKeyguard(() -> {
                     mHost.openPanels();
                     showDetail(true);
                 });
@@ -197,7 +188,6 @@ public class CellularTile extends QSTileImpl<SignalState> {
 
         DataUsageController.DataUsageInfo carrierLabelInfo = mDataController.getDataUsageInfo();
         final Resources r = mContext.getResources();
-        state.dualTarget = true;
         boolean mobileDataEnabled = mDataController.isMobileDataSupported()
                 && mDataController.isMobileDataEnabled();
         state.value = mobileDataEnabled;
