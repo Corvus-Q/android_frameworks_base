@@ -63,5 +63,9 @@
     <color name="quick_settings_theme_tile_red">#FF990C04</color>
     <color name="quick_settings_theme_tile_teal">#FF009688</color>
     <color name="quick_settings_theme_tile_yellow">#FFFFEB3B</color>
+
+    <color name="brightness_slider_progress">#FFFFFF</color>
+    <color name="brightness_slider_background">#99FFFFFF</color>
+    <color name="brightness_slider_icons">#00FFFFFF</color>
 </resources>
 
