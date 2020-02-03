@@ -5151,13 +5151,6 @@ public final class Settings {
                 ANY_STRING_VALIDATOR;
 
         /**
-         * Whether to display the torch option in the power menu
-         *
-         * @hide
-         */
-        public static final String POWERMENU_TORCH = "powermenu_torch";
-
-        /**
          * Indicates whether ANBI (Accidental navigation button interaction) is enabled.
          *
          * @hide
