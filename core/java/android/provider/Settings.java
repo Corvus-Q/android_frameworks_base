@@ -5903,6 +5903,17 @@ public final class Settings {
         private static final Validator QS_BLUR_INTENSITY_VALIDATOR = ANY_INTEGER_VALIDATOR;
 
         /**
+         * Number of times to repeat animations of Ambient edge light
+         * 0 is infinite
+         * @hide
+         */
+        public static final String PULSE_AMBIENT_LIGHT_REPEAT_COUNT = "pulse_ambient_light_repeat_count";
+
+        /** @hide */
+        private static final Validator PULSE_AMBIENT_LIGHT_REPEAT_COUNT_VALIDATOR =
+                ANY_INTEGER_VALIDATOR;
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -6013,6 +6024,7 @@ public final class Settings {
             PULSE_AMBIENT_LIGHT_COLOR,
             PULSE_AMBIENT_LIGHT_AUTO_COLOR,
             PULSE_AMBIENT_LIGHT_DURATION,
+            PULSE_AMBIENT_LIGHT_REPEAT_COUNT,
             CUSTOM_BUTTON_EXTRA_KEY_MAPPING,
             CUSTOM_DEVICE_PROXI_CHECK_ENABLED,
             CUSTOM_DEVICE_GESTURE_FEEDBACK_ENABLED,
@@ -6030,7 +6042,7 @@ public final class Settings {
             PULSE_BRIGHTNESS,
             DOZE_BRIGHTNESS,
             LOCK_SHOW_STATUS_BAR,
-            QS_BLUR_INTENSITY
+            QS_BLUR_INTENSITY,
         };
 
         /**
@@ -6218,6 +6230,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(PULSE_AMBIENT_LIGHT_COLOR);
             PRIVATE_SETTINGS.add(PULSE_AMBIENT_LIGHT_AUTO_COLOR);
             PRIVATE_SETTINGS.add(PULSE_AMBIENT_LIGHT_DURATION);
+            PRIVATE_SETTINGS.add(PULSE_AMBIENT_LIGHT_REPEAT_COUNT);
             PRIVATE_SETTINGS.add(CUSTOM_BUTTON_EXTRA_KEY_MAPPING);
             PRIVATE_SETTINGS.add(CUSTOM_DEVICE_PROXI_CHECK_ENABLED);
             PRIVATE_SETTINGS.add(CUSTOM_DEVICE_GESTURE_FEEDBACK_ENABLED);
@@ -6381,6 +6394,7 @@ public final class Settings {
             VALIDATORS.put(PULSE_AMBIENT_LIGHT_COLOR, PULSE_AMBIENT_LIGHT_COLOR_VALIDATOR);
             VALIDATORS.put(PULSE_AMBIENT_LIGHT_AUTO_COLOR, PULSE_AMBIENT_LIGHT_AUTO_COLOR_VALIDATOR);
             VALIDATORS.put(PULSE_AMBIENT_LIGHT_DURATION, PULSE_AMBIENT_LIGHT_DURATION_VALIDATOR);
+            VALIDATORS.put(PULSE_AMBIENT_LIGHT_REPEAT_COUNT, PULSE_AMBIENT_LIGHT_REPEAT_COUNT_VALIDATOR);
             VALIDATORS.put(CUSTOM_BUTTON_EXTRA_KEY_MAPPING, CUSTOM_BUTTON_EXTRA_KEY_MAPPING_VALIDATOR);
             VALIDATORS.put(CUSTOM_DEVICE_PROXI_CHECK_ENABLED, CUSTOM_DEVICE_PROXI_CHECK_ENABLED_VALIDATOR);
             VALIDATORS.put(CUSTOM_DEVICE_GESTURE_FEEDBACK_ENABLED, CUSTOM_DEVICE_GESTURE_FEEDBACK_ENABLED_VALIDATOR);
