@@ -249,7 +249,7 @@ public class DozeScreenBrightness extends BroadcastReceiver implements DozeMachi
     private void setPaused(boolean paused) {
         if (mPaused != paused) {
             mPaused = paused;
-            updateBrightnessAndReady(false /* force */);
+            updateBrightnessAndReady(true /* force */);
         }
     }
 
