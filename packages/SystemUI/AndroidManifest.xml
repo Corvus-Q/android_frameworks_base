@@ -704,6 +704,7 @@
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.android.systemui.fileprovider"
             android:exported="false"
+            tools:replace="android:authorities"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
@@ -718,6 +719,7 @@
         <provider android:name="com.google.android.systemui.keyguard.KeyguardSliceProviderGoogle"
                   android:authorities="com.android.systemui.keyguard"
                   android:grantUriPermissions="true"
+                  tools:replace="android:authorities"
                   android:exported="true">
         </provider>
 
