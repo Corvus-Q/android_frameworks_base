@@ -374,19 +374,12 @@ public class NotificationInterruptionStateProvider {
     }
 
     public boolean shouldSkipHeadsUp(StatusBarNotification sbn) {
+        boolean isImportantHeadsUp = false;
         String notificationPackageName = sbn.getPackageName().toLowerCase();
-        // Gaming mode takes precedence since messaging headsup is intrusive
-        if (mSkipHeadsUp) {
-            boolean isNonInstrusive = notificationPackageName.contains("dialer") ||
+        isImportantHeadsUp = notificationPackageName.contains("dialer") ||
+                notificationPackageName.contains("messaging") ||
                 notificationPackageName.contains("clock");
-        return !mStatusBarStateController.isDozing() && mSkipHeadsUp && !isNonInstrusive;
-    }
-
-        boolean isLessBoring = notificationPackageName.contains("dialer") ||
-                notificationPackageName.contains("clock") ||
-                notificationPackageName.contains("messaging");
-
-        return !mStatusBarStateController.isDozing() && mLessBoringHeadsUp && !isLessBoring;
+        return !mStatusBarStateController.isDozing() && mLessBoringHeadsUp && mSkipHeadsUp && !isImportantHeadsUp;
     }
 
     /**
