@@ -1191,14 +1191,14 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         if (!mPowerKeyHandled) {
             mPowerKeyHandled = true;
             mHandler.removeMessages(MSG_POWER_LONG_PRESS);
-        }
-        if (hasVeryLongPressOnPowerBehavior()) {
-            mHandler.removeMessages(MSG_POWER_VERY_LONG_PRESS);
             // See if we deferred screen wake because long press power for torch is enabled
             if (mResolvedLongPressOnPowerBehavior == LONG_PRESS_POWER_TORCH
                     && (!isScreenOn() || isDozeMode())) {
                 wakeUpFromPowerKey(SystemClock.uptimeMillis());
             }
+        }
+        if (hasVeryLongPressOnPowerBehavior()) {
+            mHandler.removeMessages(MSG_POWER_VERY_LONG_PRESS);
         }
         cancelPossibleVeryLongPressReboot();
     }
