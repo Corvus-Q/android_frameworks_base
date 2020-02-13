@@ -30,7 +30,6 @@ import com.android.systemui.qs.tiles.AmbientDisplayTile;
 import com.android.systemui.qs.tiles.AirplaneModeTile;
 import com.android.systemui.qs.tiles.BatterySaverTile;
 import com.android.systemui.qs.tiles.BluetoothTile;
-import com.android.systemui.qs.tiles.CaffeineTile;
 import com.android.systemui.qs.tiles.CastTile;
 import com.android.systemui.qs.tiles.CellularTile;
 import com.android.systemui.qs.tiles.ColorInversionTile;
@@ -90,7 +89,6 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<NfcTile> mNfcTileProvider;
     private final Provider<GarbageMonitor.MemoryTile> mMemoryTileProvider;
     private final Provider<UiModeNightTile> mUiModeNightTileProvider;
-    private final Provider<CaffeineTile> mCaffeineTileProvider;
     private final Provider<AmbientDisplayTile> mAmbientDisplayTileProvider;
     private final Provider<SoundTile> mSoundTileProvider;
     private final Provider<RebootTile> mRebootTileProvider;
@@ -126,7 +124,6 @@ public class QSFactoryImpl implements QSFactory {
             Provider<NfcTile> nfcTileProvider,
             Provider<GarbageMonitor.MemoryTile> memoryTileProvider,
             Provider<UiModeNightTile> uiModeNightTileProvider,
-            Provider<CaffeineTile> caffeineTileProvider,
             Provider<AmbientDisplayTile> ambientDisplayTileProvider,
             Provider<SoundTile> soundTileProvider,
             Provider<RebootTile> rebootTileProvider,
@@ -158,7 +155,6 @@ public class QSFactoryImpl implements QSFactory {
         mNfcTileProvider = nfcTileProvider;
         mMemoryTileProvider = memoryTileProvider;
         mUiModeNightTileProvider = uiModeNightTileProvider;
-        mCaffeineTileProvider = caffeineTileProvider;
         mAmbientDisplayTileProvider = ambientDisplayTileProvider;
         mSoundTileProvider = soundTileProvider;
         mRebootTileProvider = rebootTileProvider;
@@ -226,8 +222,6 @@ public class QSFactoryImpl implements QSFactory {
                 return mUiModeNightTileProvider.get();
             case "sync":
                 return new SyncTile(mHost);
-            case "caffeine":
-                return mCaffeineTileProvider.get();
             case "ambient_display":
                 return mAmbientDisplayTileProvider.get();
             case "sound":
