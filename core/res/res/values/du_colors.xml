@@ -22,7 +22,10 @@
 
     <!-- Themes -->
     <color name="du_themes_qs_inactive_color">#FFDCDCDC</color>
-
+    
     <!-- Bootleg unneccesary gradient declaration | Just for our shishu bars -->
     <color name="bootleg_accent_gradient_end_color">#00000000</color>
+
+    <!-- QS Accent -->
+    <color name="qs_accent">@color/accent_device_default_light</color>
 </resources>
