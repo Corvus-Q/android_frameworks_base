@@ -96,7 +96,6 @@ public class KeyguardStatusView extends GridLayout implements
 
     private int mClockSelection;
     private int mDateSelection;
-    private boolean mIsCenterAligned;
 
     // Date styles paddings
     private int mDateVerPadding;
@@ -811,9 +810,6 @@ public class KeyguardStatusView extends GridLayout implements
         mClockSelection = Settings.Secure.getIntForUser(resolver,
                 Settings.Secure.LOCKSCREEN_CLOCK_SELECTION, 2, UserHandle.USER_CURRENT);
 
-        mIsCenterAligned = Settings.Secure.getIntForUser(resolver,
-                Settings.Secure.CENTER_TEXT_CLOCK, 0, UserHandle.USER_CURRENT) == 1;
-
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)
                 mKeyguardSlice.getLayoutParams();
 
@@ -925,19 +921,13 @@ public class KeyguardStatusView extends GridLayout implements
                 params.addRule(RelativeLayout.BELOW, R.id.du_clock_view);
                 break;
         }
-        if (mTextClock != null && mIsCenterAligned) {
-            mTextClock.setGravity(Gravity.CENTER);
-            textClockParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
-            textClockParams.removeRule(RelativeLayout.ALIGN_PARENT_START);
-            mTextClock.setLayoutParams(textClockParams);
-            mTextClock.setPaddingRelative(0, 0, 0, 0);
-        } else {
-            mTextClock.setGravity(Gravity.LEFT);
-            textClockParams.removeRule(RelativeLayout.CENTER_HORIZONTAL);
-            textClockParams.addRule(RelativeLayout.ALIGN_PARENT_START);
-            mTextClock.setLayoutParams(textClockParams);
-            mTextClock.setPaddingRelative(leftPadding, 0, 0, 0);
-        }
+        if (mTextClock != null) {
+	    mTextClock.setGravity(Gravity.CENTER);
+	    mTextClock.setLayoutParams(textClockParams);
+	    mTextClock.setPaddingRelative(0, topPadding, 0, 0);
+	} else {
+	    mTextClock.setPaddingRelative(leftPadding, topPadding, 0, 0);
+	}
     }
 
     private void updateDateStyles() {
