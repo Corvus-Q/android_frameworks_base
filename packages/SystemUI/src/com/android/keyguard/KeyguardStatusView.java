@@ -96,6 +96,7 @@ public class KeyguardStatusView extends GridLayout implements
 
     private int mClockSelection;
     private int mDateSelection;
+    private int mTextClockAlignment;
 
     // Date styles paddings
     private int mDateVerPadding;
@@ -543,6 +544,29 @@ public class KeyguardStatusView extends GridLayout implements
         if (mOwnerInfo == null) return;
         String info = mLockPatternUtils.getDeviceOwnerInfo();
         if (info == null) {
+            final ContentResolver resolver = mContext.getContentResolver();
+            boolean mClockSelection = Settings.Secure.getIntForUser(resolver,
+                    Settings.Secure.LOCKSCREEN_CLOCK_SELECTION, 0, UserHandle.USER_CURRENT) == 8;
+            int mTextClockAlign = Settings.System.getIntForUser(resolver,
+                    Settings.System.TEXT_CLOCK_ALIGNMENT, 0, UserHandle.USER_CURRENT);
+
+            int leftPadding = (int) getResources().getDimension(R.dimen.custom_clock_left_padding);
+
+            if (mClockSelection) {
+                switch (mTextClockAlign) {
+                    case 0:
+                    default:
+                        mOwnerInfo.setGravity(Gravity.START);
+                        mOwnerInfo.setPaddingRelative(leftPadding, 0, 0, 0);
+                        break;
+                    case 1:
+                        mOwnerInfo.setGravity(Gravity.CENTER);
+                        mOwnerInfo.setPaddingRelative(0, 0, 0, 0);
+                        break;
+                }
+            } else {
+                mOwnerInfo.setGravity(Gravity.CENTER);
+            }
             // Use the current user owner information if enabled.
             final boolean ownerInfoEnabled = mLockPatternUtils.isOwnerInfoEnabled(
                     KeyguardUpdateMonitor.getCurrentUser());
@@ -813,14 +837,6 @@ public class KeyguardStatusView extends GridLayout implements
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)
                 mKeyguardSlice.getLayoutParams();
 
-        RelativeLayout.LayoutParams textClockParams = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT);
-        textClockParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
-
-        int leftPadding = (int) getResources().getDimension(R.dimen.custom_clock_left_padding);
-        int topPadding = (int) getResources().getDimension(R.dimen.custom_clock_top_margin);
-
         mSmallClockView = findViewById(R.id.clock_view);
         mDefaultClockView = findViewById(R.id.default_clock_view);
         mTextClock = findViewById(R.id.custom_text_clock_view);
@@ -921,13 +937,7 @@ public class KeyguardStatusView extends GridLayout implements
                 params.addRule(RelativeLayout.BELOW, R.id.du_clock_view);
                 break;
         }
-        if (mTextClock != null) {
-	    mTextClock.setGravity(Gravity.CENTER);
-	    mTextClock.setLayoutParams(textClockParams);
-	    mTextClock.setPaddingRelative(0, topPadding, 0, 0);
-	} else {
-	    mTextClock.setPaddingRelative(leftPadding, topPadding, 0, 0);
-	}
+        updateClockAlignment();
     }
 
     private void updateDateStyles() {
@@ -1016,11 +1026,44 @@ public class KeyguardStatusView extends GridLayout implements
                 mKeyguardSlice.setViewsTextStyles(0.08f, true);
                 break;
         }
+        updateClockAlignment();
     }
 
     public void updateAll() {
         updateSettings();
         updateDateStyles();
+    }
+
+    private void updateClockAlignment() {
+        final ContentResolver resolver = getContext().getContentResolver();
+
+        mTextClockAlignment = Settings.System.getIntForUser(resolver,
+                Settings.System.TEXT_CLOCK_ALIGNMENT, 0, UserHandle.USER_CURRENT);
+
+        mTextClock = findViewById(R.id.custom_text_clock_view);
+
+        int leftPadding = (int) getResources().getDimension(R.dimen.custom_clock_left_padding);
+
+        if (mClockSelection == 8) {
+            switch (mTextClockAlignment) {
+                case 0:
+                default:
+                    mTextClock.setGravity(Gravity.START);
+                    mTextClock.setPaddingRelative(leftPadding, 0, 0, 0);
+                    mKeyguardSlice.setGravity(Gravity.START);
+                    mKeyguardSlice.setPaddingRelative(leftPadding, 0, 0, 0);
+                    break;
+                case 1:
+                    mTextClock.setGravity(Gravity.CENTER);
+                    mTextClock.setPaddingRelative(0, 0, 0, 0);
+                    mKeyguardSlice.setGravity(Gravity.CENTER);
+                    mKeyguardSlice.setPaddingRelative(0, 0, 0, 0);
+                    break;
+            }
+        } else {
+            mKeyguardSlice.setPaddingRelative(0, 0, 0, 0);
+            mKeyguardSlice.setGravity(Gravity.CENTER);
+        }
     }
 
     // DateFormat.getBestDateTimePattern is extremely expensive, and refresh is called often.

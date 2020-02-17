@@ -5914,6 +5914,15 @@ public final class Settings {
                 ANY_INTEGER_VALIDATOR;
 
         /**
+         * Text clock alignment
+         * @hide
+         */
+        public static final String TEXT_CLOCK_ALIGNMENT = "text_clock_alignment";
+
+        /** @hide */
+        private static final Validator TEXT_CLOCK_ALIGNMENT_VALIDATOR = ANY_INTEGER_VALIDATOR;
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -6043,6 +6052,7 @@ public final class Settings {
             DOZE_BRIGHTNESS,
             LOCK_SHOW_STATUS_BAR,
             QS_BLUR_INTENSITY,
+            TEXT_CLOCK_ALIGNMENT,
         };
 
         /**
@@ -6249,6 +6259,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(DOZE_BRIGHTNESS);
             PRIVATE_SETTINGS.add(FORCE_SHOW_NAVBAR);
             PRIVATE_SETTINGS.add(LOCK_SHOW_STATUS_BAR);
+            PRIVATE_SETTINGS.add(TEXT_CLOCK_ALIGNMENT);
         }
 
         /**
@@ -6417,6 +6428,7 @@ public final class Settings {
             VALIDATORS.put(DOZE_BRIGHTNESS, DOZE_BRIGHTNESS_VALIDATOR);
             VALIDATORS.put(LOCK_SHOW_STATUS_BAR,LOCK_SHOW_STATUS_BAR_VALIDATOR);
             VALIDATORS.put(QS_BLUR_INTENSITY, QS_BLUR_INTENSITY_VALIDATOR);
+            VALIDATORS.put(TEXT_CLOCK_ALIGNMENT, TEXT_CLOCK_ALIGNMENT_VALIDATOR);
         }
 
         /**

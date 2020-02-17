@@ -44,6 +44,7 @@ import android.text.TextUtils.TruncateAt;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.Button;
@@ -219,6 +220,12 @@ public class KeyguardSliceView extends LinearLayout implements View.OnClickListe
         }
         mClickActions.clear();
 
+        final ContentResolver resolver = mContext.getContentResolver();
+        boolean mClockSelection = Settings.Secure.getIntForUser(resolver,
+                Settings.Secure.LOCKSCREEN_CLOCK_SELECTION, 0, UserHandle.USER_CURRENT) == 8;
+        int mTextClockAlignment = Settings.System.getIntForUser(resolver,
+                Settings.System.TEXT_CLOCK_ALIGNMENT, 0, UserHandle.USER_CURRENT);
+
         ListContent lc = new ListContent(getContext(), mSlice);
         SliceContent headerContent = lc.getHeader();
         mHasHeader = headerContent != null && !headerContent.getSliceItem().hasHint(HINT_LIST_ITEM);
@@ -249,6 +256,19 @@ public class KeyguardSliceView extends LinearLayout implements View.OnClickListe
         final int subItemsCount = subItems.size();
         final int blendedColor = getTextColor();
         final int startIndex = mHasHeader ? 1 : 0; // First item is header; skip it
+        if (mClockSelection) {
+            switch (mTextClockAlignment) {
+                case 0:
+                default:
+                    mRowContainer.setGravity(Gravity.START);
+                    break;
+                case 1:
+                    mRowContainer.setGravity(Gravity.CENTER);
+                    break;
+            }
+        } else {
+            mRowContainer.setGravity(Gravity.CENTER);
+        }
         mRow.setVisibility(subItemsCount > 0 ? VISIBLE : GONE);
 
         for (int i = startIndex; i < subItemsCount; i++) {
