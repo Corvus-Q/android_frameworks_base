@@ -6951,6 +6951,13 @@ public final class Settings {
         private static final Validator CENTER_NOTIFICATION_HEADERS_VALIDATOR = BOOLEAN_VALIDATOR;
 
         /**
+         * @hide
+         */
+        public static final String AUTO_BRIGHTNESS_MIN_VALUE = "auto_brightness_min_value";
+
+        private static final Validator AUTO_BRIGHTNESS_MIN_VALUE_VALIDATOR = ANY_INTEGER_VALIDATOR;
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -7115,6 +7122,7 @@ public final class Settings {
             THEMING_SETTINGS_DASHBOARD_ICONS,
             CENTER_NOTIFICATION_HEADERS,
             OMNI_DOZE_BRIGHTNESS_FORCE,
+            AUTO_BRIGHTNESS_MIN_VALUE,
         };
 
         /**
@@ -7348,6 +7356,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(DISPLAY_PICTURE_ADJUSTMENT);
             PRIVATE_SETTINGS.add(LIVE_DISPLAY_HINTED);
             PRIVATE_SETTINGS.add(OMNI_DOZE_BRIGHTNESS_FORCE);
+            PRIVATE_SETTINGS.add(AUTO_BRIGHTNESS_MIN_VALUE);
         }
 
         /**
@@ -7570,6 +7579,7 @@ public final class Settings {
             VALIDATORS.put(LIVE_DISPLAY_HINTED, LIVE_DISPLAY_HINTED_VALIDATOR);
             VALIDATORS.put(CENTER_NOTIFICATION_HEADERS, CENTER_NOTIFICATION_HEADERS_VALIDATOR);
             VALIDATORS.put(OMNI_DOZE_BRIGHTNESS_FORCE, OMNI_DOZE_BRIGHTNESS_FORCE_VALIDATOR);
+            VALIDATORS.put(AUTO_BRIGHTNESS_MIN_VALUE, AUTO_BRIGHTNESS_MIN_VALUE_VALIDATOR);
         }
 
         /**
