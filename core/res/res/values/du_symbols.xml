@@ -48,7 +48,6 @@
   <!-- Whether device supports an alt. ambient display -->
   <java-symbol type="bool" name="config_alt_ambient_display"/>
 
-  <!-- Whether device ignores the RSSNR signal implementation -->
   <java-symbol type="bool" name="config_ignoreRssnrSignalLevel" />
 
   <!-- Whether device has a physical display cutout -->
@@ -229,4 +228,9 @@
   <java-symbol type="integer" name="config_longPressOnAssistKeyBehavior" />
   <java-symbol type="integer" name="config_longPressOnAppSwitchKeyBehavior" />
   <java-symbol type="integer" name="config_longPressOnCameraKeyBehavior" />
+
+  <!-- Button brightness -->
+  <java-symbol type="bool" name="config_button_brightness_support" />
+  <java-symbol type="integer" name="config_button_brightness_default" />
+
 </resources>
