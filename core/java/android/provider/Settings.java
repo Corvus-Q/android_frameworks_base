@@ -6110,7 +6110,7 @@ public final class Settings {
          */
         public static final String KEY_APP_SWITCH_DOUBLE_TAP_CUSTOM_APP_FR_NAME =
                 "key_app_switch_double_tap_custom_app_fr_name";
-
+                
         /**
          * Action to perform when the app switch key is long-pressed.
          * (Default can be configured via config_longPressOnHardwareCameraBehavior)
