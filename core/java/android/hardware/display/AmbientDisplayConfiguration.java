@@ -56,7 +56,8 @@ public class AmbientDisplayConfiguration {
                 || tapGestureEnabled(user)
                 || pulseOnCustomDozeEventEnabled(user)
                 || doubleTapGestureEnabled(user)
-                || isAmbientTickerEnabled(user);
+                || isAmbientTickerEnabled(user)
+                || isAnyFlashlightActionEnabled(user);
     }
 
     /** {@hide} */
@@ -255,5 +256,11 @@ public class AmbientDisplayConfiguration {
 
     public boolean deviceHasSoli() {
         return mDeviceHasSoli;
+    }
+
+    /** {@hide} */
+    public boolean isAnyFlashlightActionEnabled(int user) {
+        return (Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.TORCH_POWER_BUTTON_GESTURE, 0, user) != 0);
     }
 }
