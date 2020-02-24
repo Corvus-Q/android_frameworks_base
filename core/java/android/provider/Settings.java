@@ -6531,6 +6531,12 @@ public final class Settings {
         public static final String STATUSBAR_DUAL_ROW = "statusbar_dual_row";
 
         /**
+         * Ambient Edge Light Layout
+         * @hide
+         */
+        public static final String AMBIENT_LIGHT_LAYOUT = "ambient_light_layout";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
