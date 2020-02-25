@@ -107,9 +107,6 @@
     <string name="accessibility_quick_settings_cpuinfo_off">CPU Info off</string>
     <string name="accessibility_quick_settings_cpuinfo_on">CPU Info on</string>
 
-    <!--Screenrecord Tile-->
-    <string name="screenrecorder_title_tile">Screenrecord</string>
-
     <!-- HW Keys Tile -->
     <string name="accessibility_quick_settings_hwkeys_on">HW keys on</string>
     <string name="accessibility_quick_settings_hwkeys_off">HW keys off</string>
