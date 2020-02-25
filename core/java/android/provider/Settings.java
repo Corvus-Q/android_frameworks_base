@@ -5818,15 +5818,6 @@ public final class Settings {
                 BOOLEAN_VALIDATOR;
 
         /**
-         * Accent Color
-         * @hide
-         */
-        public static final String ACCENT_COLOR = "accent_color";
-
-        /** @hide */
-        private static final Validator ACCENT_COLOR_VALIDATOR = ANY_INTEGER_VALIDATOR;
-
-        /**
          * User definable value of pulse notification screen brightness
          *
          * @hide
@@ -6046,13 +6037,12 @@ public final class Settings {
             BACK_GESTURE_HAPTIC,
             QS_BLUR,
             QS_BLUR_ALPHA,
-            DOUBLE_TAP_SLEEP_GESTURE,
-            ACCENT_COLOR,
             PULSE_BRIGHTNESS,
             DOZE_BRIGHTNESS,
             LOCK_SHOW_STATUS_BAR,
             QS_BLUR_INTENSITY,
             TEXT_CLOCK_ALIGNMENT,
+            DOUBLE_TAP_SLEEP_GESTURE
         };
 
         /**
@@ -6254,7 +6244,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(STATUS_BAR_TICKER_TICK_DURATION);
             PRIVATE_SETTINGS.add(BACK_GESTURE_HAPTIC);
             PRIVATE_SETTINGS.add(DOUBLE_TAP_SLEEP_GESTURE);
-            PRIVATE_SETTINGS.add(ACCENT_COLOR);
             PRIVATE_SETTINGS.add(PULSE_BRIGHTNESS);
             PRIVATE_SETTINGS.add(DOZE_BRIGHTNESS);
             PRIVATE_SETTINGS.add(FORCE_SHOW_NAVBAR);
@@ -6423,7 +6412,6 @@ public final class Settings {
             VALIDATORS.put(QS_BLUR, QS_BLUR_VALIDATOR);
             VALIDATORS.put(QS_BLUR_ALPHA, QS_BLUR_ALPHA_VALIDATOR);
             VALIDATORS.put(DOUBLE_TAP_SLEEP_GESTURE, DOUBLE_TAP_SLEEP_GESTURE_VALIDATOR);
-            VALIDATORS.put(ACCENT_COLOR, ACCENT_COLOR_VALIDATOR);
             VALIDATORS.put(PULSE_BRIGHTNESS, PULSE_BRIGHTNESS_VALIDATOR);
             VALIDATORS.put(DOZE_BRIGHTNESS, DOZE_BRIGHTNESS_VALIDATOR);
             VALIDATORS.put(LOCK_SHOW_STATUS_BAR,LOCK_SHOW_STATUS_BAR_VALIDATOR);
