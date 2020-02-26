@@ -737,10 +737,20 @@
             </intent-filter>
         </receiver>
 
+        <!-- FPS Info -->
+        <service android:name=".FPSInfoService"
+                android:exported="false" />
+        <receiver android:name=".BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name="com.android.systemui.statusbar.phone.LeftBackSwipeCustomApp"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.MinWidth"
             android:label="@string/app_picker_dialog_title" >
+
             <intent-filter>
                 <action android:name="com.android.systemui.statusbar.phone.LeftBackSwipeCustomApp" />
                 <category android:name="android.intent.category.DEFAULT" />

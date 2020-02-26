@@ -16473,6 +16473,11 @@ public final class Settings {
         public static final String SHOW_CPU_OVERLAY = "show_cpu_overlay";
 
         /**
+         * @hide
+         */
+        public static final String SHOW_FPS_OVERLAY = "show_fps_overlay";
+
+        /**
          * Whether applications can fake a signature.
          * 1 = permit apps to fake signature
          * 0 = disable this feature
