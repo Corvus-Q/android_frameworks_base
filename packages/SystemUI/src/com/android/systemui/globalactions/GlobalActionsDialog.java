@@ -140,7 +140,6 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
     private static final String GLOBAL_ACTION_KEY_EMERGENCY = "emergency";
     private static final String GLOBAL_ACTION_KEY_SCREENSHOT = "screenshot";
     private static final String GLOBAL_ACTION_KEY_RESTART_RECOVERY = "recovery";
-    private static final String GLOBAL_ACTION_KEY_SCREENRECORD = "screenrecord";
 
     private static final int SHOW_TOGGLES_BUTTON = 1;
     private static final int RESTART_RECOVERY_BUTTON = 2;
@@ -520,13 +519,8 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
                 }
             } else if (GLOBAL_ACTION_KEY_SCREENSHOT.equals(actionKey)) {
                 if (Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                            Settings.Secure.SCREENSHOT_IN_POWER_MENU, 0, getCurrentUser().id) != 0) {
+                            Settings.Secure.SCREENSHOT_IN_POWER_MENU, 1, getCurrentUser().id) != 0) {
                     mItems.add(new ScreenshotAction());
-                }
-            } else if (GLOBAL_ACTION_KEY_SCREENRECORD.equals(actionKey)) {
-                if (Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                            Settings.Secure.SCREENRECORD_IN_POWER_MENU, 0, getCurrentUser().id) != 0) {
-                    mItems.add(new ScreenrecordAction());
                 }
             /*} else if (GLOBAL_ACTION_KEY_LOGOUT.equals(actionKey)) {
                 if (mDevicePolicyManager.isLogoutEnabled()
@@ -783,11 +777,6 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
 
         @Override
         public boolean showBeforeProvisioning() {
-            return false;
-        }
-
-        @Override
-        public boolean onLongPress() {
             return false;
         }
     }
