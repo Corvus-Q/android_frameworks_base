@@ -40,12 +40,11 @@ import com.android.systemui.shared.system.QuickStepContract;
 import com.android.systemui.statusbar.phone.ReverseLinearLayout.ReverseRelativeLayout;
 import com.android.systemui.statusbar.policy.KeyButtonView;
 import com.android.systemui.tuner.TunerService;
-import com.android.systemui.tuner.TunerService.Tunable;
 
 import java.util.Objects;
 
 public class NavigationBarInflaterView extends FrameLayout
-        implements NavigationModeController.ModeChangedListener, Tunable {
+        implements NavigationModeController.ModeChangedListener, TunerService.Tunable {
 
     private static final String TAG = "NavBarInflater";
 
@@ -76,11 +75,10 @@ public class NavigationBarInflaterView extends FrameLayout
     public static final String KEY_CODE_START = "(";
     public static final String KEY_IMAGE_DELIM = ":";
     public static final String KEY_CODE_END = ")";
+    private static final String WEIGHT_SUFFIX = "W";
+    private static final String WEIGHT_CENTERED_SUFFIX = "WC";
     private static final String ABSOLUTE_SUFFIX = "A";
     private static final String ABSOLUTE_VERTICAL_CENTERED_SUFFIX = "C";
-
-    public static final String WEIGHT_SUFFIX = "W";
-    public static final String WEIGHT_CENTERED_SUFFIX = "WC";
 
     protected LayoutInflater mLayoutInflater;
     protected LayoutInflater mLandscapeInflater;
@@ -158,7 +156,6 @@ public class NavigationBarInflaterView extends FrameLayout
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         Dependency.get(TunerService.class).addTunable(this, NAV_BAR_INVERSE);
-        Dependency.get(TunerService.class).addTunable(this, NAV_BAR_VIEWS);
     }
 
     @Override
@@ -173,9 +170,6 @@ public class NavigationBarInflaterView extends FrameLayout
         if (NAV_BAR_INVERSE.equals(key)) {
             mInverseLayout = TunerService.parseIntegerSwitch(newValue, false);
             updateLayoutInversion();
-        }
-        if (NAV_BAR_VIEWS.equals(key)) {
-            setNavigationBarLayout(newValue);
         }
     }
 

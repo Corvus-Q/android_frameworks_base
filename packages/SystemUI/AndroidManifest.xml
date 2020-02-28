@@ -270,15 +270,6 @@
     <uses-permission android:name="android.permission.REBOOT" />
     <uses-permission android:name="android.permission.RECOVERY" />
 
-    <!-- Custom permissions -->
-    <uses-permission android:name="android.permission.FORCE_STOP_PACKAGES" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
-    <uses-permission android:name="android.permission.ACCESS_SURFACE_FLINGER" />
-    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
-    <protected-broadcast android:name="com.android.systemui.doze.pulse" />
-
     <!-- DataSwitch tile -->
     <uses-permission android:name="android.permission.WRITE_APN_SETTINGS" />
 
@@ -384,14 +375,6 @@
         <activity android:name=".tuner.StatusbarItemsActivity"
                   android:theme="@style/ExTunerSettings"
                   android:label="@string/statusbar_items_title"
-                  android:process=":tuner"
-                  android:parentActivityName="com.dirtyunicorns.tweaks.DirtyTweaks"
-                  android:exported="true">
-        </activity>
-
-        <activity android:name=".tuner.NavBarActivity"
-                  android:theme="@style/ExTunerSettings"
-                  android:label="@string/nav_bar"
                   android:process=":tuner"
                   android:parentActivityName="com.dirtyunicorns.tweaks.DirtyTweaks"
                   android:exported="true">

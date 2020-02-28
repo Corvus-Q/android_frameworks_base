@@ -48,10 +48,6 @@
   <!-- Whether device supports an alt. ambient display -->
   <java-symbol type="bool" name="config_alt_ambient_display"/>
 
-  <!-- Button backlight -->
-  <java-symbol type="integer" name="config_buttonBrightnessSettingDefault" />
-  <java-symbol type="bool" name="config_deviceHasVariableButtonBrightness" />
-
   <!-- Whether device ignores the RSSNR signal implementation -->
   <java-symbol type="bool" name="config_ignoreRssnrSignalLevel" />
 
@@ -66,20 +62,6 @@
   <java-symbol type="bool" name="config_intrusiveBatteryLed" />
   <java-symbol type="bool" name="config_multiColorBatteryLed" />
   <java-symbol type="bool" name="config_ledCanPulse" />
-
-  <!-- Hardware keys present on the device, stored as a bit field.
-       This integer should equal the sum of the corresponding value for each
-       of the following keys present:
-           1 - Home
-           2 - Back
-           4 - Menu
-           8 - Assistant (search)
-          16 - App switch
-          32 - Camera
-          64 - Volume rocker
-       For example, a device with Home, Back and Menu keys would set this
-       config to 7. -->
-  <integer name="config_deviceHardwareKeys">64</integer>
 
   <!-- Package Manager -->
   <java-symbol type="array" name="config_deviceDisabledComponents" />
