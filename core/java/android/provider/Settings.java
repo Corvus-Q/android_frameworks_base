@@ -6397,7 +6397,7 @@ public final class Settings {
         public static final String STATUS_BAR_SHOW_BATTERY_PERCENT = "status_bar_show_battery_percent";
 
         /**
-         * Whether to enable Ambient Edge lights
+         * Whether to enable pulse edge lights
          * @hide
          */
         public static final String AMBIENT_NOTIFICATION_LIGHT = "ambient_notification_light";
@@ -6408,17 +6408,17 @@ public final class Settings {
          * Whether to use accent color for pulse
          * @hide
          */
-        public static final String AMBIENT_NOTIFICATION_LIGHT_AUTOMATIC = "ambient_notification_light_automatic";
+        public static final String AMBIENT_LIGHT_COLOR = "ambient_light_color";
 
-        private static final Validator AMBIENT_NOTIFICATION_LIGHT_AUTOMATIC_VALIDATOR = BOOLEAN_VALIDATOR;
+        private static final Validator AMBIENT_LIGHT_COLOR_VALIDATOR = ANY_INTEGER_VALIDATOR;
 
         /**
          * @hide
          */
-        public static final String AMBIENT_LIGHT_AUTO_COLOR = "ambient_light_auto_color";
+        public static final String AMBIENT_LIGHT_CUSTOM_COLOR = "ambient_light_custom_color";
 
         /** @hide */
-        private static final Validator AMBIENT_LIGHT_AUTO_COLOR_VALIDATOR = BOOLEAN_VALIDATOR;
+        private static final Validator AMBIENT_LIGHT_CUSTOM_COLOR_VALIDATOR = ANY_STRING_VALIDATOR;
 
         /**
          * @hide
@@ -6586,8 +6586,8 @@ public final class Settings {
             NOTIFICATION_HEADERS,
             NAVIGATION_HANDLE_WIDTH,
             AMBIENT_NOTIFICATION_LIGHT,
-            AMBIENT_NOTIFICATION_LIGHT_AUTOMATIC,
-            AMBIENT_LIGHT_AUTO_COLOR,
+            AMBIENT_LIGHT_COLOR,
+            AMBIENT_LIGHT_CUSTOM_COLOR,
             AMBIENT_LIGHT_DURATION,
             AMBIENT_LIGHT_REPEAT_COUNT,
             AMBIENT_LIGHT_PULSE_FOR_ALL,
@@ -6799,8 +6799,8 @@ public final class Settings {
             PRIVATE_SETTINGS.add(QS_PANEL_BG_USE_NEW_TINT);
             PRIVATE_SETTINGS.add(NAVIGATION_HANDLE_WIDTH);
             PRIVATE_SETTINGS.add(AMBIENT_NOTIFICATION_LIGHT);
-            PRIVATE_SETTINGS.add(AMBIENT_NOTIFICATION_LIGHT_AUTOMATIC);
-            PRIVATE_SETTINGS.add(AMBIENT_LIGHT_AUTO_COLOR);
+            PRIVATE_SETTINGS.add(AMBIENT_LIGHT_COLOR);
+            PRIVATE_SETTINGS.add(AMBIENT_LIGHT_CUSTOM_COLOR);
             PRIVATE_SETTINGS.add(AMBIENT_LIGHT_DURATION);
             PRIVATE_SETTINGS.add(AMBIENT_LIGHT_REPEAT_COUNT);
             PRIVATE_SETTINGS.add(AMBIENT_LIGHT_PULSE_FOR_ALL);
@@ -6986,8 +6986,8 @@ public final class Settings {
             VALIDATORS.put(QS_PANEL_BG_USE_NEW_TINT, QS_PANEL_BG_USE_NEW_TINT_VALIDATOR);
             VALIDATORS.put(NAVIGATION_HANDLE_WIDTH, NAVIGATION_HANDLE_WIDTH_VALIDATOR);
             VALIDATORS.put(AMBIENT_NOTIFICATION_LIGHT, AMBIENT_NOTIFICATION_LIGHT_VALIDATOR);
-            VALIDATORS.put(AMBIENT_NOTIFICATION_LIGHT_AUTOMATIC, AMBIENT_NOTIFICATION_LIGHT_AUTOMATIC_VALIDATOR);
-            VALIDATORS.put(AMBIENT_LIGHT_AUTO_COLOR, AMBIENT_LIGHT_AUTO_COLOR_VALIDATOR);
+            VALIDATORS.put(AMBIENT_LIGHT_COLOR, AMBIENT_LIGHT_COLOR_VALIDATOR);
+            VALIDATORS.put(AMBIENT_LIGHT_CUSTOM_COLOR, AMBIENT_LIGHT_CUSTOM_COLOR_VALIDATOR);
             VALIDATORS.put(AMBIENT_LIGHT_DURATION, AMBIENT_LIGHT_DURATION_VALIDATOR);
             VALIDATORS.put(AMBIENT_LIGHT_REPEAT_COUNT, AMBIENT_LIGHT_REPEAT_COUNT_VALIDATOR);
             VALIDATORS.put(AMBIENT_LIGHT_PULSE_FOR_ALL, AMBIENT_LIGHT_PULSE_FOR_ALL_VALIDATOR);
