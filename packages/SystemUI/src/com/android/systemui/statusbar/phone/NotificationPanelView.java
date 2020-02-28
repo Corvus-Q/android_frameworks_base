@@ -3541,7 +3541,7 @@ public class NotificationPanelView extends PanelView implements
             }
             pulseColor |= 0xFF000000;
             if (mPulsing) {
-                if (activeNotif && (pulseReasonNotification || pulseForAll)) {
+                if ((activeNotif && pulseReasonNotification) || pulseForAll) {
                     // show the bars if we have to
                     if (pulseLights) {
                         mPulseLightsView.animateNotificationWithColor(pulseColor);
