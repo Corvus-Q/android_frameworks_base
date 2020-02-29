@@ -5712,12 +5712,6 @@ public final class Settings {
         public static final String GAMING_MODE_DUMMY = "gaming_mode_dummy";
 
         /**
-         * Whether to disable hardware keys in gaming mode
-         * @hide
-         */
-        public static final String GAMING_MODE_HW_KEYS_TOGGLE = "gaming_mode_hw_keys_toggle";
-
-        /**
          * Whether to disable heads up gaming mode
          * @hide
          */
