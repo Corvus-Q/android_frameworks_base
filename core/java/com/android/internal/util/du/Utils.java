@@ -50,6 +50,7 @@ import android.view.KeyEvent;
 import com.android.internal.R;
 import com.android.internal.statusbar.IStatusBarService;
 
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ArrayList;
 import java.util.List;
@@ -223,8 +224,11 @@ public class Utils {
     public static boolean isThemeEnabled(String packageName) {
         mOverlayService = new OverlayManager();
         try {
-            List<OverlayInfo> infos = mOverlayService.getOverlayInfosForTarget("android",
-                    UserHandle.myUserId());
+            ArrayList<OverlayInfo> infos = new ArrayList<OverlayInfo>();
+            infos.addAll(mOverlayService.getOverlayInfosForTarget("android",
+                    UserHandle.myUserId()));
+            infos.addAll(mOverlayService.getOverlayInfosForTarget("com.android.systemui",
+                    UserHandle.myUserId()));
             for (int i = 0, size = infos.size(); i < size; i++) {
                 if (infos.get(i).packageName.equals(packageName)) {
                     return infos.get(i).isEnabled();
