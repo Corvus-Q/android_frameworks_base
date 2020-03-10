@@ -966,8 +966,9 @@ class GlobalScreenshot {
         };
 
         Resources r = mContext.getResources();
-        if ((r.getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK)
-                == Configuration.UI_MODE_NIGHT_YES) {
+        boolean isDarkMode = (r.getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK)
+                == Configuration.UI_MODE_NIGHT_YES;
+        if (isDarkMode) {
             mScreenshotView.getBackground().setTint(Color.BLACK);
         } else {
             mScreenshotView.getBackground().setTintList(null);
@@ -986,12 +987,16 @@ class GlobalScreenshot {
                 mScreenshotView.setScaleX(SCREENSHOT_SCALE + mBgPaddingScale);
                 mScreenshotView.setScaleY(SCREENSHOT_SCALE + mBgPaddingScale);
                 mScreenshotView.setVisibility(View.VISIBLE);
-                mScreenshotFlash.setAlpha(0f);
-                mScreenshotFlash.setVisibility(View.VISIBLE);
+                if (!isDarkMode) {
+                    mScreenshotFlash.setAlpha(0f);
+                    mScreenshotFlash.setVisibility(View.VISIBLE);
+                }
             }
             @Override
             public void onAnimationEnd(android.animation.Animator animation) {
-                mScreenshotFlash.setVisibility(View.GONE);
+                if (!isDarkMode) {
+                    mScreenshotFlash.setVisibility(View.GONE);
+                }
             }
         });
         anim.addUpdateListener(new AnimatorUpdateListener() {
@@ -1005,7 +1010,9 @@ class GlobalScreenshot {
                 mScreenshotView.setAlpha(t);
                 mScreenshotView.setScaleX(scaleT);
                 mScreenshotView.setScaleY(scaleT);
-                mScreenshotFlash.setAlpha(flashAlphaInterpolator.getInterpolation(t));
+                if (!isDarkMode) {
+                    mScreenshotFlash.setAlpha(flashAlphaInterpolator.getInterpolation(t));
+                }
             }
         });
         return anim;
