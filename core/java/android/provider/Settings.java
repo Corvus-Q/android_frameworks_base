@@ -4683,6 +4683,15 @@ public final class Settings {
         private static final Validator VOLUME_ROCKER_WAKE_VALIDATOR =
                 BOOLEAN_VALIDATOR;
 
+        /** Width of the navigation handle.
+         *  @hide
+         */
+        public static final String NAVIGATION_HANDLE_WIDTH = "navigation_handle_width";
+
+        /** @hide */
+        private static final Validator NAVIGATION_HANDLE_WIDTH_VALIDATOR =
+                ANY_INTEGER_VALIDATOR;
+
         /**
          * @hide
          */
@@ -6438,6 +6447,7 @@ public final class Settings {
             BUTTON_BACKLIGHT_ENABLE,
             BUTTON_BACKLIGHT_TIMEOUT,
             BUTTON_BACKLIGHT_ON_TOUCH_ONLY,
+            NAVIGATION_HANDLE_WIDTH,
         };
 
         /**
@@ -6660,6 +6670,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(BUTTON_BACKLIGHT_ENABLE);
             PRIVATE_SETTINGS.add(BUTTON_BACKLIGHT_TIMEOUT);
             PRIVATE_SETTINGS.add(BUTTON_BACKLIGHT_ON_TOUCH_ONLY);
+            PRIVATE_SETTINGS.add(NAVIGATION_HANDLE_WIDTH);
         }
 
         /**
@@ -6837,6 +6848,8 @@ public final class Settings {
                     BUTTON_BACKLIGHT_TIMEOUT_VALIDATOR);
             VALIDATORS.put(BUTTON_BACKLIGHT_ON_TOUCH_ONLY,
                     BUTTON_BACKLIGHT_ON_TOUCH_ONLY_VALIDATOR);
+            VALIDATORS.put(NAVIGATION_HANDLE_WIDTH,
+                    NAVIGATION_HANDLE_WIDTH_VALIDATOR);
         }
 
         /**
