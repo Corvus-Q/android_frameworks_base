@@ -40,7 +40,7 @@
     <!-- Height of area above QQS where battery/time go -->
     <dimen name="quick_qs_offset_height">48dp</dimen>
     <!-- Total height of QQS (quick_qs_offset_height + 128) -->
-    <dimen name="quick_qs_total_height">170dp</dimen>
+    <dimen name="quick_qs_total_height">176dp</dimen>
     <!-- Height of the bottom navigation / system bar. -->
     <dimen name="navigation_bar_height">48dp</dimen>
     <!-- Height of the bottom navigation bar in portrait; often the same as @dimen/navigation_bar_height -->
@@ -763,11 +763,6 @@
     <dimen name="chooser_header_scroll_elevation">4dp</dimen>
     <dimen name="chooser_max_collapsed_height">288dp</dimen>
     <dimen name="chooser_direct_share_label_placeholder_max_width">72dp</dimen>
-
-    <dimen name="extra_qs_footer_height">48dp</dimen>
-    <dimen name="qs_background_inset">0dp</dimen>
-    <dimen name="qs_drag_handle_margin_bottom">-12dp</dimen>
-    <dimen name="qs_notification_padding">20dp</dimen>
 
     <dimen name="resolver_icon_size">32dp</dimen>
     <dimen name="resolver_button_bar_spacing">8dp</dimen>

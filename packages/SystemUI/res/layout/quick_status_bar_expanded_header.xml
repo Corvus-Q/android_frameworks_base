@@ -47,7 +47,6 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_below="@id/quick_qs_status_icons"
-        android:layout_marginTop="@dimen/qs_tiles_extra_margin_top"
         android:accessibilityTraversalAfter="@+id/date_time_group"
         android:accessibilityTraversalBefore="@id/expand_indicator"
         android:clipChildren="false"
