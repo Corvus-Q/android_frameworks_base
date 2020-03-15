@@ -6324,6 +6324,9 @@ public final class Settings {
          */
         public static final String LOCKSCREEN_CHARGING_ANIMATION_STYLE = "lockscreen_charging_animation_style";
 
+        private static final Validator LOCKSCREEN_CHARGING_ANIMATION_STYLE_VALIDATOR =
+                new SettingsValidators.InclusiveIntegerRangeValidator(0, 5);
+
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
@@ -6460,6 +6463,7 @@ public final class Settings {
             BUTTON_BACKLIGHT_TIMEOUT,
             BUTTON_BACKLIGHT_ON_TOUCH_ONLY,
             NAVIGATION_HANDLE_WIDTH,
+            LOCKSCREEN_CHARGING_ANIMATION_STYLE,
         };
 
         /**
@@ -6862,6 +6866,7 @@ public final class Settings {
                     BUTTON_BACKLIGHT_ON_TOUCH_ONLY_VALIDATOR);
             VALIDATORS.put(NAVIGATION_HANDLE_WIDTH,
                     NAVIGATION_HANDLE_WIDTH_VALIDATOR);
+            VALIDATORS.put(LOCKSCREEN_CHARGING_ANIMATION_STYLE, LOCKSCREEN_CHARGING_ANIMATION_STYLE_VALIDATOR);
         }
 
         /**
