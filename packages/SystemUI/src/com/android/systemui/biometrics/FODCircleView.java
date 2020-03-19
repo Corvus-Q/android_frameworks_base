@@ -92,33 +92,12 @@ public class FODCircleView extends ImageView {
         R.drawable.fod_icon_default_1,
         R.drawable.fod_icon_default_2,
         R.drawable.fod_icon_default_3,
-        R.drawable.fod_icon_default_4,
-        R.drawable.fod_icon_default_5,
-        R.drawable.fod_icon_arc_reactor,
-        R.drawable.fod_icon_cpt_america_flat,
-        R.drawable.fod_icon_cpt_america_flat_gray,
-        R.drawable.fod_icon_dragon_black_flat,
-        R.drawable.fod_icon_future,
-        R.drawable.fod_icon_glow_circle,
-        R.drawable.fod_icon_neon_arc,
-        R.drawable.fod_icon_neon_arc_gray,
-        R.drawable.fod_icon_neon_circle_pink,
-        R.drawable.fod_icon_neon_triangle,
-        R.drawable.fod_icon_paint_splash_circle,
-        R.drawable.fod_icon_rainbow_horn,
-        R.drawable.fod_icon_shooky,
-        R.drawable.fod_icon_spiral_blue,
-        R.drawable.fod_icon_sun_metro
     };
 
     private int mPressedIcon;
     private final int[] PRESSED_STYLES = {
         R.drawable.fod_icon_pressed_miui_cyan_light,
         R.drawable.fod_icon_pressed_miui_white_light,
-        R.drawable.fod_icon_pressed_vivo_cyan,
-        R.drawable.fod_icon_pressed_vivo_cyan_shadow,
-        R.drawable.fod_icon_pressed_vivo_cyan_shadow_et713,
-        R.drawable.fod_icon_pressed_vivo_green,
         R.drawable.fod_icon_pressed_vivo_yellow_shadow
     };
 

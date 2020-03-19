@@ -42,22 +42,11 @@ public class FODAnimation extends ImageView {
 
     private int mSelectedAnim;
     private final int[] ANIMATION_STYLES = {
-        R.drawable.fod_miui_normal_recognizing_anim,
-        R.drawable.fod_miui_aod_recognizing_anim,
-        R.drawable.fod_miui_light_recognizing_anim,
-        R.drawable.fod_miui_pop_recognizing_anim,
-        R.drawable.fod_miui_pulse_recognizing_anim,
-        R.drawable.fod_miui_pulse_recognizing_white_anim,
-        R.drawable.fod_miui_rhythm_recognizing_anim,
-        R.drawable.fod_op_cosmos_recognizing_anim,
         R.drawable.fod_op_mclaren_recognizing_anim,
         R.drawable.fod_op_ripple_recognizing_anim,
         R.drawable.fod_op_stripe_recognizing_anim,
-        R.drawable.fod_op_wave_recognizing_anim,
-        R.drawable.fod_pureview_dna_recognizing_anim,
         R.drawable.fod_pureview_future_recognizing_anim,
         R.drawable.fod_pureview_halo_ring_recognizing_anim,
-        R.drawable.fod_pureview_molecular_recognizing_anim,
         R.drawable.fod_blue_firework_recognizing_anim,
         R.drawable.fod_coloros7_1_recognizing_anim,
         R.drawable.fod_coloros7_2_recognizing_anim
