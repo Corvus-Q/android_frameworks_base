@@ -57,7 +57,6 @@ import com.android.systemui.qs.tiles.UiModeNightTile;
 import com.android.systemui.qs.tiles.SyncTile;
 import com.android.systemui.qs.tiles.SoundTile;
 import com.android.systemui.qs.tiles.ScreenshotTile;
-import com.android.systemui.qs.tiles.ScreenStabilizationTile;
 import com.android.systemui.qs.tiles.UserTile;
 import com.android.systemui.qs.tiles.WifiTile;
 import com.android.systemui.qs.tiles.WorkModeTile;
@@ -102,7 +101,6 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<GamingModeTile> mGamingModeTileProvider;
     private final Provider<ImmersiveTile> mImmersiveTileProvider;
     private final Provider<CaffeineTile> mCaffeineTileProvider;
-    private final Provider<ScreenStabilizationTile> mScreenStabilizationTileProvider;
     private final Provider<AdbOverNetworkTile> mAdbOverNetworkTileProvider;
     private final Provider<HWKeysTile> mHWKeysTileProvider;
 
@@ -139,7 +137,6 @@ public class QSFactoryImpl implements QSFactory {
             Provider<GamingModeTile> gamingModeTileProvider,
             Provider<ImmersiveTile> immersiveTileProvider,
             Provider<CaffeineTile> caffeineTileProvider,
-            Provider<ScreenStabilizationTile> screenStabilizationTileProvider,
             Provider<AdbOverNetworkTile> adbOverNetworkTileProvider,
             Provider<HWKeysTile> hWKeysTileProvider) {
         mWifiTileProvider = wifiTileProvider;
@@ -172,7 +169,6 @@ public class QSFactoryImpl implements QSFactory {
         mGamingModeTileProvider = gamingModeTileProvider;
         mImmersiveTileProvider = immersiveTileProvider;
         mCaffeineTileProvider = caffeineTileProvider;
-        mScreenStabilizationTileProvider = screenStabilizationTileProvider;
         mAdbOverNetworkTileProvider = adbOverNetworkTileProvider;
         mHWKeysTileProvider = hWKeysTileProvider;
     }
@@ -254,8 +250,6 @@ public class QSFactoryImpl implements QSFactory {
                 return mImmersiveTileProvider.get();
             case "caffeine":
                 return mCaffeineTileProvider.get();
-            case "screenstabilization":
-                return mScreenStabilizationTileProvider.get();
             case "adb_network":
                 return mAdbOverNetworkTileProvider.get();
             case "hwkeys":
