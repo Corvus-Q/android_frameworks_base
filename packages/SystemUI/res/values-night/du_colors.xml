@@ -19,4 +19,7 @@
     <color name="recents_dismiss_all_background_color">@color/GM2_grey_900</color>
     <color name="recents_dismiss_all_background_color_ripple">#555555</color>
     <color name="recents_dismiss_all_icon_color">@android:color/white</color>
+
+    <!-- Screenrecord -->
+    <color name="screenrecord_icon_color">#E45245</color>
 </resources>
