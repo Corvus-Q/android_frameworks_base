@@ -47,7 +47,6 @@ import com.android.systemui.qs.tiles.HWKeysTile;
 import com.android.systemui.qs.tiles.ImmersiveTile;
 import com.android.systemui.qs.tiles.IntentTile;
 import com.android.systemui.qs.tiles.LocationTile;
-import com.android.systemui.qs.tiles.LteTile;
 import com.android.systemui.qs.tiles.NfcTile;
 import com.android.systemui.qs.tiles.NightDisplayTile;
 import com.android.systemui.qs.tiles.RebootTile;
@@ -95,7 +94,6 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<RebootTile> mRebootTileProvider;
     private final Provider<HeadsUpTile> mHeadsUpTileProvider;
     private final Provider<ScreenshotTile> mScreenshotTileProvider;
-    private final Provider<LteTile> mLteTileProvider;
     private final Provider<CPUInfoTile> mCPUInfoTileProvider;
     private final Provider<DataSwitchTile> mDataSwitchTileProvider;
     private final Provider<GamingModeTile> mGamingModeTileProvider;
@@ -131,7 +129,6 @@ public class QSFactoryImpl implements QSFactory {
             Provider<RebootTile> rebootTileProvider,
             Provider<HeadsUpTile> headsUpTileProvider,
             Provider<ScreenshotTile> screenshotTileProvider,
-            Provider<LteTile> lteTileProvider,
             Provider<CPUInfoTile> cpuInfoTileProvider,
             Provider<DataSwitchTile> dataSwitchTileProvider,
             Provider<GamingModeTile> gamingModeTileProvider,
@@ -163,7 +160,6 @@ public class QSFactoryImpl implements QSFactory {
         mRebootTileProvider = rebootTileProvider;
         mHeadsUpTileProvider = headsUpTileProvider;
         mScreenshotTileProvider = screenshotTileProvider;
-        mLteTileProvider = lteTileProvider;
         mCPUInfoTileProvider = cpuInfoTileProvider;
         mDataSwitchTileProvider = dataSwitchTileProvider;
         mGamingModeTileProvider = gamingModeTileProvider;
@@ -236,8 +232,6 @@ public class QSFactoryImpl implements QSFactory {
                 return mHeadsUpTileProvider.get();
             case "screenshot":
                 return mScreenshotTileProvider.get();
-            case "lte":
-                return mLteTileProvider.get();
             case "cpuinfo":
                 return mCPUInfoTileProvider.get();
             case "dataswitch":
