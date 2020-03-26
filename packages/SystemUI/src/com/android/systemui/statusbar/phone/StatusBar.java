@@ -600,8 +600,6 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     private VisualizerView mVisualizerView;
 
-    private int mChargingAnimation = 1;
-
     private boolean mWallpaperSupportsAmbientMode;
 
     // LS visualizer on Ambient Display
@@ -1073,7 +1071,6 @@ public class StatusBar extends SystemUI implements DemoMode,
                 SystemUIFactory.getInstance().createKeyguardIndicationController(mContext,
                         mStatusBarWindow.findViewById(R.id.keyguard_indication_area),
                         mStatusBarWindow.findViewById(R.id.lock_icon));
-        mKeyguardIndicationController.updateChargingIndication(mChargingAnimation);
         mNotificationPanel.setKeyguardIndicationController(mKeyguardIndicationController);
 
         mAmbientIndicationContainer = mStatusBarWindow.findViewById(
@@ -2370,9 +2367,6 @@ public class StatusBar extends SystemUI implements DemoMode,
                     Settings.System.RIGHT_VERTICAL_BACK_SWIPE_ACTION),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.LOCKSCREEN_CHARGING_ANIMATION_STYLE),
-                    false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.QS_PANEL_BG_USE_NEW_TINT),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
@@ -2429,9 +2423,6 @@ public class StatusBar extends SystemUI implements DemoMode,
             } else if (uri.equals(Settings.System.getUriFor(Settings.System.GAMING_MODE_ACTIVE)) ||
                     uri.equals(Settings.System.getUriFor(Settings.System.GAMING_MODE_HEADSUP_TOGGLE))) {
                 updateGamingPeekMode();
-            } else if (uri.equals(Settings.System.getUriFor(
-                    Settings.System.LOCKSCREEN_CHARGING_ANIMATION_STYLE))) {
-                updateChargingAnimation();
             } else if (uri.equals(Settings.System.getUriFor(Settings.System.QS_PANEL_BG_USE_NEW_TINT))) {
                 mQSPanel.getHost().reloadAllTiles();
             } else if (uri.equals(Settings.System.getUriFor(Settings.System.FORCE_SHOW_NAVBAR))) {
@@ -2465,7 +2456,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         updateTickerAnimation();
         updateTickerTickDuration();
         updateKeyguardStatusSettings();
-        updateChargingAnimation();
         handleCutout(null);
         }
     }
@@ -2592,14 +2582,6 @@ public class StatusBar extends SystemUI implements DemoMode,
     private void setGestureNavOptions() {
         if (getNavigationBarView() != null) {
             getNavigationBarView().setLongSwipeOptions();
-        }
-    }
-
-    private void updateChargingAnimation() {
-        mChargingAnimation = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.LOCKSCREEN_CHARGING_ANIMATION_STYLE, 1, UserHandle.USER_CURRENT);
-        if (mKeyguardIndicationController != null) {
-            mKeyguardIndicationController.updateChargingIndication(mChargingAnimation);
         }
     }
 
