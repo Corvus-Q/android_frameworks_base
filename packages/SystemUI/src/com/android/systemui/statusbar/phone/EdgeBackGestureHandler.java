@@ -397,7 +397,7 @@ public class EdgeBackGestureHandler implements DisplayListener {
                 WindowManagerGlobal.getWindowManagerService()
                         .unregisterSystemGestureExclusionListener(
                                 mGestureExclusionListener, mDisplayId);
-            } catch (RemoteException e) {
+            } catch (Exception e) {
                 Log.e(TAG, "Failed to unregister window manager callbacks", e);
             }
 
@@ -412,7 +412,7 @@ public class EdgeBackGestureHandler implements DisplayListener {
                 WindowManagerGlobal.getWindowManagerService()
                         .registerSystemGestureExclusionListener(
                                 mGestureExclusionListener, mDisplayId);
-            } catch (RemoteException e) {
+            } catch (Exception e) {
                 Log.e(TAG, "Failed to register window manager callbacks", e);
             }
 
