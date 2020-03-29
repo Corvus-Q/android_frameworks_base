@@ -5177,6 +5177,12 @@ public final class Settings {
                 BOOLEAN_VALIDATOR;
 
         /**
+         * Whether to show heads up on new music tracks
+         * @hide
+         */
+        public static final String SHOW_MEDIA_HEADS_UP = "show_media_heads_up";
+
+        /**
          * Whether to show the kill app button in notification guts
          *
          * @hide
