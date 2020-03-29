@@ -4721,15 +4721,6 @@ public final class Settings {
         public static final Validator SHOW_VOLTE_ICON_VALIDATOR = BOOLEAN_VALIDATOR;
 
         /**
-         * Force full screen for devices with cutout
-         * @hide
-         */
-        public static final String FORCE_FULLSCREEN_CUTOUT_APPS = "force_full_screen_cutout_apps";
-
-        /** @hide */
-        private static final Validator FORCE_FULLSCREEN_CUTOUT_APPS_VALIDATOR = ANY_STRING_VALIDATOR;
-
-         /**
          * Whether to enable DOZE only when charging
          * @hide
          */
@@ -6414,7 +6405,6 @@ public final class Settings {
             VOLUME_ROCKER_WAKE,
             VOLUME_BUTTON_MUSIC_CONTROL,
             VOLUME_KEY_CURSOR_CONTROL,
-            FORCE_FULLSCREEN_CUTOUT_APPS,
             DOZE_ON_CHARGE,
             STATUS_BAR_CLOCK,
             STATUSBAR_CLOCK_STYLE,
@@ -6496,16 +6486,6 @@ public final class Settings {
          */
         public static final String[] LEGACY_RESTORE_SETTINGS = {
         };
-
-        /**
-         * Display cutout
-         * @hide
-         */
-        public static final String DISPLAY_CUTOUT_HIDDEN = "display_cutout_hidden";
-
-        /** @hide */
-        private static final Validator DISPLAY_CUTOUT_HIDDEN_VALIDATOR = new
-                SettingsValidators.InclusiveIntegerRangeValidator(0, 1);
 
         /**
          * These are all public system settings
@@ -6624,7 +6604,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(VOLUME_KEY_CURSOR_CONTROL);
             PRIVATE_SETTINGS.add(SWAP_VOLUME_BUTTONS);
             PRIVATE_SETTINGS.add(SHOW_VOLTE_ICON);
-            PRIVATE_SETTINGS.add(FORCE_FULLSCREEN_CUTOUT_APPS);
             PRIVATE_SETTINGS.add(DOZE_ON_CHARGE);
             PRIVATE_SETTINGS.add(TOAST_ICON);
             PRIVATE_SETTINGS.add(STATUS_BAR_CLOCK);
@@ -6674,7 +6653,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(CUSTOM_DEVICE_GESTURE_FEEDBACK_ENABLED);
             PRIVATE_SETTINGS.add(CUSTOM_DEVICE_FEATURE_SETTINGS);
             PRIVATE_SETTINGS.add(SENSOR_BLOCK);
-            PRIVATE_SETTINGS.add(DISPLAY_CUTOUT_HIDDEN);
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_VIEW_LOCATION);
             PRIVATE_SETTINGS.add(STATUS_BAR_SHOW_TICKER);
             PRIVATE_SETTINGS.add(STATUS_BAR_TICKER_ANIMATION_MODE);
@@ -6806,7 +6784,6 @@ public final class Settings {
             VALIDATORS.put(VOLUME_BUTTON_MUSIC_CONTROL, VOLUME_BUTTON_MUSIC_CONTROL_VALIDATOR);
             VALIDATORS.put(VOLUME_KEY_CURSOR_CONTROL, VOLUME_KEY_CURSOR_CONTROL_VALIDATOR);
             VALIDATORS.put(SHOW_VOLTE_ICON, SHOW_VOLTE_ICON_VALIDATOR);
-            VALIDATORS.put(FORCE_FULLSCREEN_CUTOUT_APPS, FORCE_FULLSCREEN_CUTOUT_APPS_VALIDATOR);
             VALIDATORS.put(DOZE_ON_CHARGE, DOZE_ON_CHARGE_VALIDATOR);
             VALIDATORS.put(STATUS_BAR_CLOCK, STATUS_BAR_CLOCK_VALIDATOR);
             VALIDATORS.put(STATUSBAR_CLOCK_STYLE, STATUSBAR_CLOCK_STYLE_VALIDATOR);
@@ -6856,7 +6833,6 @@ public final class Settings {
             VALIDATORS.put(CUSTOM_DEVICE_FEATURE_SETTINGS, CUSTOM_DEVICE_FEATURE_SETTINGS_VALIDATOR);
             VALIDATORS.put(ACCELEROMETER_ROTATION_ANGLES, ACCELEROMETER_ROTATION_ANGLES_VALIDATOR);
             VALIDATORS.put(SENSOR_BLOCK, SENSOR_BLOCK_VALIDATOR);
-            VALIDATORS.put(DISPLAY_CUTOUT_HIDDEN, DISPLAY_CUTOUT_HIDDEN_VALIDATOR);
             VALIDATORS.put(STATUS_BAR_SHOW_TICKER, STATUS_BAR_SHOW_TICKER_VALIDATOR);
             VALIDATORS.put(STATUS_BAR_TICKER_ANIMATION_MODE,
                     STATUS_BAR_TICKER_ANIMATION_MODE_VALIDATOR);

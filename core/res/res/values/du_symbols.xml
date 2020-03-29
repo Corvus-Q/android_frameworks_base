@@ -50,12 +50,6 @@
 
   <java-symbol type="bool" name="config_ignoreRssnrSignalLevel" />
 
-  <!-- Whether device has a physical display cutout -->
-  <java-symbol type="bool" name="config_physicalDisplayCutout" />
-
-  <!-- Whether device has a big physical display cutout -->
-  <java-symbol type="bool" name="config_physicalDisplayCutoutCentered" />
-
   <!-- Led Notification -->
   <java-symbol type="bool" name="config_hasNotificationLed" />
   <java-symbol type="bool" name="config_intrusiveBatteryLed" />
