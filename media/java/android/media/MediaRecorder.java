@@ -630,7 +630,7 @@ public class MediaRecorder implements AudioRouting,
              profile.quality <= CamcorderProfile.QUALITY_TIME_LAPSE_4KDCI) ||
             (profile.quality >= CamcorderProfile.QUALITY_TIME_LAPSE_QHD &&
              profile.quality <= CamcorderProfile.QUALITY_TIME_LAPSE_2K) ||
-             profile.quality <= CamcorderProfile.QUALITY_TIME_LAPSE_8KUHD) {
+             profile.quality == CamcorderProfile.QUALITY_TIME_LAPSE_8KUHD) {
             // Nothing needs to be done. Call to setCaptureRate() enables
             // time lapse video recording.
         } else {
