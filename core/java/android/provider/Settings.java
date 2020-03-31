@@ -5350,6 +5350,14 @@ public final class Settings {
         public static final String QS_SHOW_BATTERY_ESTIMATE = "qs_show_battery_estimate";
 
         /**
+         * battery location style
+         * 0: QS Panel
+         * 1: Quick Statusbar
+         * @hide
+         */
+        public static final String QS_BATTERY_LOCATION_BAR = "qs_battery_location_bar";
+
+        /**
          * @hide
          */
         public static final String USE_OLD_MOBILETYPE = "use_old_mobiletype";

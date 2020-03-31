@@ -226,9 +226,6 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mBatteryRemainingIcon.setOnClickListener(this);
         mRingerModeTextView.setSelected(true);
         mNextAlarmTextView.setSelected(true);
-        mBatteryInQS = getResources().getBoolean(R.bool.config_batteryInQSPanel);
-        mBatteryMeterView.setVisibility(mBatteryInQS ? View.GONE : View.VISIBLE);
-        mBatteryRemainingIcon.setVisibility(mBatteryInQS ? View.VISIBLE : View.GONE);
         updateSettings();
     }
 
@@ -359,6 +356,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         updateResources();
         updateStatusbarProperties();
         updateBatteryStyle();
+        updateshowBatteryInBar();
     }
 
     private void updateBatteryStyle() {
@@ -367,6 +365,14 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mBatteryRemainingIcon.updateBatteryStyle();
         mBatteryRemainingIcon.updatePercentView();
         mBatteryRemainingIcon.updateVisibility();
+    }
+
+    private void updateshowBatteryInBar() {
+        boolean showBatteryInBar = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.QS_BATTERY_LOCATION_BAR, 0,
+                UserHandle.USER_CURRENT) == 0;
+        mBatteryMeterView.setVisibility(showBatteryInBar ? View.VISIBLE : View.GONE);
+        mBatteryRemainingIcon.setVisibility(showBatteryInBar ? View.GONE : View.VISIBLE);
     }
 
     private void updateStatusIconAlphaAnimator() {
@@ -603,6 +609,9 @@ public class QuickStatusBarHeader extends RelativeLayout implements
                     this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_CUSTOM_HEADER_HEIGHT), false,
+                    this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.QS_BATTERY_LOCATION_BAR), false,
                     this, UserHandle.USER_ALL);
         }
 
