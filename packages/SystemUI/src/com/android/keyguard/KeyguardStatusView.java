@@ -917,6 +917,7 @@ public class KeyguardStatusView extends GridLayout implements
                 mCustomClockView.setVisibility(View.VISIBLE);
                 mTextClock.setVisibility(View.GONE);
                 mSmallClockView.setVisibility(View.GONE);
+                mCustomNumClockView.setVisibility(View.GONE);
                 mDuClockView.setVisibility(View.GONE);
                 params.addRule(RelativeLayout.BELOW, R.id.custom_clock_view);
                 break;
@@ -928,7 +929,7 @@ public class KeyguardStatusView extends GridLayout implements
                 mDuClockView.setVisibility(View.GONE);
                 params.addRule(RelativeLayout.BELOW, R.id.custom_num_clock_view);
                 break;
-            case 11: // custom num analog clock
+            case 11: // custom DU analog clock
                 mDuClockView.setVisibility(View.VISIBLE);
                 mTextClock.setVisibility(View.GONE);
                 mSmallClockView.setVisibility(View.GONE);
