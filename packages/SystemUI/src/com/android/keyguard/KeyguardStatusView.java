@@ -628,54 +628,71 @@ public class KeyguardStatusView extends GridLayout implements
         boolean isPrimary = UserHandle.getCallingUserId() == UserHandle.USER_OWNER;
         int ownerInfoSize = isPrimary ? getOwnerInfoSize() : 18;
 
-        if (ownerInfoSize == 10) {
-        mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+        switch (ownerInfoSize) {
+            case 10:
+                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                 getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_10));
-        } else if (ownerInfoSize == 11) {
-        mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                break;
+            case 11:
+                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                 getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_11));
-        } else if (ownerInfoSize == 12) {
-        mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                break;
+            case 12:
+                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                 getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_12));
-        } else if (ownerInfoSize == 13) {
-        mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                break;
+            case 13:
+                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                 getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_13));
-        } else if (ownerInfoSize == 14) {
-        mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                break;
+            case 14:
+                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                 getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_14));
-        }  else if (ownerInfoSize == 15) {
-        mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                break;
+            case 15:
+                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                 getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_15));
-        } else if (ownerInfoSize == 16) {
-        mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                break;
+            case 16:
+                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                 getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_16));
-        } else if (ownerInfoSize == 17) {
-        mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                break;
+            case 17:
+                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                 getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_17));
-        } else if (ownerInfoSize == 18) {
-        mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                break;
+            case 18:
+                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                 getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_18));
-        } else if (ownerInfoSize == 19) {
-        mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                break;
+            case 19:
+                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                 getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_19));
-        } else if (ownerInfoSize == 20) {
-        mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                break;
+            case 20:
+                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                 getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_20));
-        } else if (ownerInfoSize == 21) {
-        mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                break;
+            case 21:
+                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                 getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_21));
-        } else if (ownerInfoSize == 22) {
-        mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                break;
+            case 22:
+                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                 getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_22));
-        } else if (ownerInfoSize == 23) {
-        mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                break;
+            case 23:
+                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                 getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_23));
-        } else if (ownerInfoSize == 24) {
-        mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                break;
+            case 24:
+                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                 getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_24));
-        } else if (ownerInfoSize == 25) {
-        mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                break;
+            case 25:
+                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                 getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_25));
+                break;
         }
     }
 
