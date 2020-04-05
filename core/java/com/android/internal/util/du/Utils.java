@@ -57,7 +57,7 @@ import java.util.List;
 
 public class Utils {
 
-    private static OverlayManager mOverlayService;
+    private static OverlayManager sOverlayService;
 
     // Check to see if device is WiFi only
     public static boolean isWifiOnly(Context context) {
@@ -222,12 +222,14 @@ public class Utils {
 
     // Method to detect whether an overlay is enabled or not
     public static boolean isThemeEnabled(String packageName) {
-        mOverlayService = new OverlayManager();
+        if (sOverlayService == null) {
+            sOverlayService = new OverlayManager();
+        }
         try {
             ArrayList<OverlayInfo> infos = new ArrayList<OverlayInfo>();
-            infos.addAll(mOverlayService.getOverlayInfosForTarget("android",
+            infos.addAll(sOverlayService.getOverlayInfosForTarget("android",
                     UserHandle.myUserId()));
-            infos.addAll(mOverlayService.getOverlayInfosForTarget("com.android.systemui",
+            infos.addAll(sOverlayService.getOverlayInfosForTarget("com.android.systemui",
                     UserHandle.myUserId()));
             for (int i = 0, size = infos.size(); i < size; i++) {
                 if (infos.get(i).packageName.equals(packageName)) {
@@ -302,5 +304,13 @@ public class Utils {
         } else {
             return hasNavigationBar == 1;
         }
+    }
+
+    public static boolean shouldSetNavbarHeight(Context context) {
+        boolean setNavbarHeight = Settings.System.getIntForUser(context.getContentResolver(),
+            Settings.System.NAVIGATION_HANDLE_WIDTH, 2, UserHandle.USER_CURRENT) != 0;
+        boolean twoThreeButtonEnabled = Utils.isThemeEnabled("com.android.internal.systemui.navbar.twobutton") ||
+                Utils.isThemeEnabled("com.android.internal.systemui.navbar.threebutton");
+        return setNavbarHeight || twoThreeButtonEnabled;
     }
 }
