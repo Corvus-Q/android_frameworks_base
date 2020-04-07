@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2015 The Android Open Source Project
+<!-- Copyright (C) 2018 ColtOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -18,11 +18,15 @@
     <item android:gravity="center_vertical|fill_horizontal"
           android:start="4dp"
           android:end="4dp">
-        <shape android:shape="rectangle"
-               android:tint="@color/switch_track_material">
-            <corners android:radius="7dp" />
-            <solid android:color="@color/white_disabled_material" />
-            <size android:height="14dp" />
-        </shape>
+        <shape android:shape="rectangle" 
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <size android:height="13dp" android:width="5dp" />
+    <corners android:radius="30dp" />
+	<gravity android:gravity="center_vertical" />
+    <solid android:color="@android:color/transparent" />
+    <stroke
+        android:width="2dip"
+        android:color="@color/switch_track_material"/>
+</shape>
     </item>
 </layer-list>
