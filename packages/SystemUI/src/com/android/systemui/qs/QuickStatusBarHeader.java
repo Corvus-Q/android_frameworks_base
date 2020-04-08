@@ -368,11 +368,11 @@ public class QuickStatusBarHeader extends RelativeLayout implements
     }
 
     private void updateshowBatteryInBar() {
-        boolean showBatteryInBar = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.QS_BATTERY_LOCATION_BAR, 0,
-                UserHandle.USER_CURRENT) == 0;
-        mBatteryMeterView.setVisibility(showBatteryInBar ? View.VISIBLE : View.GONE);
-        mBatteryRemainingIcon.setVisibility(showBatteryInBar ? View.GONE : View.VISIBLE);
+        mBatteryInQS = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.QS_BATTERY_LOCATION_BAR, 1,
+                UserHandle.USER_CURRENT) == 1;
+        mBatteryMeterView.setVisibility(mBatteryInQS ? View.VISIBLE : View.GONE);
+        mBatteryRemainingIcon.setVisibility(mBatteryInQS ? View.GONE : View.VISIBLE);
     }
 
     private void updateStatusIconAlphaAnimator() {
