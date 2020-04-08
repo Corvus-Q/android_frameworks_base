@@ -202,4 +202,8 @@
     <string name="quick_settings_navbar_title">Navigation Bar</string>
     <string name="accessibility_quick_settings_navbar_changed_off">Navigation bar turned off</string>
     <string name="accessibility_quick_settings_navbar_changed_on">Navigation bar turned on</string>
+
+    <!-- Alerting notification header label -->
+    <string name="notification_section_header_alerting">Alerting notifications</string>
+
 </resources>
