@@ -220,9 +220,20 @@ public class Utils {
         }, 20);
     }
 
+    public static boolean shouldShowGestureNav(Context context) {
+        int navbarWidth = Settings.System.getIntForUser(context.getContentResolver(),
+            Settings.System.NAVIGATION_HANDLE_WIDTH, 1, UserHandle.USER_CURRENT);
+        boolean setNavbarHeight = ((navbarWidth != 0) ? true : false);
+        boolean twoThreeButtonEnabled = Utils.isThemeEnabled("com.android.internal.systemui.navbar.twobutton") ||
+                Utils.isThemeEnabled("com.android.internal.systemui.navbar.threebutton");
+        return setNavbarHeight || twoThreeButtonEnabled;
+    }
+
     // Method to detect whether an overlay is enabled or not
     public static boolean isThemeEnabled(String packageName) {
-        mOverlayService = new OverlayManager();
+        if (mOverlayService == null) {
+            mOverlayService = new OverlayManager();
+        }
         try {
             ArrayList<OverlayInfo> infos = new ArrayList<OverlayInfo>();
             infos.addAll(mOverlayService.getOverlayInfosForTarget("android",
