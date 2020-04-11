@@ -224,8 +224,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         // Don't need to worry about tuner settings for this icon
         mBatteryRemainingIcon.setIgnoreTunerUpdates(true);
         // QS will always show the estimate, and BatteryMeterView handles the case where
-        // it's unavailable or charging
-        mBatteryRemainingIcon.setPercentShowMode(BatteryMeterView.MODE_ESTIMATE);
+        mBatteryRemainingIcon.setPercentShowMode(getBatteryPercentMode());
         mBatteryRemainingIcon.setOnClickListener(this);
         mRingerModeTextView.setSelected(true);
         mNextAlarmTextView.setSelected(true);
@@ -388,6 +387,20 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mHeaderTextContainerAlphaAnimator = new TouchAnimator.Builder()
                 .addFloat(mHeaderTextContainerView, "alpha", 0, 0, 1)
                 .build();
+    }
+
+    private int getBatteryPercentMode() {
+        boolean showBatteryEstimate = Settings.System
+                .getIntForUser(getContext().getContentResolver(),
+                Settings.System.QS_SHOW_BATTERY_ESTIMATE, 1, UserHandle.USER_CURRENT) == 1;
+        int batteryMode = showBatteryEstimate ?
+               BatteryMeterView.MODE_ESTIMATE : BatteryMeterView.MODE_ON;
+
+        return batteryMode;
+    }
+
+    public void setBatteryPercentMode() {
+        mBatteryRemainingIcon.setPercentShowMode(getBatteryPercentMode(), true);
     }
 
     public void setExpanded(boolean expanded) {
