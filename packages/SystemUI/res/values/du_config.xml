@@ -72,9 +72,6 @@
     <!-- Whether usage of the proximity sensor during doze is supported -->
     <bool name="doze_proximity_sensor_supported">true</bool>
 
-    <!-- Enable face auth only when swiping security view -->
-    <bool name="config_faceAuthOnlyOnSecurityView">false</bool>
-
     <!-- Whether to disable assist hint on lockscreen -->
     <bool name="config_disableAssistHintOnLockscreen">false</bool>
 </resources>
