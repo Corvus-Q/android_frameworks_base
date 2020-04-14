@@ -654,16 +654,6 @@ public class ResourcesImpl {
                 }
                 dr = cs.newDrawable(wrapper);
             } else if (isColorDrawable) {
-                if (id != 0) {
-                    try {
-                        String resName = getResourceName(id);
-                        if (AccentUtils.isResourceAccent(resName))
-                            value.data = AccentUtils.getNewAccentColor(value.data);
-                    } catch (NotFoundException ignored) {
-                    } catch (Exception ex) {
-                        Log.e(TAG, ex.getMessage());
-                    }
-                }
                 dr = new ColorDrawable(value.data);
             } else {
                 dr = loadDrawableForCookie(wrapper, value, id, density);
@@ -1051,17 +1041,6 @@ public class ResourcesImpl {
 
         final long key = (((long) value.assetCookie) << 32) | value.data;
 
-        if (id != 0) {
-            try {
-                String resName = getResourceName(id);
-                if (AccentUtils.isResourceAccent(resName))
-                    value.data = AccentUtils.getNewAccentColor(value.data);
-            } catch (NotFoundException ignored) {
-            } catch (Exception ex) {
-                Log.e(TAG, ex.getMessage());
-            }
-        }
-
         // Handle inline color definitions.
         if (value.type >= TypedValue.TYPE_FIRST_COLOR_INT
                 && value.type <= TypedValue.TYPE_LAST_COLOR_INT) {
@@ -1099,17 +1078,6 @@ public class ResourcesImpl {
             if ((id >>> 24) == 0x1) {
                 final String name = getResourceName(id);
                 if (name != null) android.util.Log.d("PreloadColorStateList", name);
-            }
-        }
-
-        if (id != 0) {
-            try {
-                String resName = getResourceName(id);
-                if (AccentUtils.isResourceAccent(resName))
-                    value.data = AccentUtils.getNewAccentColor(value.data);
-            } catch (NotFoundException ignored) {
-            } catch (Exception ex) {
-                Log.e(TAG, ex.getMessage());
             }
         }
 
