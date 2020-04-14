@@ -137,4 +137,6 @@
 
     <!-- Skeleton string format for displaying the day of the month. -->
     <string name="abbrev_wday_month_no_year">MMMMd</string>
+    <string name="clock_title_mnml_box" translatable="false">MNML\'s Box</string>
+    <string name="clock_title_mnml_minimal" translatable="false">MNML\'s Minimal</string>
 </resources>
