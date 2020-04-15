@@ -271,7 +271,7 @@ public class QSContainerImpl extends FrameLayout implements
         if (mHeaderImageEnabled) {
             mStatusBarBackground.setBackgroundColor(Color.TRANSPARENT);
         } else {
-            mStatusBarBackground.setBackgroundColor(Color.BLACK);
+            mStatusBarBackground.setBackgroundColor(getResources().getColor(R.color.quick_settings_status_bar_background_color));
         }
     }
 

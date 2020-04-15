@@ -108,4 +108,11 @@ public class ThemesUtils {
             "com.android.theme.navbar.oneui",
             "com.android.theme.navbar.tecno",
     };
+
+    public static final String[] QS_HEADER_THEMES = {
+            "com.android.systemui.qsheader.grey",
+            "com.android.systemui.qsheader.lightgrey",
+            "com.android.systemui.qsheader.accent", 
+            "com.android.systemui.qsheader.transparent",
+    };
 }
