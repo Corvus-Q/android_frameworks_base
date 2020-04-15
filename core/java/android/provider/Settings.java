@@ -4620,37 +4620,6 @@ public final class Settings {
                 BOOLEAN_VALIDATOR;
 
         /**
-         * Wheter to show network traffic indicator in statusbar
-         * @hide
-         */
-        public static final String NETWORK_TRAFFIC_STATE = "network_traffic_state";
-
-        /**
-	 ** What to show in network traffic indicator in statusbar
-	 ** @hide
-	 **/
-        public static final String NETWORK_TRAFFIC_TYPE = "network_traffic_type";
-
-        /**
-         * Network traffic inactivity threshold (default is 1 kBs)
-         * @hide
-         */
-        public static final String NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD = "network_traffic_autohide_threshold";
-
-        /**
-         * Whether to disable showing arrows in statusbar network traffic indicators
-         * @hide
-         */
-        public static final String NETWORK_TRAFFIC_ARROW = "network_traffic_arrow";
-
-
-        /**
- 	 ** What size to show for network traffic indicator in statusbar
-	 ** @hide
-	 **/
-         public static final String NETWORK_TRAFFIC_FONT_SIZE = "network_traffic_font_size";
-
-        /**
          * Volume rocker wake
          * @hide
          */
@@ -4770,12 +4739,6 @@ public final class Settings {
          * @hide
          */
         public static final String QS_RUNNING_SERVICES_TOGGLE = "qs_running_services_toggle";
-
-        /**
-         * Network traffic layout
-         * @hide
-         */
-        public static final String NETWORK_TRAFFIC_LAYOUT = "network_traffic_layout";
 
          /**
          * Show or hide clock
@@ -6628,11 +6591,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(EGG_MODE);
             PRIVATE_SETTINGS.add(DISPLAY_COLOR_MODE);
             PRIVATE_SETTINGS.add(SCREENSHOT_SOUND);
-            PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_STATE);
-            PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_TYPE);
-            PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_LAYOUT);
-            PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD);
-            PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_FONT_SIZE);
             PRIVATE_SETTINGS.add(VOLUME_ROCKER_WAKE);
             PRIVATE_SETTINGS.add(VOLUME_BUTTON_MUSIC_CONTROL);
             PRIVATE_SETTINGS.add(VOLUME_KEY_CURSOR_CONTROL);
@@ -6687,7 +6645,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(CUSTOM_DEVICE_GESTURE_FEEDBACK_ENABLED);
             PRIVATE_SETTINGS.add(CUSTOM_DEVICE_FEATURE_SETTINGS);
             PRIVATE_SETTINGS.add(SENSOR_BLOCK);
-            PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_VIEW_LOCATION);
             PRIVATE_SETTINGS.add(STATUS_BAR_SHOW_TICKER);
             PRIVATE_SETTINGS.add(STATUS_BAR_TICKER_ANIMATION_MODE);
             PRIVATE_SETTINGS.add(STATUS_BAR_TICKER_TICK_DURATION);

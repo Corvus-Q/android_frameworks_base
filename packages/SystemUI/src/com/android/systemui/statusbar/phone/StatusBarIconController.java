@@ -19,7 +19,6 @@ import static android.app.StatusBarManager.DISABLE_NONE;
 
 import static com.android.systemui.statusbar.phone.StatusBarIconHolder.TYPE_ICON;
 import static com.android.systemui.statusbar.phone.StatusBarIconHolder.TYPE_MOBILE;
-import static com.android.systemui.statusbar.phone.StatusBarIconHolder.TYPE_NETWORK_TRAFFIC;
 import static com.android.systemui.statusbar.phone.StatusBarIconHolder.TYPE_WIFI;
 
 import android.content.Context;
@@ -50,7 +49,6 @@ import com.android.systemui.statusbar.StatusBarWifiView;
 import com.android.systemui.statusbar.StatusIconDisplayable;
 import com.android.systemui.statusbar.phone.StatusBarSignalPolicy.MobileIconState;
 import com.android.systemui.statusbar.phone.StatusBarSignalPolicy.WifiIconState;
-import com.android.systemui.statusbar.policy.NetworkTrafficSB;
 import com.android.systemui.util.Utils.DisableStateTracker;
 
 import java.util.List;
@@ -255,9 +253,6 @@ public interface StatusBarIconController {
 
                 case TYPE_MOBILE:
                     return addMobileIcon(index, slot, holder.getMobileState());
-
-                case TYPE_NETWORK_TRAFFIC:
-                    return addNetworkTraffic(index, slot);
             }
 
             return null;
@@ -284,12 +279,6 @@ public interface StatusBarIconController {
             return view;
         }
 
-        protected NetworkTrafficSB addNetworkTraffic(int index, String slot) {
-            NetworkTrafficSB view = onCreateNetworkTraffic(slot);
-            mGroup.addView(view, index, onCreateLayoutParams());
-            return view;
-        }
-
         @VisibleForTesting
         protected StatusBarMobileView addMobileIcon(int index, String slot, MobileIconState state) {
             StatusBarMobileView view = onCreateStatusBarMobileView(slot);
@@ -313,13 +302,6 @@ public interface StatusBarIconController {
 
         private StatusBarMobileView onCreateStatusBarMobileView(String slot) {
             StatusBarMobileView view = StatusBarMobileView.fromContext(mContext, slot);
-            return view;
-        }
-
-        private NetworkTrafficSB onCreateNetworkTraffic(String slot) {
-            NetworkTrafficSB view = new NetworkTrafficSB(mContext);
-            view.setPadding(2, 0, 2, 0);
-            view.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
             return view;
         }
 
