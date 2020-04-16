@@ -111,7 +111,6 @@ public interface VolumeDialogController {
         public boolean disallowMedia;
         public boolean disallowSystem;
         public boolean disallowRinger;
-        public boolean routedToSubmixAndEarphone;
 
         public State copy() {
             final State rt = new State();
@@ -130,7 +129,6 @@ public interface VolumeDialogController {
             rt.disallowMedia = disallowMedia;
             rt.disallowSystem = disallowSystem;
             rt.disallowRinger = disallowRinger;
-            rt.routedToSubmixAndEarphone = routedToSubmixAndEarphone;
             return rt;
         }
 
@@ -164,7 +162,6 @@ public interface VolumeDialogController {
             sep(sb, indent); sb.append("disallowMedia:").append(disallowMedia);
             sep(sb, indent); sb.append("disallowSystem:").append(disallowSystem);
             sep(sb, indent); sb.append("disallowRinger:").append(disallowRinger);
-            sep(sb, indent); sb.append("routedToSubmixAndEarphone:").append(routedToSubmixAndEarphone);
             if (indent > 0) sep(sb, indent);
             return sb.append('}').toString();
         }

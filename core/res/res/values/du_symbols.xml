@@ -195,9 +195,6 @@
   <java-symbol type="anim" name="ethans_launch_task_behind_source" />
   <java-symbol type="anim" name="ethans_launch_task_behind_target" />
 
-  <!-- Whether device supports internal audio recording -->
-  <java-symbol type="bool" name="config_hasInternalAudioRecordingSupport" />
-
   <!-- Smart charging battery percentage -->
   <java-symbol type="bool" name="config_smartChargingAvailable" />
   <java-symbol type="integer" name="config_smartChargingBatteryLevel" />
