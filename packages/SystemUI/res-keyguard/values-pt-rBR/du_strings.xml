@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file\nexcept in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,\neither\nexpress or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <plurals name="type_clock_header">
+        <item quantity="one"><annotation name="color">São</annotation>\n^1\ne ^2</item>
+        <item quantity="other"><annotation name="color">São</annotation>\n^1\ne ^2</item>
+    </plurals>
+    <!-- Hour displayed in words on the typographic clock face. [CHAR LIMIT=12] -->
+    <string-array name="type_clock_hours_12">
+        <item>Doze</item>
+        <item>Uma</item>
+        <item>Duas</item>
+        <item>Três</item>
+        <item>Quatro</item>
+        <item>Cinco</item>
+        <item>Seis</item>
+        <item>Sete</item>
+        <item>Oito</item>
+        <item>Nove</item>
+        <item>Dez</item>
+        <item>Onze</item>
+    </string-array>
+    <string-array name="type_clock_hours_24">
+        <item>Zero</item>
+        <item>Uma</item>
+        <item>Duas</item>
+        <item>Três</item>
+        <item>Quatro</item>
+        <item>Cinco</item>
+        <item>Seis</item>
+        <item>Sete</item>
+        <item>Oito</item>
+        <item>Nove</item>
+        <item>Dez</item>
+        <item>Onze</item>
+        <item>Doze</item>
+        <item>Treze</item>
+        <item>Quatorze</item>
+        <item>Quinze</item>
+        <item>Dezesseis</item>
+        <item>Dezessete</item>
+        <item>Dezoito</item>
+        <item>Dezenove</item>
+        <item>Vinte</item>
+        <item>Vinte\ne Uma</item>
+        <item>Vinte\ne Duas</item>
+        <item>Vinte\ne Três</item>
+    </string-array>
+    <!-- Minutes displayed in words on the typographic clock face. [CHAR LIMIT=20] -->
+    <string-array name="type_clock_minutes">
+        <item>Em Ponto</item>
+        <item>Um</item>
+        <item>Dois</item>
+        <item>Três</item>
+        <item>Quatro</item>
+        <item>Cinco</item>
+        <item>Seis</item>
+        <item>Sete</item>
+        <item>Oito</item>
+        <item>Nove</item>
+        <item>Dez</item>
+        <item>Onze</item>
+        <item>Doze</item>
+        <item>Treze</item>
+        <item>Quatorze</item>
+        <item>Quinze</item>
+        <item>Dezesseis</item>
+        <item>Dezessete</item>
+        <item>Dezoito</item>
+        <item>Dezenove</item>
+        <item>Vinte</item>
+        <item>Vinte\ne Um</item>
+        <item>Vinte\ne Dois</item>
+        <item>Vinte\ne Três</item>
+        <item>Vinte\ne Quatro</item>
+        <item>Vinte\ne Cinco</item>
+        <item>Vinte\ne Seis</item>
+        <item>Vinte\ne Sete</item>
+        <item>Vinte\ne Oito</item>
+        <item>Vinte\ne Nove</item>
+        <item>Trinta</item>
+        <item>Trinta\ne Um</item>
+        <item>Trinta\ne Dois</item>
+        <item>Trinta\ne Três</item>
+        <item>Trinta\ne Quatro</item>
+        <item>Trinta\ne Cinco</item>
+        <item>Trinta\ne Seis</item>
+        <item>Trinta\ne Sete</item>
+        <item>Trinta\ne Oito</item>
+        <item>Trinta\ne Nove</item>
+        <item>Quarenta</item>
+        <item>Quarenta\ne Um</item>
+        <item>Quarenta\ne Dois</item>
+        <item>Quarenta\ne Três</item>
+        <item>Quarenta\ne Quatro</item>
+        <item>Quarenta\ne Cinco</item>
+        <item>Quarenta\ne Seis</item>
+        <item>Quarenta\ne Sete</item>
+        <item>Quarenta\ne Oito</item>
+        <item>Quarenta\ne Nove</item>
+        <item>Cinquenta</item>
+        <item>Cinquenta\ne Um</item>
+        <item>Cinquenta\ne Dois</item>
+        <item>Cinquenta\ne Três</item>
+        <item>Cinquenta\ne Quatro</item>
+        <item>Cinquenta\ne Cinco</item>
+        <item>Cinquenta\ne Seis</item>
+        <item>Cinquenta\ne Sete</item>
+        <item>Cinquenta\ne Oito</item>
+        <item>Cinquenta\ne Nove</item>
+    </string-array>
+    <!-- Skeleton string format for displaying the date with number. -->
+    <string name="abbrev_wday_day_no_year">eeeedd</string>
+    <!-- Skeleton string format for displaying the date. -->
+    <string name="abbrev_wday_no_year">eeee</string>
+    <!-- Skeleton string format for displaying the day of the month. -->
+    <string name="abbrev_wday_month_no_year">MMMMd</string>
+</resources>

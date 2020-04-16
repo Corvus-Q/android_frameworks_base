@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright (c) 2009, The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    
+	<!-- Label for area where tiles can be added to the qs panel -->
+    <string name="drag_or_tap_to_add_tiles">Segure &amp; arraste ou toque para adicionar blocos</string>
+    
+	<!-- Label for header of customize QS -->
+    <string name="drag_or_tap_to_rearrange_tiles">Segure &amp; arraste para reorganizar ou toque para remover</string>
+    
+	<!-- Advanced Reboot menu -->
+    <string name="global_action_restart_advanced">Avançado</string>
+    <string name="global_action_restart_recovery">Recuperação</string>
+    <string name="global_action_restart_bootloader">Bootloader</string>
+    <string name="global_action_restart_ui">SystemUI</string>
+    
+	<!-- Tuner -->
+    <string name="statusbar_items_title">Ícones da barra de status</string>
+    <string name="quick_settings_vpn_title">VPN</string>
+    
+	<!-- Sync Tile -->
+    <string name="quick_settings_sync_label">Sincronizar</string>
+    <string name="accessibility_quick_settings_sync_off">Sincronização desativada</string>
+    <string name="accessibility_quick_settings_sync_on">Sincronização ativada</string>
+    <string name="accessibility_quick_settings_sync_changed_off">A sincronização foi desativada</string>
+    <string name="accessibility_quick_settings_sync_changed_on">A sincronização foi ativada</string>
+    
+	<!-- Ambient display QS tile -->
+    <string name="quick_settings_ambient_display_label">Tela Ambiente</string>
+    <string name="accessibility_quick_settings_ambient_display_off">Tela ambiente desligada.</string>
+    <string name="accessibility_quick_settings_ambient_display_on">Tela ambiente foi ligada.</string>
+    <string name="accessibility_quick_settings_ambient_display_changed_off">Tela ambiente foi desligada.</string>
+    <string name="accessibility_quick_settings_ambient_display_changed_on">Tela ambiente foi ligada.</string>
+    
+	<!-- Sound QS Tile -->
+    <string name="quick_settings_sound_label">Som</string>
+    <string name="quick_settings_sound_ring">Toque</string>
+    <string name="quick_settings_sound_vibrate">Vibrar</string>
+    <string name="quick_settings_sound_dnd">\"Não perturbe\"</string>
+    
+	<!-- Reboot/Recovery QS Tile -->
+    <string name="quick_settings_reboot_label">Reiniciar</string>
+    <string name="quick_settings_reboot_recovery_label">Recuperação</string>
+    
+	<!-- Heads Up QS Tile -->
+    <string name="quick_settings_heads_up_label">Notificações pop-up</string>
+    <string name="accessibility_quick_settings_heads_up_off">Notificações pop-up desativadas.</string>
+    <string name="accessibility_quick_settings_heads_up_on">Notificações pop-up ativadas.</string>
+    <string name="accessibility_quick_settings_heads_up_changed_off">As notificações pop-up foram desativadas.</string>
+    <string name="accessibility_quick_settings_heads_up_changed_on">As notificações pop-up foram ativadas.</string>
+    
+	<!-- Screenshot QS tile -->
+    <string name="quick_settings_screenshot_label">Captura</string>
+    <string name="quick_settings_region_screenshot_label">Captura parcial</string>
+    
+	<!-- Advance location quick setting tile -->
+    <string name="quick_settings_secondary_location_off"></string>
+    <string name="quick_settings_location_secondary_battery_saving">Economia de bateria</string>
+    <string name="accessibility_quick_settings_location_battery_saving">Modo de localização: economia de bateria.</string>
+    <string name="quick_settings_location_secondary_gps_only">Somente sensores</string>
+    <string name="accessibility_quick_settings_location_gps_only">Relatório de localização: modo somente sensores.</string>
+    <string name="quick_settings_location_secondary_high_accuracy">Alta precisão</string>
+    <string name="accessibility_quick_settings_location_high_accuracy">Relatório de localização: alta precisão.</string>
+    
+	<!-- accessibility label for button to open running apps prefscreen [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_running_services">Abrir tela de Serviços em Execução.</string>
+    
+	<!-- CPUInfo tile -->
+    <string name="quick_settings_cpuinfo_label">Informações da CPU</string>
+    <string name="accessibility_quick_settings_cpuinfo_off">Informação da CPU desligado</string>
+    <string name="accessibility_quick_settings_cpuinfo_on">Informação da CPU ligada</string>
+    
+	<!-- Heads up snooze toast -->
+    <string name="heads_up_snooze_message_one_minute"><xliff:g id="string">%s</xliff:g> - As notificações flutuantes vão parar por 1 minuto.</string>
+    <string name="heads_up_snooze_message"><xliff:g id="string">%s</xliff:g> - As notificações flutuantes serão silenciadas por <xliff:g id="number">%d</xliff:g> minutos.</string>
+    
+	<!-- Kill button in notification guts -->
+    <string name="force_stop_dlg_title">Forçar interrupção?</string>
+    <string name="force_stop_dlg_text">Se você forçar a parada de um app, ele pode apresentar mau funcionamento.</string>
+    <string name="dlg_ok">\@android:string/ok</string>
+    <string name="dlg_cancel">\@android:string/cancelar</string>
+    <string name="guts_force_close_app">Fechar Aplicativo</string>
+    
+	<!-- Lockscreen Tuner -->
+    <string name="lockscreen_default">Padrão</string>
+    <string name="lockscreen_hidden">Nenhum</string>
+    
+	<!-- Shows when people have clicked on the custom lockscreen shortcut [CHAR LIMIT=60] -->
+    <string name="custom_hint">Deslize a partir do ícone para iniciar</string>
+    
+	<!-- DataSwitch Tile -->
+    <string name="qs_data_switch_label">Alternar dados</string>
+    <string name="qs_data_switch_changed_1">Usando SIM 1 para dados móveis</string>
+    <string name="qs_data_switch_changed_2">Usando SIM 2 para dados móveis</string>
+    
+	<!-- Navbar -->
+    <string name="systemui_tuner_navbar_title">Layout</string>
+    <string name="navigation_bar_format_title">Formato Navbar</string>
+    <string name="navigation_bar_accessibility_dpad_left">Cursor left</string>
+    <string name="navigation_bar_accessibility_dpad_right">Cursor right</string>
+    
+	<!-- Theme tile -->
+    <string name="system_theme_style_title">Temas</string>
+    <string name="system_theme_style_light">Light</string>
+    <string name="system_theme_style_dark">Google dark</string>
+    <string name="system_theme_style_pitchblack">Pitch black</string>
+    <string name="system_theme_style_solarizeddark">Solarized dark</string>
+    <string name="system_theme_style_chocox">Choco X</string>
+    <string name="system_theme_style_bakedgreen">Baked Green</string>
+    <string name="quick_settings_theme_tile_title">Destaque</string>
+    <string name="quick_settings_theme_tile_accent_detail_title">Selecione uma cor de destaque</string>
+    <string name="quick_settings_theme_tile_style_detail_title">Selecione um tema</string>
+    <string name="quick_settings_theme_tile_color_default">Padrão</string>
+    <string name="quick_settings_theme_tile_color_space">Space</string>
+    <string name="quick_settings_theme_tile_color_purple">Roxo</string>
+    <string name="quick_settings_theme_tile_color_orchid">Orquídea</string>
+    <string name="quick_settings_theme_tile_color_ocean">Oceano</string>
+    <string name="quick_settings_theme_tile_color_green">Verde</string>
+    <string name="quick_settings_theme_tile_color_cinnamon">Canela</string>
+    <string name="quick_settings_theme_tile_color_amber">Âmbar</string>
+    <string name="quick_settings_theme_tile_color_blue">Azul</string>
+    <string name="quick_settings_theme_tile_color_bluegrey">Cinza azulado</string>
+    <string name="quick_settings_theme_tile_color_brown">Marrom</string>
+    <string name="quick_settings_theme_tile_color_cyan">Ciano</string>
+    <string name="quick_settings_theme_tile_color_deeporange">Laranja escuro</string>
+    <string name="quick_settings_theme_tile_color_deeppurple">Roxo Escuro</string>
+    <string name="quick_settings_theme_tile_color_grey">Cinza</string>
+    <string name="quick_settings_theme_tile_color_indigo">Índigo</string>
+    <string name="quick_settings_theme_tile_color_lightblue">Azul claro</string>
+    <string name="quick_settings_theme_tile_color_lightgreen">Verde Claro</string>
+    <string name="quick_settings_theme_tile_color_lime">Limão</string>
+    <string name="quick_settings_theme_tile_color_orange">Laranja</string>
+    <string name="quick_settings_theme_tile_color_pink">Rosa</string>
+    <string name="quick_settings_theme_tile_color_red">Vermelho</string>
+    <string name="quick_settings_theme_tile_color_teal">Verde-azulado</string>
+    <string name="quick_settings_theme_tile_color_yellow">Amarelo</string>
+    
+	<!-- Gaming mode -->
+    <string name="gaming_mode_not_enabled">O modo de jogo está desativado nas configurações</string>
+    <string name="quick_settings_gaming_mode_label">Modo de Jogo</string>
+    
+	<!-- Content description of the Gaming mode tile in quick settings when disabled (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_gaming_mode_disabled">O modo de jogo foi desativado.</string>
+    
+	<!-- Content description of the Gaming mode tile in quick settings when enabled (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_gaming_mode_enabled">O modo de jogo foi ativado.</string>
+    
+	<!-- Immersive tile -->
+    <string name="quick_settings_immersive_tile">Modo imersivo</string>
+    <string name="quick_settings_immersive_tile_statusbar">Barra de Status imersiva</string>
+    <string name="quick_settings_immersive_tile_navbar">Barra de Navegação Imersiva</string>
+    <string name="quick_settings_immersive_tile_full">Modo imersivo completo</string>
+    
+	<!-- Caffeine tile -->
+    <string name="quick_settings_caffeine_label">Modo cafeína</string>
+    <string name="quick_settings_caffeine_label_off">Desligado</string>
+    <string name="accessibility_quick_settings_caffeine_off">Modo cafeína desativado</string>
+    <string name="accessibility_quick_settings_caffeine_on">Modo cafeína ativado</string>
+    
+	<!-- Screenshot toast -->
+    <string name="delete_screenshot_toast">Captura de tela excluída</string>
+    
+	<!-- Screen pinning -->
+    <string name="screen_pinning_description_custom">Ela é mantida à vista até que seja liberada. Toque &amp; em \"Voltar\" e mantenha essa opção pressionada para liberar.</string>
+    <string name="screen_pinning_description_recents_invisible_custom">Ela é mantida à vista até que seja liberada. Toque &amp; em \"Voltar\" e mantenha essa opção pressionada para liberar.</string>
+    <string name="screen_pinning_description_accessible_custom">Ela é mantida à vista até que seja liberada. Toque &amp; em \"Voltar\" e mantenha essa opção pressionada para liberar.</string>
+    <string name="screen_pinning_description_recents_invisible_accessible_custom">Ela é mantida à vista até que seja liberada. Toque &amp; em \"Voltar\" e mantenha essa opção pressionada para liberar.</string>
+    <string name="screen_pinning_toast_custom">Para desafixar esta tela, toque &amp; segure o botão Voltar</string>
+    <string name="screen_pinning_toast_recents_invisible_custom">Para desafixar esta tela, toque &amp; segure o botão Voltar</string>
+    
+	<!-- Long swipe gesture actions -->
+    <string name="app_picker_dialog_title">Selecione um app</string>
+    <string name="recents_app_killed">Aplicativo encerrado</string>
+    <string name="nope_cant_kill">Lançador não pode ser encerrado</string>
+    
+	<!-- ADB over Network tile -->
+    <string name="quick_settings_adb_network">ADB através da Rede</string>
+    <string name="quick_settings_network_adb_enabled_label">ADB através da Rede</string>
+    <string name="quick_settings_network_adb_disabled_label">ADB através da Rede</string>
+    <string name="adb_network_forced_tcp_warn">A rede ADB é forçada a ativar na porta: <xliff:g id="port">%1$s</xliff:g></string>
+    
+	<!-- HW Keys Tile -->
+    <string name="accessibility_quick_settings_hwkeys_on">Teclas físicas ativadas</string>
+    <string name="accessibility_quick_settings_hwkeys_off">Teclas físicas desativadas</string>
+    <string name="quick_settings_hwkeys_label">Teclas físicas</string>
+    
+	<!-- NavBar QS Tile -->
+    <string name="quick_settings_navbar_title">Barra de Navegação</string>
+    <string name="accessibility_quick_settings_navbar_changed_off">Barra de navegação desativada</string>
+    <string name="accessibility_quick_settings_navbar_changed_on">Barra de navegação ativada</string>
+    
+	<!-- QS Header data usage info -->
+    <string name="usage_data">utilizado</string>
+
+</resources>
