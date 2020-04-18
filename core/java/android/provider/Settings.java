@@ -6473,6 +6473,14 @@ public final class Settings {
                 BOOLEAN_VALIDATOR;
 
         /**
+         * Controls whether to show R style notification headers
+         * @hide
+         */
+        public static final String NOTIFICATION_HEADERS = "notification_headers";
+
+        private static final Validator NOTIFICATION_HEADERS_VALIDATOR = BOOLEAN_VALIDATOR;
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -6614,6 +6622,7 @@ public final class Settings {
             STOCK_STATUSBAR_IN_HIDE,
             HIDE_SMART_REPLIES,
             HEADSET_CONNECT_PLAYER,
+            NOTIFICATION_HEADERS,
         };
 
         /**
@@ -7012,6 +7021,7 @@ public final class Settings {
             VALIDATORS.put(HIDE_SMART_REPLIES, HIDE_SMART_REPLIES_VALIDATOR);
             VALIDATORS.put(FORCE_FULLSCREEN_CUTOUT_APPS, FORCE_FULLSCREEN_CUTOUT_APPS_VALIDATOR);
             VALIDATORS.put(HEADSET_CONNECT_PLAYER, HEADSET_CONNECT_PLAYER_VALIDATOR);
+            VALIDATORS.put(NOTIFICATION_HEADERS, NOTIFICATION_HEADERS_VALIDATOR);
         }
 
         /**
