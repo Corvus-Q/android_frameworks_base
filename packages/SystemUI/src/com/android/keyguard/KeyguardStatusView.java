@@ -375,10 +375,10 @@ public class KeyguardStatusView extends GridLayout implements
                 mKeyguardSlice.setViewsTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
                 break;
             case 1:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("sans-serif", Typeface.BOLD));
+                mKeyguardSlice.setViewsTypeface(Typeface.create("sans-serif", Typeface.ITALIC));
                 break;
             case 2:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("sans-serif", Typeface.ITALIC));
+                mKeyguardSlice.setViewsTypeface(Typeface.create("sans-serif", Typeface.BOLD));
                 break;
             case 3:
                 mKeyguardSlice.setViewsTypeface(Typeface.create("sans-serif", Typeface.BOLD_ITALIC));
@@ -706,10 +706,10 @@ public class KeyguardStatusView extends GridLayout implements
                 mOwnerInfo.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
                 break;
             case 1:
-                mOwnerInfo.setTypeface(Typeface.create("sans-serif", Typeface.BOLD));
+                mOwnerInfo.setTypeface(Typeface.create("sans-serif", Typeface.ITALIC));
                 break;
             case 2:
-                mOwnerInfo.setTypeface(Typeface.create("sans-serif", Typeface.ITALIC));
+                mOwnerInfo.setTypeface(Typeface.create("sans-serif", Typeface.BOLD));
                 break;
             case 3:
                 mOwnerInfo.setTypeface(Typeface.create("sans-serif", Typeface.BOLD_ITALIC));
