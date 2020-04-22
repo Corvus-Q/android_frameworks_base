@@ -42,6 +42,7 @@ public class FODAnimation extends ImageView {
 
     private int mSelectedAnim;
     private final int[] ANIMATION_STYLES = {
+        R.drawable.fod_op_energy_recognizing_anim,
         R.drawable.fod_op_mclaren_recognizing_anim,
         R.drawable.fod_op_ripple_recognizing_anim,
         R.drawable.fod_op_stripe_recognizing_anim,
