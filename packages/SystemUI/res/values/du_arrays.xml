@@ -36,4 +36,6 @@
         <item>@string/screenrecord_audio_recording_microphone</item>
     </string-array>
 
+    <integer-array name="fod_animation_resources">
+    </integer-array>
 </resources>
