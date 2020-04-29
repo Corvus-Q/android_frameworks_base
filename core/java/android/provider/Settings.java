@@ -4529,7 +4529,10 @@ public final class Settings {
          *    1 - Show percentage
          * @hide
          */
-        public static final String SHOW_BATTERY_PERCENT = "dummy_show_battery_percent";
+        public static final String SHOW_BATTERY_PERCENT = "status_bar_show_battery_percent";
+
+        /** @hide */
+        private static final Validator SHOW_BATTERY_PERCENT_VALIDATOR = BOOLEAN_VALIDATOR;
 
         /**
          * Whether the user has already accepted MediaProjection permission for the built-in screenrecorder
@@ -4969,21 +4972,6 @@ public final class Settings {
         public static final String STATUS_BAR_QUICK_QS_PULLDOWN = "status_bar_quick_qs_pulldown";
 
         /**
-         * Battery style
-         * @hide
-         */
-        public static final String STATUS_BAR_BATTERY_STYLE = "status_bar_battery_style";
-
-        /**
-          * Statusbar Battery %
-          * 0: Hide the battery percentage
-          * 1: Display the battery percentage
-          * 2: Display the battery percentage only while charging
-          * @hide
-          */
-        public static final String STATUS_BAR_SHOW_BATTERY_PERCENT = "status_bar_show_battery_percent";
-
-        /**
          * Whether the battery light should be enabled (if hardware supports it)
          * The value is boolean (1 or 0).
          * @hide
@@ -5254,12 +5242,6 @@ public final class Settings {
         public static final String STATUS_BAR_FILE_HEADER_IMAGE = "status_bar_file_header_image";
 
         private static final Validator STATUS_BAR_FILE_HEADER_IMAGE_VALIDATOR = ANY_STRING_VALIDATOR;
-
-        /**
-         * Whether to show battery estimates in QS
-         * @hide
-         */
-        public static final String QS_SHOW_BATTERY_ESTIMATE = "qs_show_battery_estimate";
 
         /**
          * battery location style
@@ -6506,6 +6488,7 @@ public final class Settings {
             LOCK_TO_APP_ENABLED,
             NOTIFICATION_SOUND,
             ACCELEROMETER_ROTATION,
+            SHOW_BATTERY_PERCENT,
             NOTIFICATION_VIBRATION_INTENSITY,
             RING_VIBRATION_INTENSITY,
             HAPTIC_FEEDBACK_INTENSITY,
@@ -6707,6 +6690,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(POINTER_SPEED);
             PRIVATE_SETTINGS.add(LOCK_TO_APP_ENABLED);
             PRIVATE_SETTINGS.add(EGG_MODE);
+            PRIVATE_SETTINGS.add(SHOW_BATTERY_PERCENT);
             PRIVATE_SETTINGS.add(DISPLAY_COLOR_MODE);
             PRIVATE_SETTINGS.add(SCREENSHOT_SOUND);
             PRIVATE_SETTINGS.add(VOLUME_ROCKER_WAKE);
