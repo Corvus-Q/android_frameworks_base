@@ -42,7 +42,6 @@ public class FODAnimation extends ImageView {
 
     private int mSelectedAnim;
     private final int[] ANIMATION_STYLES = {
-        R.drawable.fod_op_energy_recognizing_anim,
         R.drawable.fod_op_mclaren_recognizing_anim,
         R.drawable.fod_op_ripple_recognizing_anim,
         R.drawable.fod_op_stripe_recognizing_anim,
@@ -50,7 +49,8 @@ public class FODAnimation extends ImageView {
         R.drawable.fod_pureview_halo_ring_recognizing_anim,
         R.drawable.fod_blue_firework_recognizing_anim,
         R.drawable.fod_coloros7_1_recognizing_anim,
-        R.drawable.fod_coloros7_2_recognizing_anim
+        R.drawable.fod_coloros7_2_recognizing_anim,
+        R.drawable.fod_op_energy_recognizing_anim
     };
 
     public FODAnimation(Context context, int mPositionX, int mPositionY) {
