@@ -85,6 +85,7 @@ import com.android.internal.statusbar.IStatusBarService;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.TelephonyProperties;
 import com.android.internal.util.EmergencyAffordanceManager;
+import com.android.internal.util.ScreenRecordHelper;
 import com.android.internal.util.ScreenshotHelper;
 import com.android.internal.util.du.Utils;
 import com.android.internal.view.RotationPolicy;
@@ -141,6 +142,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
     private static final String GLOBAL_ACTION_KEY_EMERGENCY = "emergency";
     private static final String GLOBAL_ACTION_KEY_SCREENSHOT = "screenshot";
     private static final String GLOBAL_ACTION_KEY_RESTART_RECOVERY = "recovery";
+    private static final String GLOBAL_ACTION_KEY_SCREENRECORD = "screenrecord";
 
     private static final int SHOW_TOGGLES_BUTTON = 1;
     private static final int RESTART_RECOVERY_BUTTON = 2;
@@ -179,6 +181,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
     private final boolean mShowSilentToggle;
     private final EmergencyAffordanceManager mEmergencyAffordanceManager;
     private final ScreenshotHelper mScreenshotHelper;
+    private final ScreenRecordHelper mScreenRecordHelper;
     private final ActivityStarter mActivityStarter;
     private GlobalActionsPanelPlugin mPanelPlugin;
 
@@ -222,6 +225,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
 
         mEmergencyAffordanceManager = new EmergencyAffordanceManager(context);
         mScreenshotHelper = new ScreenshotHelper(context);
+        mScreenRecordHelper = new ScreenRecordHelper(context);
 
         Dependency.get(ConfigurationController.class).addCallback(this);
 
@@ -522,8 +526,13 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
                 }
             } else if (GLOBAL_ACTION_KEY_SCREENSHOT.equals(actionKey)) {
                 if (Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                            Settings.Secure.SCREENSHOT_IN_POWER_MENU, 1, getCurrentUser().id) != 0) {
+                            Settings.Secure.SCREENSHOT_IN_POWER_MENU, 0, getCurrentUser().id) != 0) {
                     mItems.add(new ScreenshotAction());
+                }
+            } else if (GLOBAL_ACTION_KEY_SCREENRECORD.equals(actionKey)) {
+                if (Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                            Settings.Secure.SCREENRECORD_IN_POWER_MENU, 0, getCurrentUser().id) != 0) {
+                    mItems.add(new ScreenrecordAction());
                 }
             /*} else if (GLOBAL_ACTION_KEY_LOGOUT.equals(actionKey)) {
                 if (mDevicePolicyManager.isLogoutEnabled()
@@ -746,9 +755,9 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
         }
     }
 
-    private class ScreenshotAction extends SinglePressAction {
+    private class ScreenshotAction extends SinglePressAction implements LongPressAction {
         public ScreenshotAction() {
-            super(com.android.systemui.R.drawable.ic_screenshot, R.string.global_action_screenshot);
+            super(com.android.systemui.R.drawable.ic_screenshot, com.android.systemui.R.string.global_action_screenshot_cust);
         }
 
         @Override
@@ -778,6 +787,38 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
 
         @Override
         public boolean showBeforeProvisioning() {
+            return false;
+        }
+
+        @Override
+        public boolean onLongPress() {
+            return false;
+        }
+    }
+
+    private class ScreenrecordAction extends SinglePressAction implements LongPressAction {
+        public ScreenrecordAction() {
+            super(com.android.systemui.R.drawable.ic_screenrecord,
+            com.android.systemui.R.string.global_action_screenrecord);
+        }
+
+        @Override
+        public void onPress() {
+            mScreenRecordHelper.launchRecordPrompt();
+        }
+
+        @Override
+        public boolean showDuringKeyguard() {
+            return true;
+        }
+
+        @Override
+        public boolean showBeforeProvisioning() {
+            return false;
+        }
+
+        @Override
+        public boolean onLongPress() {
             return false;
         }
     }
