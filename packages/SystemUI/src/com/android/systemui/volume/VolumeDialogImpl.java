@@ -120,7 +120,7 @@ import java.util.List;
  * Methods ending in "H" must be called on the (ui) handler.
  */
 public class VolumeDialogImpl implements VolumeDialog,
-        ConfigurationController.ConfigurationListener, OnLongClickListener, LocalMediaManager.DeviceCallback {
+        ConfigurationController.ConfigurationListener, LocalMediaManager.DeviceCallback {
     private static final String TAG = Util.logTag(VolumeDialogImpl.class);
 
     private static final long USER_ATTEMPT_GRACE_PERIOD = 1000;
@@ -200,6 +200,19 @@ public class VolumeDialogImpl implements VolumeDialog,
     private boolean isNotificationLinked = true;
     private int mTimeOut = 3;
 
+    private SettingsObserver settingsObserver;
+
+    private boolean mDarkMode;
+    private boolean mVibrateOnSlider;
+    private boolean mExpanded;
+    private boolean mShowingMediaDevices;
+
+    private float mElevation;
+    private float mHeight, mWidth, mSpacer;
+
+    private final List<MediaOutputRow> mMediaOutputRows = new ArrayList<>();
+    private final List<MediaDevice> mMediaDevices = new ArrayList<>();
+
     private class SettingsObserver extends ContentObserver {
         SettingsObserver(Handler handler) {
             super(handler);
@@ -232,25 +245,12 @@ public class VolumeDialogImpl implements VolumeDialog,
              isAlarmShowing = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.AUDIO_PANEL_VIEW_ALARM, 0, UserHandle.USER_CURRENT) == 1;
              isVoiceShowing = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.AUDIO_PANEL_VIEW_VOICE, 0, UserHandle.USER_CURRENT) == 1;
              isBTSCOShowing = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.AUDIO_PANEL_VIEW_BT_SCO, 0, UserHandle.USER_CURRENT) == 1;
-            isNotificationLinked = Settings.Secure.getIntForUser(mContext.getContentResolver(), Settings.Secure.VOLUME_LINK_NOTIFICATION, 1, UserHandle.USER_CURRENT) == 1;
-            mTimeOut = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.VOLUME_DIALOG_TIMEOUT, 3, UserHandle.USER_CURRENT);
-            mLeftVolumeRocker = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.AUDIO_PANEL_VIEW_POSITION, isAudioPanelOnLeftSide() ? 1 : 0, UserHandle.USER_CURRENT) == 1;
+             isNotificationLinked = Settings.Secure.getIntForUser(mContext.getContentResolver(), Settings.Secure.VOLUME_LINK_NOTIFICATION, 1, UserHandle.USER_CURRENT) == 1;
+             mTimeOut = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.VOLUME_DIALOG_TIMEOUT, 3, UserHandle.USER_CURRENT);
+             mLeftVolumeRocker = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.AUDIO_PANEL_VIEW_POSITION, 0,UserHandle.USER_CURRENT) == 1;
         }
     }
-
-    private SettingsObserver settingsObserver;
-
-    private boolean mDarkMode;
-    private boolean mVibrateOnSlider;
-    private boolean mExpanded;
-    private boolean mShowingMediaDevices;
-
-    private float mElevation;
-    private float mHeight, mWidth, mSpacer;
-
-    private final List<MediaOutputRow> mMediaOutputRows = new ArrayList<>();
-    private final List<MediaDevice> mMediaDevices = new ArrayList<>();
 
     public VolumeDialogImpl(Context context) {
         mContext =
@@ -363,7 +363,7 @@ public class VolumeDialogImpl implements VolumeDialog,
         mDialog.setContentView(R.layout.volume_dialog);
         mDialogView = mDialog.findViewById(R.id.volume_dialog);
         mDialogView.setLayoutDirection(
-                isAudioPanelOnLeftSide() ? View.LAYOUT_DIRECTION_LTR : View.LAYOUT_DIRECTION_RTL);
+                mLeftVolumeRocker ? View.LAYOUT_DIRECTION_LTR : View.LAYOUT_DIRECTION_RTL);
         mDialogView.setAlpha(0);
         mDialog.setCanceledOnTouchOutside(true);
         mDialog.setOnShowListener(dialog -> {
@@ -404,6 +404,11 @@ public class VolumeDialogImpl implements VolumeDialog,
         if (mRinger != null) {
             mRingerIcon = mRinger.findViewById(R.id.ringer_icon);
             mZenIcon = mRinger.findViewById(R.id.dnd_icon);
+            if(!mLeftVolumeRocker) {
+                mRinger.setForegroundGravity(Gravity.RIGHT);
+            } else {
+                mRinger.setForegroundGravity(Gravity.LEFT);
+            }
             Util.setVisOrGone(mRinger, !mHasAlertSlider);
         }
 
@@ -415,12 +420,16 @@ public class VolumeDialogImpl implements VolumeDialog,
         if (mHasSeenODICaptionsTooltip && mODICaptionsTooltipViewStub != null) {
             mDialogView.removeView(mODICaptionsTooltipViewStub);
             mODICaptionsTooltipViewStub = null;
+            if(!mLeftVolumeRocker) {
+                mRinger.setForegroundGravity(Gravity.RIGHT);
+            } else {
+                mRinger.setForegroundGravity(Gravity.LEFT);
+            }
         }
 
         mExpandRowsView = mDialog.findViewById(R.id.expandable_indicator_container);
         mExpandRows = mExpandRowsView.findViewById(R.id.expandable_indicator);
         mExpandRows.setScaleY(mLeftVolumeRocker ? -1f : 1f);
-        mExpandRows.setOnLongClickListener(this);
 
         mMediaOutputView = mDialog.findViewById(R.id.media_output_container);
         mMediaOutputScrollView = mDialog.findViewById(R.id.media_output_scroller);
@@ -502,7 +511,11 @@ public class VolumeDialogImpl implements VolumeDialog,
         if (D.BUG) Slog.d(TAG, "Adding row for stream " + stream);
         VolumeRow row = new VolumeRow();
         initRow(row, stream, iconRes, iconMuteRes, important, defaultStream);
-        mDialogRowsView.addView(row.view, 0);
+        if(!mLeftVolumeRocker){
+            mDialogRowsView.addView(row.view, 0);
+        } else {
+            mDialogRowsView.addView(row.view);
+        }
         mRows.add(row);
     }
 
@@ -511,7 +524,11 @@ public class VolumeDialogImpl implements VolumeDialog,
         for (VolumeRow row : mRows) {
             initRow(row, row.stream, row.iconRes, row.iconMuteRes, row.important,
                     row.defaultStream);
-            mDialogRowsView.addView(row.view, 0);
+            if(!mLeftVolumeRocker){
+                mDialogRowsView.addView(row.view, 0);
+            } else {
+                mDialogRowsView.addView(row.view);
+            }
             updateVolumeRowH(row);
         }
     }
@@ -566,7 +583,7 @@ public class VolumeDialogImpl implements VolumeDialog,
                 if (mCurrAnimator != null && mCurrAnimator.isRunning()) {
                     mCurrAnimator.cancel();
                 }
-                int x = (int) (isAudioPanelOnLeftSide() ? 0 : (3 * mWidth + 2 * mSpacer));
+                int x = (int) (mLeftVolumeRocker ? 0 : (3 * mWidth + 2 * mSpacer));
                 int endRadius = (int) Math.hypot(3 * mWidth + 2 * mSpacer, mHeight);
                 mCurrAnimator = circularExit(mMediaOutputScrollView, x, endRadius);
                 mCurrAnimator.start();
@@ -657,7 +674,7 @@ public class VolumeDialogImpl implements VolumeDialog,
                     mHeight = (float) activeRow.view.getHeight();
                     mWidth = (float) activeRow.view.getWidth();
                 }
-                int x = (int) (isLandscape() ? (isAudioPanelOnLeftSide() ? (
+                int x = (int) (isLandscape() ? (mLeftVolumeRocker ? (
                         (mWidth + mSpacer) * (mHasAlertSlider ? 1 : 2) + mWidth / 2)
                         : (mHasAlertSlider ? mWidth * 1.5 + mSpacer : mWidth / 2))
                         : (1.5 * mWidth + mSpacer));
@@ -688,6 +705,7 @@ public class VolumeDialogImpl implements VolumeDialog,
                 Events.writeEvent(mContext, Events.EVENT_SETTINGS_CLICK);
                 Intent intent = new Intent(Settings.Panel.ACTION_VOLUME);
                 dismissH(DISMISS_REASON_SETTINGS_CLICKED);
+                mController.vibrate(VibrationEffect.get(VibrationEffect.EFFECT_HEAVY_CLICK));
                 Dependency.get(ActivityStarter.class).startActivity(intent,
                         true /* dismissShade */);
                 return true;
@@ -745,18 +763,7 @@ public class VolumeDialogImpl implements VolumeDialog,
                     mExpanded = false;
                 }
                 mExpandRows.setExpanded(mExpanded);
-            });
-            mExpandRows.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    Intent soundSettings = new Intent(Settings.ACTION_SOUND_SETTINGS);
-                    soundSettings.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    dismissH(DISMISS_REASON_SETTINGS_CLICKED);
-                    Dependency.get(ActivityStarter.class).startActivity(soundSettings,
-                            true /* dismissShade */);
-                    return true;
-                }
-            });
+            });	
         }
     }
 
@@ -847,7 +854,7 @@ public class VolumeDialogImpl implements VolumeDialog,
             startZ = -startZ;
         }
 
-        view.setTranslationX(isAudioPanelOnLeftSide() ? -startX : startX);
+        view.setTranslationX(mLeftVolumeRocker ? -startX : startX);
         view.setTranslationZ(startZ);
         view.setAlpha(startAlpha);
         Util.setVisOrGone(view, true);
@@ -878,7 +885,7 @@ public class VolumeDialogImpl implements VolumeDialog,
 
         view.animate()
             .alpha(endAlpha)
-            .translationX(isAudioPanelOnLeftSide() ? -endX : endX)
+            .translationX(mLeftVolumeRocker ? -endX : endX)
             .translationZ(endZ)
             .setDuration(DIALOG_SHOW_ANIMATION_DURATION)
             .setInterpolator(new SystemUIInterpolators.LogDecelerateInterpolator())
@@ -1932,22 +1939,6 @@ public class VolumeDialogImpl implements VolumeDialog,
             }
             return false;
         }
-    }
-
-    public boolean onLongClick(View v) {
-        if (v == mExpandRows) {
-            startSoundActivity();
-            mController.vibrate(VibrationEffect.get(VibrationEffect.EFFECT_HEAVY_CLICK));
-        }
-        return false;
-    }
-
-    private void startSoundActivity() {
-        dismissH(Events.DISMISS_REASON_TOUCH_OUTSIDE);
-        Intent nIntent = new Intent(Intent.ACTION_MAIN);
-        nIntent.setClassName("com.android.settings",
-            "com.android.settings.Settings$SoundSettingsActivity");
-        Dependency.get(ActivityStarter.class).startActivity(nIntent, true /* dismissShade */);
     }
 
     private final class VolumeSeekBarChangeListener implements OnSeekBarChangeListener {
