@@ -191,14 +191,9 @@ public class VolumeDialogImpl implements VolumeDialog,
     private boolean mLeftVolumeRocker;
     private boolean mHasAlertSlider;
 
-    private boolean isMediaShowing = false;
-    private boolean isRingerShowing = false;
-    private boolean isNotificationShowing = false;
-    private boolean isAlarmShowing = false;
-    private boolean isVoiceShowing = false;
-    private boolean isBTSCOShowing = false;
-    private boolean isNotificationLinked = true;
     private int mTimeOut = 3;
+
+    private boolean mNotificationLinked;
 
     private SettingsObserver settingsObserver;
 
@@ -219,15 +214,8 @@ public class VolumeDialogImpl implements VolumeDialog,
         }
 
         void observe() {
-            mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.AUDIO_PANEL_VIEW_MEDIA), false, this, UserHandle.USER_ALL);
-            mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.AUDIO_PANEL_VIEW_RINGER), false, this, UserHandle.USER_ALL);
-            mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.AUDIO_PANEL_VIEW_NOTIFICATION), false, this, UserHandle.USER_ALL);
-            mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.AUDIO_PANEL_VIEW_ALARM), false, this, UserHandle.USER_ALL);
-            mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.AUDIO_PANEL_VIEW_VOICE), false, this, UserHandle.USER_ALL);
-            mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.AUDIO_PANEL_VIEW_BT_SCO), false, this, UserHandle.USER_ALL);
-            mContext.getContentResolver().registerContentObserver(Settings.Secure.getUriFor(Settings.Secure.VOLUME_LINK_NOTIFICATION), false, this, UserHandle.USER_ALL);
-            mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.VOLUME_DIALOG_TIMEOUT), false, this, UserHandle.USER_ALL);
             mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.AUDIO_PANEL_VIEW_POSITION), false, this, UserHandle.USER_ALL);
+            mContext.getContentResolver().registerContentObserver(Settings.Secure.getUriFor(Settings.Secure.VOLUME_LINK_NOTIFICATION), false, this, UserHandle.USER_ALL);
             update();
         }
 
@@ -239,16 +227,10 @@ public class VolumeDialogImpl implements VolumeDialog,
         }
 
         public void update() {
-             isMediaShowing = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.AUDIO_PANEL_VIEW_MEDIA, 0, UserHandle.USER_CURRENT) == 1;
-             isRingerShowing = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.AUDIO_PANEL_VIEW_RINGER, 0, UserHandle.USER_CURRENT) == 1;
-             isNotificationShowing = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.AUDIO_PANEL_VIEW_NOTIFICATION, 0, UserHandle.USER_CURRENT) == 1;
-             isAlarmShowing = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.AUDIO_PANEL_VIEW_ALARM, 0, UserHandle.USER_CURRENT) == 1;
-             isVoiceShowing = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.AUDIO_PANEL_VIEW_VOICE, 0, UserHandle.USER_CURRENT) == 1;
-             isBTSCOShowing = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.AUDIO_PANEL_VIEW_BT_SCO, 0, UserHandle.USER_CURRENT) == 1;
-             isNotificationLinked = Settings.Secure.getIntForUser(mContext.getContentResolver(), Settings.Secure.VOLUME_LINK_NOTIFICATION, 1, UserHandle.USER_CURRENT) == 1;
              mTimeOut = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.VOLUME_DIALOG_TIMEOUT, 3, UserHandle.USER_CURRENT);
              mLeftVolumeRocker = Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.AUDIO_PANEL_VIEW_POSITION, 0,UserHandle.USER_CURRENT) == 1;
+             mNotificationLinked = Settings.Secure.getIntForUser(mContext.getContentResolver(), Settings.Secure.VOLUME_LINK_NOTIFICATION, 1, UserHandle.USER_CURRENT) == 0;
         }
     }
 
@@ -520,7 +502,6 @@ public class VolumeDialogImpl implements VolumeDialog,
     }
 
     private void addExistingRows() {
-        Log.d(TAG, "addExistingRows ");
         for (VolumeRow row : mRows) {
             initRow(row, row.stream, row.iconRes, row.iconMuteRes, row.important,
                     row.defaultStream);
@@ -1315,29 +1296,6 @@ public class VolumeDialogImpl implements VolumeDialog,
             return true;
         }
 
-        if(row.stream == AudioManager.STREAM_MUSIC && isMediaShowing){
-            return true;
-        }
-        if(row.stream == AudioManager.STREAM_RING && isRingerShowing){
-            return true;
-        }
-        if (row.stream == AudioManager.STREAM_NOTIFICATION) {
-            if (isNotificationLinked)
-                return false;
-
-            if (isNotificationShowing)
-                return true;
-        }
-        if(row.stream == AudioManager.STREAM_ALARM && isAlarmShowing){
-            return true;
-        }
-        if(row.stream == AudioManager.STREAM_VOICE_CALL && isVoiceShowing){
-            return true;
-        }
-        if(row.stream == AudioManager.STREAM_BLUETOOTH_SCO && isBTSCOShowing){
-            return true;
-        }
-
         if (!mShowActiveStreamOnly) {
             if (row.stream == STREAM_ACCESSIBILITY) {
                 return mShowA11yStream;
@@ -1351,6 +1309,9 @@ public class VolumeDialogImpl implements VolumeDialog,
                 return true;
             }
 
+            if (row.stream == AudioManager.STREAM_NOTIFICATION){
+                return mNotificationLinked;
+            }
             if (row.defaultStream) {
                 return activeRow.stream == STREAM_RING
                         || activeRow.stream == STREAM_ALARM
@@ -1359,7 +1320,6 @@ public class VolumeDialogImpl implements VolumeDialog,
                         || mDynamic.get(activeRow.stream);
             }
         }
-
         return false;
     }
 
@@ -1494,14 +1454,10 @@ public class VolumeDialogImpl implements VolumeDialog,
             final VolumeRow row = mRows.get(i);
             if (row.ss == null || !row.ss.dynamic) continue;
             if (!mDynamic.get(row.stream)) {
-                removeRow(row);
+                mRows.remove(i);
+                mDialogRowsView.removeView(row.view);
             }
         }
-    }
-
-    private void removeRow(VolumeRow volumeRow) {
-        mRows.remove(volumeRow);
-        mDialogRowsView.removeView(volumeRow.view);
     }
 
     protected void onStateChangedH(State state) {
@@ -1578,8 +1534,7 @@ public class VolumeDialogImpl implements VolumeDialog,
 
         // update slider max
         final int max = ss.levelMax * 100;
-        final boolean maxChanged = max != row.slider.getMax();
-        if (maxChanged) {
+        if (max != row.slider.getMax()) {
             row.slider.setMax(max);
         }
         // update slider min
@@ -1652,7 +1607,7 @@ public class VolumeDialogImpl implements VolumeDialog,
         final boolean enableSlider = !zenMuted;
         final int vlevel = row.ss.muted && (!isRingStream && !zenMuted) ? 0
                 : row.ss.level;
-        updateVolumeRowSliderH(row, enableSlider, vlevel, maxChanged);
+        updateVolumeRowSliderH(row, enableSlider, vlevel);
     }
 
     private void updateVolumeRowTintH(VolumeRow row, boolean isActive) {
@@ -1670,7 +1625,7 @@ public class VolumeDialogImpl implements VolumeDialog,
         row.cachedTint = tint;
     }
 
-    private void updateVolumeRowSliderH(VolumeRow row, boolean enable, int vlevel, boolean maxChanged) {
+    private void updateVolumeRowSliderH(VolumeRow row, boolean enable, int vlevel) {
         row.slider.setEnabled(enable);
         updateVolumeRowTintH(row, row.stream == mActiveStream);
         if (row.tracking) {
@@ -1694,7 +1649,7 @@ public class VolumeDialogImpl implements VolumeDialog,
             }
         }
         final int newProgress = vlevel * 100;
-        if (progress != newProgress || maxChanged && !row.ss.muted) {
+        if (progress != newProgress && !row.ss.muted) {
             if (mShowing && rowVisible) {
                 // animate!
                 if (row.anim != null && row.anim.isRunning()

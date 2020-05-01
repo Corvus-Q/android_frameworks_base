@@ -178,7 +178,7 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
                         UserHandle.USER_CURRENT);
         if (isShow) {
             if (text == null || text == "") {
-                v.setText("#DureX");
+                v.setText("#Corvus");
                 v.setVisibility(View.VISIBLE);
             } else {
                 v.setText(text);

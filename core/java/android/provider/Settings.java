@@ -4839,27 +4839,6 @@ public final class Settings {
          */
         public static final String CUSTOM_CARRIER_LABEL = "custom_carrier_label";
 
-        /** @hide */
-        public static final String AUDIO_PANEL_VIEW_MEDIA = "audio_panel_view_media";
-
-        /** @hide */
-        public static final String AUDIO_PANEL_VIEW_RINGER = "audio_panel_view_ringer";
-
-        /** @hide */
-        public static final String AUDIO_PANEL_VIEW_NOTIFICATION = "audio_panel_view_notification";
-
-        /** @hide */
-        public static final String AUDIO_PANEL_VIEW_ALARM = "audio_panel_view_alarm";
-
-        /** @hide */
-        public static final String AUDIO_PANEL_VIEW_VOICE = "audio_panel_view_voice";
-
-        /** @hide */
-        public static final String AUDIO_PANEL_VIEW_BT_SCO = "audio_panel_view_bt_sco";
-
-        /** @hide */
-        public static final String AUDIO_PANEL_VIEW_POSITION = "audio_panel_view_position";
-
         /**
          * Carrier Label Custom Color
          * @hide
@@ -5073,11 +5052,14 @@ public final class Settings {
          */
         public static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
 
-         /**
-          * Volume dialog timeout
-          * @hide
-          */
-         public static final String VOLUME_DIALOG_TIMEOUT = "volume_dialog_timeout";
+        /**
+         * Volume dialog timeout
+         * @hide
+         */
+        public static final String VOLUME_DIALOG_TIMEOUT = "volume_dialog_timeout";
+
+        /** @hide */
+        public static final String AUDIO_PANEL_VIEW_POSITION = "audio_panel_view_position";
 
        /**
         * Defines the global heads up notification snooze
