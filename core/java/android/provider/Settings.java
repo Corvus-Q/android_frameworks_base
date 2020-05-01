@@ -4607,15 +4607,6 @@ public final class Settings {
         private static final Validator VOLUME_ROCKER_WAKE_VALIDATOR =
                 BOOLEAN_VALIDATOR;
 
-        /** Width of the navigation handle.
-         *  @hide
-         */
-        public static final String NAVIGATION_HANDLE_WIDTH = "navigation_handle_width";
-
-        /** @hide */
-        private static final Validator NAVIGATION_HANDLE_WIDTH_VALIDATOR =
-                ANY_INTEGER_VALIDATOR;
-
         /**
          * @hide
          */
@@ -5602,6 +5593,12 @@ public final class Settings {
          */
         public static final String VIBRATE_ON_NOTIFICATIONS = "vibrate_on_notifications";
 
+        /** @hide */
+        public static final String GESTURE_PILL_TOGGLE = "gesture_pill_toggle";
+
+        /** @hide */
+        private static final Validator GESTURE_PILL_TOGGLE_VALIDATOR = BOOLEAN_VALIDATOR;
+
         /**
          * Whether to show the notification ticker on the status bar
          * @hide
@@ -6217,58 +6214,6 @@ public final class Settings {
         public static final String RIGHT_LONG_BACK_SWIPE_APP_ACTIVITY_ACTION = "right_long_back_swipe_app_activity_action";
 
         /**
-         * Gestures nav: left long back swipe action
-         * @hide
-         */
-        public static final String LEFT_VERTICAL_BACK_SWIPE_ACTION = "left_vertical_back_swipe_action";
-
-        /**
-         * Gestures nav: left long back swipe app action
-         * @hide
-         */
-        public static final String LEFT_VERTICAL_BACK_SWIPE_APP_ACTION = "left_vertical_back_swipe_app_action";
-
-        /**
-         * Display friendly name of custom application launched when
-         * using the long left back swipe app action
-         * @hide
-         */
-        public static final String LEFT_VERTICAL_BACK_SWIPE_APP_FR_ACTION = "left_vertical_back_swipe_app_fr_action";
-
-        /**
-         * Launch custom activity when using the long left back swipe app action
-         *
-         * @hide
-         */
-        public static final String LEFT_VERTICAL_BACK_SWIPE_APP_ACTIVITY_ACTION = "left_vertical_back_swipe_app_activity_action";
-
-        /**
-         * Gestures nav: right long back swipe action
-         * @hide
-         */
-        public static final String RIGHT_VERTICAL_BACK_SWIPE_ACTION = "right_vertical_back_swipe_action";
-
-        /**
-         * Gestures nav: right long back swipe app action
-         * @hide
-         */
-        public static final String RIGHT_VERTICAL_BACK_SWIPE_APP_ACTION = "right_vertical_back_swipe_app_action";
-
-        /**
-         * Display friendly name of custom application launched when
-         * using the long right back swipe app action
-         * @hide
-         */
-        public static final String RIGHT_VERTICAL_BACK_SWIPE_APP_FR_ACTION = "right_vertical_back_swipe_app_fr_action";
-
-        /**
-         * Launch custom activity when using the long right back swipe app action
-         *
-         * @hide
-         */
-        public static final String RIGHT_VERTICAL_BACK_SWIPE_APP_ACTIVITY_ACTION = "right_vertical_back_swipe_app_activity_action";
-
-        /**
          * Gestures nav: long back swipe timeout
          * @hide
          */
@@ -6574,6 +6519,7 @@ public final class Settings {
             CUSTOM_DEVICE_GESTURE_FEEDBACK_ENABLED,
             CUSTOM_DEVICE_FEATURE_SETTINGS,
             SENSOR_BLOCK,
+            GESTURE_PILL_TOGGLE,
             STATUS_BAR_SHOW_TICKER,
             STATUS_BAR_TICKER_ANIMATION_MODE,
             STATUS_BAR_TICKER_TICK_DURATION, 
@@ -6593,7 +6539,6 @@ public final class Settings {
             BUTTON_BACKLIGHT_TIMEOUT,
             BUTTON_BACKLIGHT_ON_TOUCH_ONLY,
             FORCE_SHOW_NAVBAR,
-            NAVIGATION_HANDLE_WIDTH,
             LOCKSCREEN_CHARGING_ANIMATION_STYLE,
             QS_PANEL_BG_USE_NEW_TINT,
             DISPLAY_CUTOUT_MODE,
@@ -6804,7 +6749,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(BUTTON_BACKLIGHT_TIMEOUT);
             PRIVATE_SETTINGS.add(BUTTON_BACKLIGHT_ON_TOUCH_ONLY);
             PRIVATE_SETTINGS.add(FORCE_SHOW_NAVBAR);
-            PRIVATE_SETTINGS.add(NAVIGATION_HANDLE_WIDTH);
             PRIVATE_SETTINGS.add(POCKET_JUDGE);
             PRIVATE_SETTINGS.add(DISPLAY_CUTOUT_MODE);
             PRIVATE_SETTINGS.add(STOCK_STATUSBAR_IN_HIDE);
@@ -6987,8 +6931,6 @@ public final class Settings {
             VALIDATORS.put(BUTTON_BACKLIGHT_ON_TOUCH_ONLY,
                     BUTTON_BACKLIGHT_ON_TOUCH_ONLY_VALIDATOR);
             VALIDATORS.put(FORCE_SHOW_NAVBAR, FORCE_SHOW_NAVBAR_VALIDATOR);
-            VALIDATORS.put(NAVIGATION_HANDLE_WIDTH,
-                    NAVIGATION_HANDLE_WIDTH_VALIDATOR);
             VALIDATORS.put(LOCKSCREEN_CHARGING_ANIMATION_STYLE, LOCKSCREEN_CHARGING_ANIMATION_STYLE_VALIDATOR);
             VALIDATORS.put(QS_PANEL_BG_USE_NEW_TINT, QS_PANEL_BG_USE_NEW_TINT_VALIDATOR);
             VALIDATORS.put(POCKET_JUDGE, POCKET_JUDGE_VALIDATOR);

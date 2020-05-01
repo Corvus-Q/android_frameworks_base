@@ -79,8 +79,7 @@ public class NavBarTintController implements View.OnAttachStateChangeListener,
         mLightBarController = lightBarController;
 
         final Resources res = navigationBarView.getResources();
-
-        mNavBarHeight = navigationBarView.showGestureNavbar() ? res.getDimensionPixelSize(R.dimen.navigation_bar_height) : 0;
+        mNavBarHeight = res.getDimensionPixelSize(R.dimen.navigation_bar_height);
         mNavColorSampleMargin =
                 res.getDimensionPixelSize(R.dimen.navigation_handle_sample_horizontal_margin);
         mLuminanceThreshold = res.getFloat(R.dimen.navigation_luminance_threshold);
@@ -129,7 +128,7 @@ public class NavBarTintController implements View.OnAttachStateChangeListener,
         mSamplingBounds.setEmpty();
         // TODO: Extend this to 2/3 button layout as well
         View view = mNavigationBarView.getHomeHandle().getCurrentView();
-        if (mNavigationBarView.showGestureNavbar() && view != null) {
+        if (view != null) {
             int[] pos = new int[2];
             view.getLocationOnScreen(pos);
             Point displaySize = new Point();

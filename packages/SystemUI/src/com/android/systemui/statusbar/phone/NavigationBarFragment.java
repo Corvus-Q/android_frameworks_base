@@ -209,8 +209,7 @@ public class NavigationBarFragment extends LifecycleFragment implements Callback
             if (QuickStepContract.isSwipeUpMode(mNavBarMode)) {
                 buttonDispatcher = mNavigationBarView.getBackButton();
             } else if (QuickStepContract.isGesturalMode(mNavBarMode)) {
-                buttonDispatcher = mNavigationBarView.showGestureNavbar()
-                        ? mNavigationBarView.getHomeHandle() : null;
+                buttonDispatcher = mNavigationBarView.getHomeHandle();
             }
             if (buttonDispatcher != null) {
                 buttonDispatcher.setVisibility(alpha > 0 ? View.VISIBLE : View.INVISIBLE);
