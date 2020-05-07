@@ -5288,24 +5288,6 @@ public final class Settings {
         public static final Validator VOLTE_ICON_STYLE_VALIDATOR = ANY_INTEGER_VALIDATOR;
 
         /**
-         * Whether to enable Ambient edge light
-         * @hide
-         */
-        public static final String PULSE_AMBIENT_LIGHT = "pulse_ambient_light";
-
-        /** @hide */
-        private static final Validator PULSE_AMBIENT_LIGHT_VALIDATOR = BOOLEAN_VALIDATOR;
-
-        /**
-         * What color to use for Ambient edge light
-         * @hide
-         */
-        public static final String PULSE_AMBIENT_LIGHT_COLOR = "pulse_ambient_light_color";
-
-        /** @hide */
-        private static final Validator PULSE_AMBIENT_LIGHT_COLOR_VALIDATOR = ANY_STRING_VALIDATOR;
-
-        /**
          * some devices have a extra hw button e.g. n3 on the back on the
          * fingerprint sensor. allow mapping button to key
          *
@@ -5384,24 +5366,6 @@ public final class Settings {
          * @hide
          */
         public static final String SEEK_BAR_BATTERY_CHARGE_LEVEL_SOUND = "battery_level_charge_seek_bar";
-
-        /**
-         * Whether to use color from wallpaper for Ambient edge light
-         * @hide
-         */
-        public static final String PULSE_AMBIENT_LIGHT_AUTO_COLOR = "pulse_ambient_light_auto_color";
-
-        /** @hide */
-        private static final Validator PULSE_AMBIENT_LIGHT_AUTO_COLOR_VALIDATOR = BOOLEAN_VALIDATOR;
-
-        /**
-         * Duration of Ambient edge light in seconds
-         * @hide
-         */
-        public static final String PULSE_AMBIENT_LIGHT_DURATION = "pulse_ambient_light_duration";
-
-        /** @hide */
-        private static final Validator PULSE_AMBIENT_LIGHT_DURATION_VALIDATOR = ANY_INTEGER_VALIDATOR;
 
         /**
          ** Change fonts for the system lockscreen clock widget
@@ -5763,26 +5727,6 @@ public final class Settings {
         public static final String QS_BLUR_INTENSITY = "qs_blur_intensity";
         /** @hide */
         private static final Validator QS_BLUR_INTENSITY_VALIDATOR = ANY_INTEGER_VALIDATOR;
-
-        /**
-         * Number of times to repeat animations of Ambient edge light
-         * 0 is infinite
-         * @hide
-         */
-        public static final String PULSE_AMBIENT_LIGHT_REPEAT_COUNT = "pulse_ambient_light_repeat_count";
-
-        /** @hide */
-        private static final Validator PULSE_AMBIENT_LIGHT_REPEAT_COUNT_VALIDATOR =
-                ANY_INTEGER_VALIDATOR;
-
-        /**
-         * Ambient Edge Light Layout
-         * @hide
-         */
-        public static final String PULSE_AMBIENT_LIGHT_LAYOUT = "pulse_ambient_light_layout";
-
-        /** @hide */
-        private static final Validator PULSE_AMBIENT_LIGHT_LAYOUT_VALIDATOR = ANY_INTEGER_VALIDATOR;
 
         /**
          * Text clock alignment
@@ -6557,12 +6501,6 @@ public final class Settings {
             STATUS_BAR_FILE_HEADER_IMAGE,
             STATUS_BAR_CUSTOM_HEADER_HEIGHT,
             USE_OLD_MOBILETYPE,
-            PULSE_AMBIENT_LIGHT,
-            PULSE_AMBIENT_LIGHT_COLOR,
-            PULSE_AMBIENT_LIGHT_AUTO_COLOR,
-            PULSE_AMBIENT_LIGHT_DURATION,
-            PULSE_AMBIENT_LIGHT_REPEAT_COUNT,
-            PULSE_AMBIENT_LIGHT_LAYOUT,
             CUSTOM_BUTTON_EXTRA_KEY_MAPPING,
             CUSTOM_DEVICE_PROXI_CHECK_ENABLED,
             CUSTOM_DEVICE_GESTURE_FEEDBACK_ENABLED,
@@ -6759,12 +6697,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(STATUS_BAR_CUSTOM_HEADER_HEIGHT);
             PRIVATE_SETTINGS.add(USE_OLD_MOBILETYPE);
             PRIVATE_SETTINGS.add(VOLTE_ICON_STYLE);
-            PRIVATE_SETTINGS.add(PULSE_AMBIENT_LIGHT);
-            PRIVATE_SETTINGS.add(PULSE_AMBIENT_LIGHT_COLOR);
-            PRIVATE_SETTINGS.add(PULSE_AMBIENT_LIGHT_AUTO_COLOR);
-            PRIVATE_SETTINGS.add(PULSE_AMBIENT_LIGHT_DURATION);
-            PRIVATE_SETTINGS.add(PULSE_AMBIENT_LIGHT_REPEAT_COUNT);
-            PRIVATE_SETTINGS.add(PULSE_AMBIENT_LIGHT_LAYOUT);
             PRIVATE_SETTINGS.add(CUSTOM_BUTTON_EXTRA_KEY_MAPPING);
             PRIVATE_SETTINGS.add(CUSTOM_DEVICE_PROXI_CHECK_ENABLED);
             PRIVATE_SETTINGS.add(CUSTOM_DEVICE_GESTURE_FEEDBACK_ENABLED);
@@ -6944,12 +6876,6 @@ public final class Settings {
             VALIDATORS.put(STATUS_BAR_CUSTOM_HEADER_HEIGHT, STATUS_BAR_CUSTOM_HEADER_HEIGHT_VALIDATOR);
             VALIDATORS.put(USE_OLD_MOBILETYPE, USE_OLD_MOBILETYPE_VALIDATOR);
             VALIDATORS.put(VOLTE_ICON_STYLE, VOLTE_ICON_STYLE_VALIDATOR);
-            VALIDATORS.put(PULSE_AMBIENT_LIGHT, PULSE_AMBIENT_LIGHT_VALIDATOR);
-            VALIDATORS.put(PULSE_AMBIENT_LIGHT_COLOR, PULSE_AMBIENT_LIGHT_COLOR_VALIDATOR);
-            VALIDATORS.put(PULSE_AMBIENT_LIGHT_AUTO_COLOR, PULSE_AMBIENT_LIGHT_AUTO_COLOR_VALIDATOR);
-            VALIDATORS.put(PULSE_AMBIENT_LIGHT_DURATION, PULSE_AMBIENT_LIGHT_DURATION_VALIDATOR);
-            VALIDATORS.put(PULSE_AMBIENT_LIGHT_REPEAT_COUNT, PULSE_AMBIENT_LIGHT_REPEAT_COUNT_VALIDATOR);
-            VALIDATORS.put(PULSE_AMBIENT_LIGHT_LAYOUT, PULSE_AMBIENT_LIGHT_LAYOUT_VALIDATOR);
             VALIDATORS.put(CUSTOM_BUTTON_EXTRA_KEY_MAPPING, CUSTOM_BUTTON_EXTRA_KEY_MAPPING_VALIDATOR);
             VALIDATORS.put(CUSTOM_DEVICE_PROXI_CHECK_ENABLED, CUSTOM_DEVICE_PROXI_CHECK_ENABLED_VALIDATOR);
             VALIDATORS.put(CUSTOM_DEVICE_GESTURE_FEEDBACK_ENABLED, CUSTOM_DEVICE_GESTURE_FEEDBACK_ENABLED_VALIDATOR);
