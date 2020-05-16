@@ -5815,6 +5815,16 @@ public final class Settings {
         public static final String THEME_TILE_ENABLED_MODE = "theme_tile_enabled_mode";
 
         /**
+         * Direction of repeat animations of Ambient edge light
+         * 0 is restart
+         * 1 is reverse
+         * @hide
+         */
+        public static final String AMBIENT_LIGHT_REPEAT_DIRECTION = "ambient_light_repeat_direction";
+
+        private static final Validator AMBIENT_LIGHT_REPEAT_DIRECTION_VALIDATOR = BOOLEAN_VALIDATOR;
+
+        /**
          * Whether to show arrow keys in navigation bar
          * @hide
          */
@@ -6586,6 +6596,7 @@ public final class Settings {
             HAPTIC_FEEDBACK_INTENSITY,
             DISPLAY_COLOR_MODE,
             ALARM_ALERT,
+            AMBIENT_LIGHT_REPEAT_DIRECTION,
             NOTIFICATION_LIGHT_PULSE,
             SCREENSHOT_SOUND,
             VOLUME_ROCKER_WAKE,
@@ -6848,6 +6859,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(LOCK_SHOW_STATUS_BAR);
             PRIVATE_SETTINGS.add(TEXT_CLOCK_ALIGNMENT);
             PRIVATE_SETTINGS.add(INCALL_FEEDBACK_VIBRATE);
+            PRIVATE_SETTINGS.add(AMBIENT_LIGHT_REPEAT_DIRECTION);
             PRIVATE_SETTINGS.add(NAVIGATION_BAR_ARROW_KEYS);
             PRIVATE_SETTINGS.add(KEY_HOME_LONG_PRESS_ACTION);
             PRIVATE_SETTINGS.add(KEY_HOME_DOUBLE_TAP_ACTION);
@@ -6980,6 +6992,7 @@ public final class Settings {
             VALIDATORS.put(WIFI_STATIC_DNS1, WIFI_STATIC_DNS1_VALIDATOR);
             VALIDATORS.put(WIFI_STATIC_DNS2, WIFI_STATIC_DNS2_VALIDATOR);
             VALIDATORS.put(QS_SHOW_BATTERY_ESTIMATE, QS_SHOW_BATTERY_ESTIMATE_VALIDATOR);
+            VALIDATORS.put(AMBIENT_LIGHT_REPEAT_DIRECTION, AMBIENT_LIGHT_REPEAT_DIRECTION_VALIDATOR);
             VALIDATORS.put(NOTIFICATION_LIGHT_PULSE, BOOLEAN_VALIDATOR);
             VALIDATORS.put(SCREENSHOT_SOUND, SCREENSHOT_SOUND_VALIDATOR);
             VALIDATORS.put(VOLUME_ROCKER_WAKE, VOLUME_ROCKER_WAKE_VALIDATOR);
