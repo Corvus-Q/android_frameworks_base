@@ -198,6 +198,12 @@ public final class DefaultPermissionGrantPolicy {
         SUSPEND_APP_PERMISSIONS.add(Manifest.permission.SUSPEND_APPS);
     }
 
+    private static final Set<String> PULSE_EQ_PERMISSIONS = new ArraySet<>();
+    static {
+        PULSE_EQ_PERMISSIONS.add(Manifest.permission.MODIFY_AUDIO_SETTINGS);
+        PULSE_EQ_PERMISSIONS.add(Manifest.permission.RECORD_AUDIO);
+    }
+
     private static final Set<String> WALLPAPER_PERMISSIONS = new ArraySet<>();
     static {
         WALLPAPER_PERMISSIONS.add(Manifest.permission.BIND_WALLPAPER);
@@ -829,6 +835,9 @@ public final class DefaultPermissionGrantPolicy {
 
         // ThemePicker
         grantSystemFixedPermissionsToSystemPackage("com.android.wallpaper", userId, STORAGE_PERMISSIONS);
+
+        // SystemUI Pulse EQ
+        grantSystemFixedPermissionsToSystemPackage("com.android.systemui", userId, PULSE_EQ_PERMISSIONS);
     }
 
     private String getDefaultSystemHandlerActivityPackageForCategory(String category, int userId) {
