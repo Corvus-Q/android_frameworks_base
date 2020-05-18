@@ -494,6 +494,9 @@
     <!-- Whether to show VoLTE icon in the status bar -->
     <bool name="config_display_volte">true</bool>
 
+    <!-- Whether to show VoWiFi icon in the status bar -->
+    <bool name="config_display_vowifi">true</bool>
+
     <!-- Respect the drawable/rounded.xml that allow to customize as multiple radius corner path -->
     <bool name="config_roundedCornerMultipleRadius">false</bool>
 
