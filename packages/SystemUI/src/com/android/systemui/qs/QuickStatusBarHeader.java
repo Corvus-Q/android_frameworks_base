@@ -64,6 +64,7 @@ import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.plugins.DarkIconDispatcher;
 import com.android.systemui.plugins.DarkIconDispatcher.DarkReceiver;
 import com.android.systemui.qs.QSDetail.Callback;
+import com.android.systemui.statusbar.info.DataUsageView;
 import com.android.systemui.statusbar.phone.PhoneStatusBarView;
 import com.android.systemui.statusbar.phone.StatusBarIconController;
 import com.android.systemui.statusbar.phone.StatusBarIconController.TintedIconManager;
@@ -141,6 +142,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
     private boolean mForceHideQsStatusBar;
     private boolean mBatteryInQS;
     private BatteryMeterView mBatteryMeterView;
+    private DataUsageView mDataUsageView;
 
     private SettingsObserver mSettingsObserver = new SettingsObserver(mHandler);
 
@@ -191,6 +193,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mRingerContainer = findViewById(R.id.ringer_container);
         mCarrierGroup = findViewById(R.id.carrier_group);
         mForceHideQsStatusBar = mContext.getResources().getBoolean(R.bool.qs_status_bar_hidden);
+        mDataUsageView = findViewById(R.id.data_sim_usage);
 
         updateResources();
 
@@ -357,6 +360,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         updateResources();
         updateStatusbarProperties();
         updateshowBatteryInBar();
+        updateDataUsageView();
     }
 
     private void updateBatteryStyle() {
@@ -373,6 +377,13 @@ public class QuickStatusBarHeader extends RelativeLayout implements
                 UserHandle.USER_CURRENT) == 1;
         mBatteryMeterView.setVisibility(mBatteryInQS ? View.VISIBLE : View.GONE);
         mBatteryRemainingIcon.setVisibility(mBatteryInQS ? View.GONE : View.VISIBLE);
+    }
+
+    private void updateDataUsageView() {
+        if (mDataUsageView.isDataUsageEnabled())
+            mDataUsageView.setVisibility(View.VISIBLE);
+        else
+            mDataUsageView.setVisibility(View.GONE);
     }
 
     private void updateStatusIconAlphaAnimator() {
@@ -627,6 +638,9 @@ public class QuickStatusBarHeader extends RelativeLayout implements
                     this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.QS_BATTERY_LOCATION_BAR), false,
+                    this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System
+                    .getUriFor(Settings.System.QS_DATAUSAGE), false,
                     this, UserHandle.USER_ALL);
         }
 
