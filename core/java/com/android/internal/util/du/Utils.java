@@ -40,6 +40,8 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.SystemClock;
+import android.text.TextUtils;
+import android.text.format.Time;
 import android.view.IWindowManager;
 import android.view.WindowManagerGlobal;
 import android.util.DisplayMetrics;
@@ -175,6 +177,15 @@ public class Utils {
         } catch (RemoteException e) {
             return false;
         }
+    }
+
+    // Returns today's passed time in Millisecond
+    public static long getTodayMillis() {
+        final long passedMillis;
+        Time time = new Time();
+        time.set(System.currentTimeMillis());
+        passedMillis = ((time.hour * 60 * 60) + (time.minute * 60) + time.second) * 1000;
+        return passedMillis;
     }
 
     public static boolean hasNotch(Context context) {
