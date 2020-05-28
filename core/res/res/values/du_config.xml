@@ -324,4 +324,7 @@
 
     <!-- Whether device uses linear screen brightness slider -->
     <bool name="config_linearBrightnessSlider">false</bool>
+
+    <!-- Defines custom OEM sensor for pocket detection. -->
+    <string name="config_pocketJudgeVendorSensorName"></string>
 </resources>
