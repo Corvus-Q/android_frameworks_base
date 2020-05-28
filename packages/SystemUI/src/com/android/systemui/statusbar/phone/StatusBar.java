@@ -2489,10 +2489,6 @@ public class StatusBar extends SystemUI implements DemoMode,
             mPresenter.setHeadsUpBlacklist();
     }
 
-    public void updateQSDataUsageInfo() {
-        DataUsageView.updateUsage();
-    }
-
     private void setScreenBrightnessMode() {
         int mode = Settings.System.getIntForUser(mContext.getContentResolver(),
             Settings.System.SCREEN_BRIGHTNESS_MODE,
