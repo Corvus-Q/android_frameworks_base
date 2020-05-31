@@ -340,8 +340,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
             .build();
 
-    private int sshotType;
-
     /**
      * Keyguard stuff
      */
@@ -682,6 +680,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
 
     private int mPowerButtonSuppressionDelayMillis = POWER_BUTTON_SUPPRESSION_DELAY_DEFAULT_MILLIS;
 
+    private int sshotType;
     private int mTorchActionMode;
     private boolean mIsTorchEnabled;
     private PocketManager mPocketManager;
@@ -2055,6 +2054,8 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     }
                 } catch (RemoteException ignored) {}
                 if (!mPocketLockShowing) {
+                    if (sshotType == 1) mScreenshotRunnable.setScreenshotType(TAKE_SCREENSHOT_SELECTED_REGION);
+                    else mScreenshotRunnable.setScreenshotType(TAKE_SCREENSHOT_FULLSCREEN);
                     mHandler.post(mScreenshotRunnable);
                 }
             }
