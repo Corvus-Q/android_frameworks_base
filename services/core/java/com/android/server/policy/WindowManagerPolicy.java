@@ -1512,5 +1512,5 @@ public interface WindowManagerPolicy extends WindowManagerPolicyConstants {
      * Long screenshot
      * @hide
      */
-    void takeAlternativeScreenshot();
+    void takeAlternativeScreenshot(int type);
 }
