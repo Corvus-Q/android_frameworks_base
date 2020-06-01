@@ -55,58 +55,6 @@ import java.util.List;
 
 public class ThemeTile extends QSTileImpl<BooleanState> {
 
-    static final List<ThemeTileItem> sThemeItems = new ArrayList<ThemeTileItem>();
-    static {
-        sThemeItems.add(new ThemeTileItem(0, R.color.quick_settings_theme_tile_default,
-                R.string.quick_settings_theme_tile_color_default));
-        sThemeItems.add(new ThemeTileItem(1, R.color.quick_settings_theme_tile_space,
-                R.string.quick_settings_theme_tile_color_space, "com.android.theme.color.space"));
-        sThemeItems.add(new ThemeTileItem(2, R.color.quick_settings_theme_tile_purple,
-                R.string.quick_settings_theme_tile_color_purple, "com.android.theme.color.purple"));
-        sThemeItems.add(new ThemeTileItem(3, R.color.quick_settings_theme_tile_orchid,
-                R.string.quick_settings_theme_tile_color_orchid, "com.android.theme.color.orchid"));
-        sThemeItems.add(new ThemeTileItem(4, R.color.quick_settings_theme_tile_ocean,
-                R.string.quick_settings_theme_tile_color_ocean, "com.android.theme.color.ocean"));
-        sThemeItems.add(new ThemeTileItem(5, R.color.quick_settings_theme_tile_green,
-                R.string.quick_settings_theme_tile_color_green, "com.android.theme.color.green"));
-        sThemeItems.add(new ThemeTileItem(6, R.color.quick_settings_theme_tile_cinnamon,
-                R.string.quick_settings_theme_tile_color_cinnamon, "com.android.theme.color.cinnamon"));
-        sThemeItems.add(new ThemeTileItem(7, R.color.quick_settings_theme_tile_amber,
-                R.string.quick_settings_theme_tile_color_amber, "com.android.theme.color.amber"));
-        sThemeItems.add(new ThemeTileItem(8, R.color.quick_settings_theme_tile_blue,
-                R.string.quick_settings_theme_tile_color_blue, "com.android.theme.color.blue"));
-        sThemeItems.add(new ThemeTileItem(9, R.color.quick_settings_theme_tile_bluegrey,
-                R.string.quick_settings_theme_tile_color_bluegrey, "com.android.theme.color.bluegrey"));
-        sThemeItems.add(new ThemeTileItem(10, R.color.quick_settings_theme_tile_brown,
-                R.string.quick_settings_theme_tile_color_brown, "com.android.theme.color.brown"));
-        sThemeItems.add(new ThemeTileItem(11, R.color.quick_settings_theme_tile_cyan,
-                R.string.quick_settings_theme_tile_color_cyan, "com.android.theme.color.cyan"));
-        sThemeItems.add(new ThemeTileItem(12, R.color.quick_settings_theme_tile_deeporange,
-                R.string.quick_settings_theme_tile_color_deeporange, "com.android.theme.color.deeporange"));
-        sThemeItems.add(new ThemeTileItem(13, R.color.quick_settings_theme_tile_deeppurple,
-                R.string.quick_settings_theme_tile_color_deeppurple, "com.android.theme.color.deeppurple"));
-        sThemeItems.add(new ThemeTileItem(14, R.color.quick_settings_theme_tile_grey,
-                R.string.quick_settings_theme_tile_color_grey, "com.android.theme.color.grey"));
-        sThemeItems.add(new ThemeTileItem(15, R.color.quick_settings_theme_tile_indigo,
-                R.string.quick_settings_theme_tile_color_indigo, "com.android.theme.color.indigo"));
-        sThemeItems.add(new ThemeTileItem(16, R.color.quick_settings_theme_tile_lightblue,
-                R.string.quick_settings_theme_tile_color_lightblue, "com.android.theme.color.lightblue"));
-        sThemeItems.add(new ThemeTileItem(17, R.color.quick_settings_theme_tile_lightgreen,
-                R.string.quick_settings_theme_tile_color_lightgreen, "com.android.theme.color.lightgreen"));
-        sThemeItems.add(new ThemeTileItem(18, R.color.quick_settings_theme_tile_lime,
-                R.string.quick_settings_theme_tile_color_lime, "com.android.theme.color.lime"));
-        sThemeItems.add(new ThemeTileItem(19, R.color.quick_settings_theme_tile_orange,
-                R.string.quick_settings_theme_tile_color_orange, "com.android.theme.color.orange"));
-        sThemeItems.add(new ThemeTileItem(20, R.color.quick_settings_theme_tile_pink,
-                R.string.quick_settings_theme_tile_color_pink, "com.android.theme.color.pink"));
-        sThemeItems.add(new ThemeTileItem(21, R.color.quick_settings_theme_tile_red,
-                R.string.quick_settings_theme_tile_color_red, "com.android.theme.color.red"));
-        sThemeItems.add(new ThemeTileItem(22, R.color.quick_settings_theme_tile_teal,
-                R.string.quick_settings_theme_tile_color_teal, "com.android.theme.color.teal"));
-        sThemeItems.add(new ThemeTileItem(23, R.color.quick_settings_theme_tile_yellow,
-                R.string.quick_settings_theme_tile_color_yellow, "com.android.theme.color.yellow"));
-    }
-
     static final List<ThemeTileItem> sStyleItems = new ArrayList<ThemeTileItem>();
     static {
         sStyleItems.add(new ThemeTileItem(UiModeManager.MODE_NIGHT_NO, -1,
@@ -128,7 +76,7 @@ public class ThemeTile extends QSTileImpl<BooleanState> {
     }
 
     private enum Mode {
-        ACCENT, STYLE
+       STYLE
     }
 
     private static IOverlayManager mOverlayManager;
@@ -140,11 +88,7 @@ public class ThemeTile extends QSTileImpl<BooleanState> {
         mOverlayManager = IOverlayManager.Stub.asInterface(
                 ServiceManager.getService(Context.OVERLAY_SERVICE));
         mUiModeManager = mContext.getSystemService(UiModeManager.class);
-        // Get enabled mode
-        String userChoice = Settings.System.getStringForUser(mContext.getContentResolver(),
-                Settings.System.THEME_TILE_ENABLED_MODE,
-                UserHandle.USER_CURRENT);
-        mMode = userChoice != null ? Mode.valueOf(userChoice) : Mode.ACCENT;
+        mMode = Mode.STYLE;
     }
 
     private static class ThemeTileItem {
@@ -166,22 +110,6 @@ public class ThemeTile extends QSTileImpl<BooleanState> {
 
         public String getLabel(Context context) {
             return context.getString(labelRes);
-        }
-
-        public void commit() {
-            try {
-                for (int i = 0; i < ThemesUtils.ACCENTS.length; i++) {
-                    String accent = ThemesUtils.ACCENTS[i];
-                    try {
-                        mOverlayManager.setEnabled(accent, false, USER_SYSTEM);
-                    } catch (RemoteException e) {
-                        e.printStackTrace();
-                    }
-                }
-                mOverlayManager.setEnabled(uri, true, USER_SYSTEM);
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
         }
 
         public void styleCommit(Context context) {
@@ -218,9 +146,7 @@ public class ThemeTile extends QSTileImpl<BooleanState> {
 
         @Override
         public CharSequence getTitle() {
-            return mContext.getString(mMode == Mode.ACCENT ?
-                    R.string.quick_settings_theme_tile_accent_detail_title :
-                    R.string.quick_settings_theme_tile_style_detail_title);
+            return mContext.getString(R.string.quick_settings_theme_tile_style_detail_title);
         }
 
         @Override
@@ -244,27 +170,10 @@ public class ThemeTile extends QSTileImpl<BooleanState> {
             if (mAdapter == null)
                 return;
             mThemeItems.clear();
-            if (mMode == Mode.ACCENT) {
-                mThemeItems.addAll(getAccentItems());
-            } else {
+            if (mMode == Mode.STYLE) {
                 mThemeItems.addAll(getStyleItems());
             }
             mAdapter.notifyDataSetChanged();
-        }
-
-        private List<Item> getAccentItems() {
-            List<Item> items = new ArrayList<Item>();
-            for (int i = 0; i < sThemeItems.size(); i++) {
-                ThemeTileItem themeTileItem = sThemeItems.get(i);
-                Item item = new Item();
-                item.tag = themeTileItem;
-                item.doDisableTint = true;
-                item.doDisableFocus = true;
-                item.icon = themeTileItem.getIcon(mContext);
-                item.line1 = themeTileItem.getLabel(mContext);
-                items.add(item);
-            }
-            return items;
         }
 
         private List<Item> getStyleItems() {
@@ -302,9 +211,7 @@ public class ThemeTile extends QSTileImpl<BooleanState> {
                 return;
             ThemeTileItem themeItem = (ThemeTileItem) item.tag;
             showDetail(false);
-            if (mMode == Mode.ACCENT) {
-                themeItem.commit();
-            } else {
+            if (mMode == Mode.STYLE) {
                 themeItem.styleCommit(mContext);
                 for (int i = 0; i < ThemesUtils.PITCH_BLACK.length; i++) {
                     String pitch_black = ThemesUtils.PITCH_BLACK[i];
@@ -375,20 +282,9 @@ public class ThemeTile extends QSTileImpl<BooleanState> {
     }
 
     @Override
-    protected void handleLongClick() {
-        mMode = mMode == Mode.ACCENT ? Mode.STYLE : Mode.ACCENT;
-        Settings.System.putStringForUser(mContext.getContentResolver(),
-                Settings.System.THEME_TILE_ENABLED_MODE, mMode.name(),
-                UserHandle.USER_CURRENT);
-        refreshState();
-    }
-
-    @Override
     protected void handleUpdateState(BooleanState state, Object arg) {
-        state.label = mContext.getString(mMode == Mode.ACCENT
-                ? R.string.quick_settings_theme_tile_title : R.string.system_theme_style_title);
-        state.icon = ResourceIcon.get(mMode == Mode.ACCENT
-                ? R.drawable.ic_qs_accent : R.drawable.ic_qs_style);
+        state.label = mContext.getString(R.string.system_theme_style_title);
+        state.icon = ResourceIcon.get(R.drawable.ic_qs_style);
     }
 
     @Override
@@ -407,11 +303,16 @@ public class ThemeTile extends QSTileImpl<BooleanState> {
     }
 
     @Override
+    protected void handleLongClick() {
+        handleClick();
+    }
+
+    @Override
     protected void handleSetListening(boolean listening) {
     }
 
     @Override
     public CharSequence getTileLabel() {
-        return mContext.getString(R.string.quick_settings_theme_tile_title);
+        return mContext.getString(R.string.system_theme_style_title);
     }
 }

@@ -123,33 +123,7 @@
     <string name="system_theme_style_solarizeddark">Solarized dark</string>
     <string name="system_theme_style_chocox">Choco X</string>
     <string name="system_theme_style_bakedgreen">Baked Green</string>
-    <string name="quick_settings_theme_tile_title">Destaque</string>
-    <string name="quick_settings_theme_tile_accent_detail_title">Selecione uma cor de destaque</string>
     <string name="quick_settings_theme_tile_style_detail_title">Selecione um tema</string>
-    <string name="quick_settings_theme_tile_color_default">Padrão</string>
-    <string name="quick_settings_theme_tile_color_space">Space</string>
-    <string name="quick_settings_theme_tile_color_purple">Roxo</string>
-    <string name="quick_settings_theme_tile_color_orchid">Orquídea</string>
-    <string name="quick_settings_theme_tile_color_ocean">Oceano</string>
-    <string name="quick_settings_theme_tile_color_green">Verde</string>
-    <string name="quick_settings_theme_tile_color_cinnamon">Canela</string>
-    <string name="quick_settings_theme_tile_color_amber">Âmbar</string>
-    <string name="quick_settings_theme_tile_color_blue">Azul</string>
-    <string name="quick_settings_theme_tile_color_bluegrey">Cinza azulado</string>
-    <string name="quick_settings_theme_tile_color_brown">Marrom</string>
-    <string name="quick_settings_theme_tile_color_cyan">Ciano</string>
-    <string name="quick_settings_theme_tile_color_deeporange">Laranja escuro</string>
-    <string name="quick_settings_theme_tile_color_deeppurple">Roxo Escuro</string>
-    <string name="quick_settings_theme_tile_color_grey">Cinza</string>
-    <string name="quick_settings_theme_tile_color_indigo">Índigo</string>
-    <string name="quick_settings_theme_tile_color_lightblue">Azul claro</string>
-    <string name="quick_settings_theme_tile_color_lightgreen">Verde Claro</string>
-    <string name="quick_settings_theme_tile_color_lime">Limão</string>
-    <string name="quick_settings_theme_tile_color_orange">Laranja</string>
-    <string name="quick_settings_theme_tile_color_pink">Rosa</string>
-    <string name="quick_settings_theme_tile_color_red">Vermelho</string>
-    <string name="quick_settings_theme_tile_color_teal">Verde-azulado</string>
-    <string name="quick_settings_theme_tile_color_yellow">Amarelo</string>
     
 	<!-- Gaming mode -->
     <string name="gaming_mode_not_enabled">O modo de jogo está desativado nas configurações</string>
