@@ -537,8 +537,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
     };
 
-    private boolean dataupdated = false;
-
     public void resetTrackInfo() {
         if (mTicker != null) {
             mTicker.resetShownMediaMetadata();
@@ -1218,15 +1216,12 @@ public class StatusBar extends SystemUI implements DemoMode,
         float QSBlurAlpha = mNotificationPanel.getExpandedFraction() * (float)((float) QSUserAlpha / 100.0);
         boolean enoughBlurData = (QSBlurAlpha > 0 && qsBlurIntensity() > 0);
 
-        if (enoughBlurData && !blurperformed && !dataupdated && !mIsKeyguard && isQSBlurEnabled()) {
+        if (enoughBlurData && !blurperformed && !mIsKeyguard && isQSBlurEnabled()) {
             drawBlurView();
-            DataUsageView.updateUsage();
-            dataupdated = true;
             blurperformed = true;
             mQSBlurView.setVisibility(View.VISIBLE);
         } else if (!enoughBlurData || mState == StatusBarState.KEYGUARD) {
             blurperformed = false;
-            dataupdated = false;
             mQSBlurView.setVisibility(View.GONE);
         }
         mQSBlurView.setAlpha(QSBlurAlpha);
@@ -2492,6 +2487,10 @@ public class StatusBar extends SystemUI implements DemoMode,
     private void setHeadsUpBlacklist() {
         if (mPresenter != null)
             mPresenter.setHeadsUpBlacklist();
+    }
+
+    public void updateQSDataUsageInfo() {
+        DataUsageView.updateUsage();
     }
 
     private void setScreenBrightnessMode() {

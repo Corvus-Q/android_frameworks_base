@@ -6307,6 +6307,9 @@ public final class Settings {
          */
         public static final String QS_DATAUSAGE = "qs_datausage";
 
+        /** @hide */
+        private static final Validator QS_DATAUSAGE_VALIDATOR = ANY_INTEGER_VALIDATOR;
+
         /**
          * Wheter to show network traffic indicator in statusbar
          * @hide
@@ -6591,6 +6594,7 @@ public final class Settings {
             AMBIENT_LIGHT_DURATION,
             AMBIENT_LIGHT_REPEAT_COUNT,
             AMBIENT_LIGHT_PULSE_FOR_ALL,
+            QS_DATAUSAGE,
         };
 
         /**
@@ -6804,6 +6808,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(AMBIENT_LIGHT_DURATION);
             PRIVATE_SETTINGS.add(AMBIENT_LIGHT_REPEAT_COUNT);
             PRIVATE_SETTINGS.add(AMBIENT_LIGHT_PULSE_FOR_ALL);
+            PRIVATE_SETTINGS.add(QS_DATAUSAGE);
         }
 
         /**
@@ -6991,6 +6996,7 @@ public final class Settings {
             VALIDATORS.put(AMBIENT_LIGHT_DURATION, AMBIENT_LIGHT_DURATION_VALIDATOR);
             VALIDATORS.put(AMBIENT_LIGHT_REPEAT_COUNT, AMBIENT_LIGHT_REPEAT_COUNT_VALIDATOR);
             VALIDATORS.put(AMBIENT_LIGHT_PULSE_FOR_ALL, AMBIENT_LIGHT_PULSE_FOR_ALL_VALIDATOR);
+            VALIDATORS.put(QS_DATAUSAGE, QS_DATAUSAGE_VALIDATOR);
         }
 
         /**
