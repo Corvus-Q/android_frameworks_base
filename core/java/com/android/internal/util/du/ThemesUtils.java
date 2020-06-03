@@ -84,6 +84,11 @@ public class ThemesUtils {
             "com.android.theme.materialocean.systemui",
     };
 
+    public static final String[] CORVUS_CLEAR = {
+            "com.android.theme.corvusclear.system",
+            "com.android.theme.corvusclear.systemui",
+    };
+
     public static final String[] STATUSBAR_ICONS = {
             "com.android.theme.icon_pack.filled.android",
             "com.android.theme.icon_pack.rounded.android",

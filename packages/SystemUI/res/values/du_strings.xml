@@ -146,6 +146,7 @@
     <string name="system_theme_style_bakedgreen">Baked green</string>
     <string name="system_theme_style_darkgrey">Dark grey</string>
     <string name="system_theme_style_materialocean">Material ocean</string>
+    <string name="system_theme_style_corvusclear">Corvus clear</string>
     <string name="quick_settings_theme_tile_style_detail_title">Select theme</string>
 
     <!-- Gaming mode -->
