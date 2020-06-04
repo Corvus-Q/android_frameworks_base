@@ -162,12 +162,9 @@
     <!-- Accent Date styles padding-->
     <dimen name="widget_date_accent_box_padding_hor">10dp</dimen>
     <dimen name="widget_date_accent_box_padding_ver">6dp</dimen>
-
-    <!-- The margin between Emergency Carrier area and pattern/pin
-         view to incorporate the FOD icon -->
-    <dimen name="keyguard_security_fod_view_margin">120dp</dimen>
     
     <!-- The minimum bottom margin of the keyguard security container -->
     <dimen name="kg_security_container_min_bottom_margin">0dp</dimen>
     <dimen name="clock_oronos_outline_size">4dp</dimen>    
+
 </resources>
