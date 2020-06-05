@@ -137,6 +137,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener, T
         R.drawable.fod_icon_invisible
     };
 
+    private int mDefaultPressedIcon;
     private int mPressedIcon;
     private final int[] PRESSED_STYLES = {
         R.drawable.fod_icon_pressed_miui_cyan_light,
@@ -268,6 +269,8 @@ public class FODCircleView extends ImageView implements ConfigurationListener, T
         Resources res = context.getResources();
 
         mColorBackground = res.getColor(R.color.config_fodColorBackground);
+        mDefaultPressedIcon = res.getInteger(com.android.internal.R.
+             integer.config_pressed_fod_icon);
         mPaintFingerprintBackground.setColor(mColorBackground);
         mPaintFingerprintBackground.setAntiAlias(true);
 
@@ -527,7 +530,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener, T
         mSelectedIcon = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.FOD_ICON, 0);
         mPressedIcon = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.FOD_PRESSED_STATE, 0);
+                Settings.System.FOD_PRESSED_STATE, mDefaultPressedIcon);
         if (mFODAnimation != null) {
             mFODAnimation.update();
         }
