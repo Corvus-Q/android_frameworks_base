@@ -91,7 +91,7 @@ public class BarTransitions {
     }
 
     /**
-     * @hid
+     * @hide
      */
     public BarBackgroundDrawable getBackground() {
         return mBarBackground;
