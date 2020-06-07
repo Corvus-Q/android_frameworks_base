@@ -267,4 +267,8 @@
 
   <!-- Whether device supports internal audio recording -->
   <java-symbol type="bool" name="config_hasInternalAudioRecordingSupport" />
+
+  <!-- FOD -->
+  <java-symbol type="bool" name="config_targetUsesInKernelDimming" />
+
 </resources>
