@@ -46,4 +46,8 @@
 
     <!-- Quicksettings main QS background-->
     <color name="quick_settings_status_bar_background_color">#ff000000</color>
+    
+    <!-- Color of the FOD view -->
+    <color name="config_fodColorBackground">#20000000</color>
+    
 </resources>
