@@ -16,6 +16,13 @@
 
 package com.android.systemui.biometrics;
 
+import static com.android.internal.widget.LockPatternUtils.StrongAuthTracker.STRONG_AUTH_REQUIRED_AFTER_DPM_LOCK_NOW;
+import static com.android.internal.widget.LockPatternUtils.StrongAuthTracker.STRONG_AUTH_REQUIRED_AFTER_LOCKOUT;
+import static com.android.internal.widget.LockPatternUtils.StrongAuthTracker.STRONG_AUTH_REQUIRED_AFTER_TIMEOUT;
+import static com.android.internal.widget.LockPatternUtils.StrongAuthTracker.STRONG_AUTH_REQUIRED_AFTER_USER_LOCKDOWN;
+
+import android.app.ActivityManager;
+
 import android.app.admin.DevicePolicyManager;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -77,6 +84,7 @@ public class FODCircleView extends ImageView {
     private boolean mIsDreaming;
     private boolean mIsKeyguard;
     private boolean mIsCircleShowing;
+    private boolean mCanUnlockWithFp;
 
     private Handler mHandler;
     
@@ -177,7 +185,35 @@ public class FODCircleView extends ImageView {
                 mHandler.post(() -> mFODAnimation.hideFODanimation());
             }
         }
+        
+        @Override
+        public void onStrongAuthStateChanged(int userId) {
+            mCanUnlockWithFp = canUnlockWithFp();
+            if (!mCanUnlockWithFp){
+                hide();
+            }
+        }
     };
+    
+    private boolean canUnlockWithFp() {
+        int currentUser = ActivityManager.getCurrentUser();
+        boolean biometrics = mUpdateMonitor.isUnlockingWithBiometricsPossible(currentUser);
+        KeyguardUpdateMonitor.StrongAuthTracker strongAuthTracker =
+                mUpdateMonitor.getStrongAuthTracker();
+        int strongAuth = strongAuthTracker.getStrongAuthForUser(currentUser);
+        if (biometrics && !strongAuthTracker.hasUserAuthenticatedSinceBoot()) {
+            return false;
+        } else if (biometrics && (strongAuth & STRONG_AUTH_REQUIRED_AFTER_TIMEOUT) != 0) {
+            return false;
+        } else if (biometrics && (strongAuth & STRONG_AUTH_REQUIRED_AFTER_DPM_LOCK_NOW) != 0) {
+            return false;
+        } else if (biometrics && (strongAuth & STRONG_AUTH_REQUIRED_AFTER_LOCKOUT) != 0) {
+            return false;
+        } else if (biometrics && (strongAuth & STRONG_AUTH_REQUIRED_AFTER_USER_LOCKDOWN) != 0) {
+            return false;
+        }
+        return true;
+    }
 
     public FODCircleView(Context context) {
         super(context);
@@ -246,6 +282,8 @@ public class FODCircleView extends ImageView {
 
         mUpdateMonitor = KeyguardUpdateMonitor.getInstance(context);
         mUpdateMonitor.registerCallback(mMonitorCallback);
+        
+        mCanUnlockWithFp = canUnlockWithFp();
 
         mFODAnimation = new FODAnimation(context, mPositionX, mPositionY);
     }
@@ -378,6 +416,11 @@ public class FODCircleView extends ImageView {
             return;
         }
 
+        if (!mCanUnlockWithFp){
+            // Ignore when unlocking with fp is not possible
+            return;
+        }
+        
         dispatchShow();
         setVisibility(View.VISIBLE);
     }
