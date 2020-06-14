@@ -108,6 +108,7 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
 
                 // Update view if there's anything new to show
                 if (output != getText()) {
+                    setText(output);
                     indicatorUp = true;
                 }
                 mTrafficVisible = true;
@@ -169,7 +170,7 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
             } else if (speed >= 10 * KB) {
                 decimalFormat = new DecimalFormat("00.0");
                 unit = "KB";
-                formatSpeed =  decimalFormat.format(speed / (float)MB);
+                formatSpeed =  decimalFormat.format(speed / (float)KB);
             } else {
                 decimalFormat = new DecimalFormat("0.00");
                 unit = "KB";
