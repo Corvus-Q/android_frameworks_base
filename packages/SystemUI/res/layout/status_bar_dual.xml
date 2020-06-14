@@ -39,7 +39,8 @@
         android:scaleType="center"
         android:visibility="gone" />
 
-    <LinearLayout android:id="@+id/status_bar_contents"
+    <LinearLayout 
+        android:id="@+id/status_bar_contents"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingStart="@dimen/status_bar_padding_start"
@@ -58,6 +59,21 @@
              individual views are controlled by StatusBarManager disable flags DISABLE_CLOCK and
              DISABLE_NOTIFICATION_ICONS, respectively -->
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.android.systemui.statusbar.policy.Clock
+                    android:id="@+id/clock"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.StatusBar.Clock"
+                    android:singleLine="true"
+                    android:visibility="gone"
+                    android:layout_marginStart="8dp"
+                    android:gravity="center_horizontal|start" />
+
+            <LinearLayout
                 android:id="@+id/status_bar_left_side"
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
@@ -68,7 +84,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout="@layout/operator_name" />
-
+            
                 <com.android.keyguard.AlphaOptimizedLinearLayout
                     android:id="@+id/left_icon_area"
                     android:layout_width="wrap_content"
@@ -95,25 +111,16 @@
                         android:singleLine="true"/>
                 </com.android.keyguard.AlphaOptimizedLinearLayout>
 
-                <com.android.systemui.statusbar.policy.Clock
-                    android:id="@+id/clock"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:textAppearance="@style/TextAppearance.StatusBar.Clock"
-                    android:singleLine="true"
-                    android:visibility="gone"
-                    android:paddingStart="@dimen/status_bar_left_clock_starting_padding"
-                    android:paddingEnd="@dimen/status_bar_left_clock_end_padding"
-                    android:gravity="center_vertical|start"/>
-
                 <com.android.systemui.statusbar.AlphaOptimizedFrameLayout
                     android:id="@+id/notification_icon_area"
                     android:layout_width="0dp"
+                    android:paddingStart="-6dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="horizontal"
-                    android:clipChildren="false" />
+                    android:clipChildren="false"/>
 
+                </LinearLayout>
             </LinearLayout>
         </FrameLayout>
 
@@ -121,6 +128,8 @@
         <android.widget.Space
             android:id="@+id/cutout_space_view"
             android:layout_width="0dp"
+            android:paddingStart="-12dp"
+            android:paddingEnd="-12dp"
             android:layout_height="match_parent"
             android:gravity="center_horizontal|center_vertical" />
 
@@ -139,6 +148,7 @@
             android:layout_weight="@integer/system_icon_area_weight"
             android:orientation="horizontal"
             android:gravity="center_vertical|end">
+
             <include layout="@layout/system_icons" />
 
         </com.android.keyguard.AlphaOptimizedLinearLayout>
@@ -160,7 +170,7 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" >
         <com.android.systemui.statusbar.policy.ClockCenter
             android:id="@+id/center_clock"
             android:textAppearance="@style/TextAppearance.StatusBar.Clock"

@@ -6507,6 +6507,11 @@ public final class Settings {
         public static final String SCREENSHOT_DEFAULT_MODE = "screenshot_default_mode";
 
         /**
+         * Weather to enable statusbar dual row
+         */
+        public static final String STATUSBAR_DUAL_ROW = "statusbar_dual_row";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
