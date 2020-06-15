@@ -5005,6 +5005,10 @@ public class StatusBar extends SystemUI implements DemoMode,
         setStatusBarStockOverlay(hideCutoutMode && statusBarStock);
     }
 
+    public void updateQSDataUsageInfo() {
+        DataUsageView.updateUsage();
+    }
+
     public int getWakefulnessState() {
         return mWakefulnessLifecycle.getWakefulness();
     }
