@@ -11,7 +11,7 @@ import android.text.format.Formatter.BytesResult;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-import com.android.internal.util.du.Utils;
+import com.android.internal.util.du.ActionUtils;
 import com.android.settingslib.net.DataUsageController;
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
@@ -48,10 +48,10 @@ public class DataUsageView extends TextView {
         mobileDataController.setSubscriptionId(
             SubscriptionManager.getDefaultDataSubscriptionId());
         final DataUsageController.DataUsageInfo info = isDataUsageEnabled() == 1 ?
-                (Utils.isWiFiConnected(mContext) ?
+                (ActionUtils.isWiFiConnected(mContext) ?
                         mobileDataController.getDailyWifiDataUsageInfo()
                         : mobileDataController.getDailyDataUsageInfo())
-                : (Utils.isWiFiConnected(mContext) ?
+                : (ActionUtils.isWiFiConnected(mContext) ?
                         mobileDataController.getWifiDataUsageInfo()
                         : mobileDataController.getDataUsageInfo());
         formatedinfo = formatDataUsage(info.usageLevel) + " ";
