@@ -217,7 +217,7 @@ public class NetworkTrafficQS extends TextView {
         Handler mHandler = new Handler();
         SettingsObserver settingsObserver = new SettingsObserver(mHandler);
         settingsObserver.observe();
-        update();
+        setMode();
     }
 
     @Override
@@ -231,7 +231,7 @@ public class NetworkTrafficQS extends TextView {
             filter.addAction(Intent.ACTION_SCREEN_ON);
             mContext.registerReceiver(mIntentReceiver, filter, null, getHandler());
         }
-        update();
+        setMode();
     }
 
     @Override
@@ -285,7 +285,6 @@ public class NetworkTrafficQS extends TextView {
         @Override
         public void onChange(boolean selfChange) {
             setMode();
-            update();
         }
     }
 
@@ -297,10 +296,10 @@ public class NetworkTrafficQS extends TextView {
             if (action == null) return;
 
             if (action.equals(ConnectivityManager.CONNECTIVITY_ACTION) && mScreenOn) {
-                update();
+                setMode();
             } else if (action.equals(Intent.ACTION_SCREEN_ON)) {
                 mScreenOn = true;
-                update();
+                setMode();
             } else if (action.equals(Intent.ACTION_SCREEN_OFF)) {
                 mScreenOn = false;
                 clearHandlerCallbacks();
@@ -313,25 +312,6 @@ public class NetworkTrafficQS extends TextView {
                 (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo network = (connManager != null) ? connManager.getActiveNetworkInfo() : null;
         return network != null;
-    }
-
-    private void update() {
-        final ContentResolver resolver = getContext().getContentResolver();
-        mTrafficInHeaderView = Settings.System.getIntForUser(resolver,
-                Settings.System.NETWORK_TRAFFIC_VIEW_LOCATION, 0,
-                UserHandle.USER_CURRENT) == 1;
-        updateVisibility();
-        if (mIsEnabled) {
-            if (mAttached) {
-                totalRxBytes = TrafficStats.getTotalRxBytes();
-                lastUpdateTime = SystemClock.elapsedRealtime();
-                mTrafficHandler.sendEmptyMessage(1);
-            }
-            updateTrafficDrawable();
-            return;
-        } else {
-            clearHandlerCallbacks();
-        }
     }
 
     private void setMode() {
@@ -351,7 +331,18 @@ public class NetworkTrafficQS extends TextView {
         setGravity(Gravity.CENTER);
         setMaxLines(2);
         setSpacingAndFonts();
-        updateTrafficDrawable();
+        updateVisibility();
+        if (mIsEnabled) {
+            if (mAttached) {
+                totalRxBytes = TrafficStats.getTotalRxBytes();
+                lastUpdateTime = SystemClock.elapsedRealtime();
+                mTrafficHandler.sendEmptyMessage(1);
+            }
+            updateTrafficDrawable();
+            return;
+        } else {
+            clearHandlerCallbacks();
+        }
     }
 
     private void clearHandlerCallbacks() {
@@ -402,6 +393,6 @@ public class NetworkTrafficQS extends TextView {
     public void onDensityOrFontScaleChanged() {
         setCompoundDrawablePadding(txtImgPadding);
         setSpacingAndFonts();
-        update();
+        setMode();
     }
 }

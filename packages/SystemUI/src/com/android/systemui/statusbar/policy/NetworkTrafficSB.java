@@ -225,11 +225,10 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
         txtFont = getResources().getString(com.android.internal.R.string.config_headlineFontFamilyMedium);
         txtImgPadding = resources.getDimensionPixelSize(R.dimen.net_traffic_sb_txt_img_padding);
         mTintColor = resources.getColor(android.R.color.white);
-        setMode();
         Handler mHandler = new Handler();
         SettingsObserver settingsObserver = new SettingsObserver(mHandler);
         settingsObserver.observe();
-        update();
+        setMode();
     }
 
     @Override
@@ -244,7 +243,7 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
             mContext.registerReceiver(mIntentReceiver, filter, null, getHandler());
         }
         Dependency.get(DarkIconDispatcher.class).addDarkReceiver(this);
-        update();
+        setMode();
     }
 
     @Override
@@ -299,7 +298,6 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
         @Override
         public void onChange(boolean selfChange) {
             setMode();
-            update();
         }
     }
 
@@ -311,10 +309,10 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
             if (action == null) return;
 
             if (action.equals(ConnectivityManager.CONNECTIVITY_ACTION) && mScreenOn) {
-                update();
+                setMode();
             } else if (action.equals(Intent.ACTION_SCREEN_ON)) {
                 mScreenOn = true;
-                update();
+                setMode();
             } else if (action.equals(Intent.ACTION_SCREEN_OFF)) {
                 mScreenOn = false;
                 clearHandlerCallbacks();
@@ -327,25 +325,6 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
                 (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo network = (connManager != null) ? connManager.getActiveNetworkInfo() : null;
         return network != null;
-    }
-
-    private void update() {
-        final ContentResolver resolver = getContext().getContentResolver();
-        mTrafficInHeaderView = Settings.System.getIntForUser(resolver,
-                Settings.System.NETWORK_TRAFFIC_VIEW_LOCATION, 0,
-                UserHandle.USER_CURRENT) == 1;
-        updateVisibility();
-        if (mIsEnabled) {
-            if (mAttached) {
-                totalRxBytes = TrafficStats.getTotalRxBytes();
-                lastUpdateTime = SystemClock.elapsedRealtime();
-                mTrafficHandler.sendEmptyMessage(1);
-            }
-            updateTrafficDrawable();
-            return;
-        } else {
-            clearHandlerCallbacks();
-        }
     }
 
     private void setMode() {
@@ -365,7 +344,18 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
         setGravity(Gravity.CENTER);
         setMaxLines(2);
         setSpacingAndFonts();
-        updateTrafficDrawable();
+        updateVisibility();
+        if (mIsEnabled) {
+            if (mAttached) {
+                totalRxBytes = TrafficStats.getTotalRxBytes();
+                lastUpdateTime = SystemClock.elapsedRealtime();
+                mTrafficHandler.sendEmptyMessage(1);
+            }
+            updateTrafficDrawable();
+            return;
+        } else {
+            clearHandlerCallbacks();
+        }
     }
 
     private void clearHandlerCallbacks() {
@@ -469,6 +459,6 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
     public void onDensityOrFontScaleChanged() {
         setCompoundDrawablePadding(txtImgPadding);
         setSpacingAndFonts();
-        update();
+        setMode();
     }
 }
