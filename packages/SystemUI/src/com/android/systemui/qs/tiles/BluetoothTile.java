@@ -282,6 +282,7 @@ public class BluetoothTile extends QSTileImpl<BooleanState> {
             refreshState();
             if (isShowingDetail()) {
                 mDetailAdapter.updateItems();
+                mDetailAdapter.setItemsVisible(true);
                 fireToggleStateChanged(mDetailAdapter.getToggleState());
             }
         }
