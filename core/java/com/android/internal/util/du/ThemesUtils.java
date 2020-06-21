@@ -78,6 +78,9 @@ public class ThemesUtils {
             "com.android.systemui.qstile.inktober",
             "com.android.systemui.qstile.neonlike",
             "com.android.systemui.qstile.triangles",
+            "com.bootleggers.qstile.oos",
+            "com.bootleggers.qstile.divided",
+            "com.bootleggers.qstile.cosmos",
     };
 
     public static final String[] PITCH_BLACK = {
