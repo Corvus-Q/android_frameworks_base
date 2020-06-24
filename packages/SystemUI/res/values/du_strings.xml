@@ -31,23 +31,6 @@
     <!-- Name of the microphone status bar icon. -->
     <string name="status_bar_microphone">Microphone</string>
 
-    <!-- Screen record -->
-    <string name="screenrecord_dialog_title">Start recording?</string>
-    <string name="screenrecord_dialog_summary">While recording, Android system can capture any sensitive information that\'s visible on your screen or played on your device. This includes passwords, payment info, photos, messages, and audio.</string>
-    <string name="screenrecord_dialog_start">Start</string>
-    <string name="screenrecord_dialog_cancel">Cancel</string>
-    <string name="screenrecord_audio_recording_title">Audio source</string>
-    <string name="screenrecord_audio_recording_internal">Internal</string>
-    <string name="screenrecord_audio_recording_microphone">Microphone</string>
-    <string name="screenrecord_audio_recording_off">Disabled</string>
-    <string name="screenrecord_taps_title">Show touches on screen</string>
-    <string name="screenrecord_stopdot_title">Show stop dot</string>
-    <string name="screenrecord_video_bitrate_title">Video bitrate</string>
-
-    <!-- Power menu item for taking a screenshot [CHAR LIMIT=20]-->
-    <string name="global_action_screenshot_cust">Screenshot</string>
-    <string name="global_action_screenrecord">Screen record</string>
-
     <!-- Advanced Reboot menu -->
     <string name="global_action_restart_advanced">Advanced</string>
     <string name="global_action_restart_recovery">Recovery</string>
@@ -110,9 +93,6 @@
     <string name="quick_settings_cpuinfo_label">CPU Info</string>
     <string name="accessibility_quick_settings_cpuinfo_off">CPU Info off</string>
     <string name="accessibility_quick_settings_cpuinfo_on">CPU Info on</string>
-
-    <!--Screenrecord Tile-->
-    <string name="screenrecorder_title_tile">Screenrecord</string>
 
     <!-- Heads up snooze toast -->
     <string name="heads_up_snooze_message_one_minute"><xliff:g id="string">%s</xliff:g> - Peeking notification are snoozing for 1 minute.</string>

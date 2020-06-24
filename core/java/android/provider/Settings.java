@@ -4549,10 +4549,10 @@ public final class Settings {
         public static final String MEDIAPROJECTION_SYSUI_OK = "mediaprojection_sysui_ok";
 
         /**
-         * Screenrecord: audio source
+         * Screenrecord: enable mic
          * @hide
          */
-        public static final String SCREENRECORD_AUDIO_SOURCE = "screenrecord_audio_source";
+        public static final String SCREENRECORD_ENABLE_MIC = "screenrecord_enable_mic";
 
         /**
          * Screenrecord: show taps
@@ -4567,10 +4567,10 @@ public final class Settings {
         public static final String SCREENRECORD_STOP_DOT = "screenrecord_stop_dot";
 
         /**
-         * Screenrecord: video bitrate
+         * Screenrecord: low quality
          * @hide
          */
-        public static final String SCREENRECORD_VIDEO_BITRATE = "screenrecord_video_bitrate";
+        public static final String SCREENRECORD_LOW_QUALITY = "screenrecord_low_quality";
 
         /**
          * Whether to show the battery info on the lockscreen while charging
@@ -11121,12 +11121,6 @@ public final class Settings {
          * @hide
          */
         public static final String SCREENSHOT_IN_POWER_MENU = "screenshot_in_power_menu";
-
-        /**
-         * Whether the Screen record button should be shown in the power menu.
-         * @hide
-         */
-        public static final String SCREENRECORD_IN_POWER_MENU = "screenrecord_in_power_menu";
 
         private static final Validator LOCKDOWN_IN_POWER_MENU_VALIDATOR = BOOLEAN_VALIDATOR;
 
