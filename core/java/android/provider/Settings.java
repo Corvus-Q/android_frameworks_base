@@ -6324,6 +6324,14 @@ public final class Settings {
         public static final String RIGHT_LONG_BACK_SWIPE_APP_ACTION = "right_long_back_swipe_app_action";
 
         /**
+         * @hide
+         */
+        public static final String OMNI_DOZE_BRIGHTNESS_FORCE = "doze_brightness_force";
+
+        private static final Validator OMNI_DOZE_BRIGHTNESS_FORCE_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
          * Display friendly name of custom application launched when
          * using the long right back swipe app action
          * @hide
@@ -7099,6 +7107,7 @@ public final class Settings {
             QS_DATAUSAGE,
             THEMING_SETTINGS_DASHBOARD_ICONS,
             CENTER_NOTIFICATION_HEADERS,
+            OMNI_DOZE_BRIGHTNESS_FORCE,
         };
 
         /**
@@ -7331,6 +7340,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(DISPLAY_COLOR_ADJUSTMENT);
             PRIVATE_SETTINGS.add(DISPLAY_PICTURE_ADJUSTMENT);
             PRIVATE_SETTINGS.add(LIVE_DISPLAY_HINTED);
+            PRIVATE_SETTINGS.add(OMNI_DOZE_BRIGHTNESS_FORCE);
         }
 
         /**
@@ -7552,6 +7562,7 @@ public final class Settings {
             VALIDATORS.put(DISPLAY_PICTURE_ADJUSTMENT, DISPLAY_PICTURE_ADJUSTMENT_VALIDATOR);
             VALIDATORS.put(LIVE_DISPLAY_HINTED, LIVE_DISPLAY_HINTED_VALIDATOR);
             VALIDATORS.put(CENTER_NOTIFICATION_HEADERS, CENTER_NOTIFICATION_HEADERS_VALIDATOR);
+            VALIDATORS.put(OMNI_DOZE_BRIGHTNESS_FORCE, OMNI_DOZE_BRIGHTNESS_FORCE_VALIDATOR);
         }
 
         /**
