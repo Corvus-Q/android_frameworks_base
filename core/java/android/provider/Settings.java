@@ -6755,6 +6755,12 @@ public final class Settings {
         public static final String STATUSBAR_DUAL_ROW = "statusbar_dual_row";
 
         /**
+         * A2DP codec priority
+         * @hide
+         */
+        public static final String A2DP_SOURCE_CODEC_PRIORITY = "a2dp_source_codec_priority";
+
+        /**
          * Ambient Edge Light Layout
          * @hide
          */
