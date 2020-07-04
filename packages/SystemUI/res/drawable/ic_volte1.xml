@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+        android:insetRight="2.5dp">
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="15.5dp"
     android:height="15dp"
@@ -34,4 +36,4 @@
         android:strokeWidth="1"
         android:pathData="M2135 1084 c-27 -13 -56 -24 -62 -24 -15 0 -14 4 -16 -125 -2 -89 -5 -106 -31 -155 -16 -30 -43 -68 -60 -84 -41 -37 -102 -76 -120 -76 -24 0 -23 -20 7 -106 19 -54 35 -84 44 -84 42 0 172 84 222 143 14 16 32 36 40 45 21 20 78 141 86 183 13 60 10 212 -4 254 -22 63 -31 65 -106 29z" />
 </vector>
-
+</inset>

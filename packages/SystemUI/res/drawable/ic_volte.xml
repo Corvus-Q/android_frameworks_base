@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+        android:insetRight="2.5dp">
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="14.5dp"
     android:height="12dp"
@@ -22,3 +25,4 @@
         android:strokeWidth="1"
         android:pathData="M2700 1507 c-27 -14 -32 -30 -51 -169 -30 -233 -150 -436 -313 -532 -74 -43 -215 -85 -310 -92 -63 -5 -94 -12 -112 -26 -33 -27 -32 -70 3 -98 25 -20 35 -21 108 -15 446 39 711 313 767 793 l12 105 -28 23 c-31 27 -41 29 -76 11z" />
 </vector>
+</inset>

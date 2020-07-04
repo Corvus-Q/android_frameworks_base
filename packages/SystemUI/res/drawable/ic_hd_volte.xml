@@ -14,6 +14,8 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+        android:insetRight="2.5dp">
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="14dp"
     android:height="14dp"
@@ -27,4 +29,4 @@
         android:fillColor="#FFFFFFFF"
         android:pathData="M15.07,10.19H17.5v3.66H15.07Z" />
 </vector>
-
+</inset>
