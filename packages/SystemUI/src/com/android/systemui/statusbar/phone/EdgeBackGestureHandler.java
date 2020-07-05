@@ -733,7 +733,7 @@ public class EdgeBackGestureHandler implements DisplayListener {
                 ActionUtils.switchScreenOff(mContext);
                 break;
             case 8: // Screenshot
-                ActionUtils.takeScreenshot(true);
+                ActionUtils.takeScreenshot(1);
                 break;
             case 9: // Notification panel
                 ActionUtils.toggleNotifications();
