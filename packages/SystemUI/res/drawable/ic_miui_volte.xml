@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<inset xmlns:android="http://schemas.android.com/apk/res/android"
-       android:insetRight="2.5dp">
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:viewportWidth="40"
     android:viewportHeight="56"
@@ -18,4 +16,3 @@
             android:fillColor="#FFFFFF" />
     </group>
 </vector>
-</inset>
