@@ -6386,7 +6386,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             } else if (ActionUtils.INTENT_LONG_SCREENSHOT.equals(action)) {
                 mContext.enforceCallingOrSelfPermission(Manifest.permission.ACCESS_SURFACE_FLINGER,
                         TAG + "sendCustomAction permission denied");
-                takeAlternativeScreenshot(1);
+                takeAlternativeScreenshot();
             }
         }
     }
@@ -7117,8 +7117,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     }
 
     @Override
-    public void takeAlternativeScreenshot(int type) {
-        mScreenshotRunnable.setScreenshotType(type);
-        mHandler.post(mScreenshotRunnable);
+    public void takeAlternativeScreenshot() {
+        takeScreenshot(TAKE_SCREENSHOT_FULLSCREEN);
     }
 }

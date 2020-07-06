@@ -649,5 +649,5 @@ interface IWindowManager
      * Long screenshot
      * @hide
      */
-    void takeAlternativeScreenshot(int type);
+    void takeAlternativeScreenshot();
 }
