@@ -45,6 +45,7 @@ import android.widget.TextView;
 
 import androidx.core.graphics.ColorUtils;
 
+import com.android.internal.util.du.ThemesUtils;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.keyguard.clock.CustomAnalogClock;
 import com.android.keyguard.clock.CustomTextClock;
@@ -291,8 +292,7 @@ public class KeyguardStatusView extends GridLayout implements
             mClockView.refreshclocksize();
         }
         if (mOwnerInfo != null) {
-            mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_18));
+            mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX, (float) 18);
         }
         loadBottomMargin();
     }
@@ -367,155 +367,26 @@ public class KeyguardStatusView extends GridLayout implements
     }
 
     private void refreshLockDateFont() {
+        String[][] fontsArray = ThemesUtils.FONTS_STYLE;
         final Resources res = getContext().getResources();
         boolean isPrimary = UserHandle.getCallingUserId() == UserHandle.USER_OWNER;
         int lockDateFont = isPrimary ? getLockDateFont() : 28;
-        switch (lockDateFont) {
-            case 0:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
+
+        int fontType = Typeface.NORMAL;
+        switch (fontsArray[lockDateFont][1]) {
+            case "BOLD":
+                fontType = Typeface.BOLD;
                 break;
-            case 1:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("sans-serif", Typeface.ITALIC));
+            case "ITALIC":
+                fontType = Typeface.ITALIC;
                 break;
-            case 2:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("sans-serif", Typeface.BOLD));
+            case "BOLD_ITALIC":
+                fontType = Typeface.BOLD_ITALIC;
                 break;
-            case 3:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("sans-serif", Typeface.BOLD_ITALIC));
-                break;
-            case 4:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("sans-serif-light", Typeface.ITALIC));
-                break;
-            case 5:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("sans-serif-light", Typeface.NORMAL));
-                break;
-            case 6:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("sans-serif-thin", Typeface.ITALIC));
-                break;
-            case 7:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("sans-serif-thin", Typeface.NORMAL));
-                break;
-            case 8:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("sans-serif-condensed", Typeface.NORMAL));
-                break;
-            case 9:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("sans-serif-condensed", Typeface.ITALIC));
-                break;
-            case 10:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD));
-                break;
-            case 11:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD_ITALIC));
-                break;
-            case 12:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
-                break;
-            case 13:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("sans-serif-medium", Typeface.ITALIC));
-                break;
-            case 14:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("sans-serif-condensed-light", Typeface.NORMAL));
-                break;
-            case 15:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("sans-serif-condensed-light", Typeface.ITALIC));
-                break;
-            case 16:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("sans-serif-black", Typeface.NORMAL));
-                break;
-            case 17:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("sans-serif-black", Typeface.ITALIC));
-                break;
-            case 18:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("cursive", Typeface.NORMAL));
-                break;
-            case 19:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("cursive", Typeface.BOLD));
-                break;
-            case 20:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("casual", Typeface.NORMAL));
-                break;
-            case 21:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("serif", Typeface.NORMAL));
-                break;
-            case 22:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("serif", Typeface.ITALIC));
-                break;
-            case 23:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("serif", Typeface.BOLD));
-                break;
-            case 24:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("serif", Typeface.BOLD_ITALIC));
-                break;
-            case 25:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("gobold-light-sys", Typeface.NORMAL));
-                break;
-            case 26:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("roadrage-sys", Typeface.NORMAL));
-                break;
-            case 27:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("snowstorm-sys", Typeface.NORMAL));
-                break;
-            case 28:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("googlesans-sys", Typeface.NORMAL));
-                break;
-            case 29:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("neoneon-sys", Typeface.NORMAL));
-                break;
-            case 30:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("themeable-sys", Typeface.NORMAL));
-                break;
-            case 31:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("samsung-sys", Typeface.NORMAL));
-                break;
-            case 32:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("mexcellent-sys", Typeface.NORMAL));
-                break;
-            case 33:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("burnstown-sys", Typeface.NORMAL));
-                break;
-            case 34:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("dumbledor-sys", Typeface.NORMAL));
-                break;
-            case 35:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("phantombold-sys", Typeface.NORMAL));
-                break;
-            case 36:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("sourcesanspro-sys", Typeface.NORMAL));
-                break;
-            case 37:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("circularstd-sys", Typeface.NORMAL));
-                break;
-            case 38:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("oneplusslate-sys", Typeface.NORMAL));
-                break;
-            case 39:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("aclonica-sys", Typeface.NORMAL));
-                break;
-            case 40:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("amarante-sys", Typeface.NORMAL));
-                break;
-            case 41:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("bariol-sys", Typeface.NORMAL));
-                break;
-            case 42:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("cagliostro-sys", Typeface.NORMAL));
-                break;
-            case 43:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("coolstory-sys", Typeface.NORMAL));
-                break;
-            case 44:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("lgsmartgothic-sys", Typeface.NORMAL));
-                break;
-            case 45:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("rosemary-sys", Typeface.NORMAL));
-                break;
-            case 46:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("sonysketch-sys", Typeface.NORMAL));
-                break;
-            case 47:
-                mKeyguardSlice.setViewsTypeface(Typeface.create("surfer-sys", Typeface.NORMAL));
+            default:
                 break;
         }
+        mKeyguardSlice.setViewsTypeface(Typeface.create(fontsArray[lockDateFont][0], fontType));
     }
 
     public float getClockTextSize() {
@@ -627,226 +498,29 @@ public class KeyguardStatusView extends GridLayout implements
         final Resources res = getContext().getResources();
         boolean isPrimary = UserHandle.getCallingUserId() == UserHandle.USER_OWNER;
         int ownerInfoSize = isPrimary ? getOwnerInfoSize() : 18;
-
-        switch (ownerInfoSize) {
-            case 10:
-                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_10));
-                break;
-            case 11:
-                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_11));
-                break;
-            case 12:
-                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_12));
-                break;
-            case 13:
-                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_13));
-                break;
-            case 14:
-                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_14));
-                break;
-            case 15:
-                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_15));
-                break;
-            case 16:
-                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_16));
-                break;
-            case 17:
-                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_17));
-                break;
-            case 18:
-                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_18));
-                break;
-            case 19:
-                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_19));
-                break;
-            case 20:
-                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_20));
-                break;
-            case 21:
-                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_21));
-                break;
-            case 22:
-                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_22));
-                break;
-            case 23:
-                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_23));
-                break;
-            case 24:
-                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_24));
-                break;
-            case 25:
-                mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_25));
-                break;
-        }
+        mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_DIP, ownerInfoSize);
     }
 
     private void refreshOwnerInfoFont() {
-        final Resources res = getContext().getResources();
+        String[][] fontsArray = ThemesUtils.FONTS_STYLE;
         boolean isPrimary = UserHandle.getCallingUserId() == UserHandle.USER_OWNER;
         int ownerinfoFont = isPrimary ? getOwnerInfoFont() : 28;
+        int fontType = Typeface.NORMAL;
+        switch (fontsArray[ownerinfoFont][1]) {
+            case "BOLD":
+                fontType = Typeface.BOLD;
+                break;
+            case "ITALIC":
+                fontType = Typeface.ITALIC;
+                break;
+            case "BOLD_ITALIC":
+                fontType = Typeface.BOLD_ITALIC;
+                break;
+            default:
+                break;
 
-        switch (ownerinfoFont) {
-            case 0:
-                mOwnerInfo.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
-                break;
-            case 1:
-                mOwnerInfo.setTypeface(Typeface.create("sans-serif", Typeface.ITALIC));
-                break;
-            case 2:
-                mOwnerInfo.setTypeface(Typeface.create("sans-serif", Typeface.BOLD));
-                break;
-            case 3:
-                mOwnerInfo.setTypeface(Typeface.create("sans-serif", Typeface.BOLD_ITALIC));
-                break;
-            case 4:
-                mOwnerInfo.setTypeface(Typeface.create("sans-serif-light", Typeface.ITALIC));
-                break;
-            case 5:
-                mOwnerInfo.setTypeface(Typeface.create("sans-serif-light", Typeface.NORMAL));
-                break;
-            case 6:
-                mOwnerInfo.setTypeface(Typeface.create("sans-serif-thin", Typeface.ITALIC));
-                break;
-            case 7:
-                mOwnerInfo.setTypeface(Typeface.create("sans-serif-thin", Typeface.NORMAL));
-                break;
-            case 8:
-                mOwnerInfo.setTypeface(Typeface.create("sans-serif-condensed", Typeface.NORMAL));
-                break;
-            case 9:
-                mOwnerInfo.setTypeface(Typeface.create("sans-serif-condensed", Typeface.ITALIC));
-                break;
-            case 10:
-                mOwnerInfo.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD));
-                break;
-            case 11:
-                mOwnerInfo.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD_ITALIC));
-                break;
-            case 12:
-                mOwnerInfo.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
-                break;
-            case 13:
-                mOwnerInfo.setTypeface(Typeface.create("sans-serif-medium", Typeface.ITALIC));
-                break;
-            case 14:
-                mOwnerInfo.setTypeface(Typeface.create("sans-serif-condensed-light", Typeface.NORMAL));
-                break;
-            case 15:
-                mOwnerInfo.setTypeface(Typeface.create("sans-serif-condensed-light", Typeface.ITALIC));
-                break;
-            case 16:
-                mOwnerInfo.setTypeface(Typeface.create("sans-serif-black", Typeface.NORMAL));
-                break;
-            case 17:
-                mOwnerInfo.setTypeface(Typeface.create("sans-serif-black", Typeface.ITALIC));
-                break;
-            case 18:
-                mOwnerInfo.setTypeface(Typeface.create("cursive", Typeface.NORMAL));
-                break;
-            case 19:
-                mOwnerInfo.setTypeface(Typeface.create("cursive", Typeface.BOLD));
-                break;
-            case 20:
-                mOwnerInfo.setTypeface(Typeface.create("casual", Typeface.NORMAL));
-                break;
-            case 21:
-                mOwnerInfo.setTypeface(Typeface.create("serif", Typeface.NORMAL));
-                break;
-            case 22:
-                mOwnerInfo.setTypeface(Typeface.create("serif", Typeface.ITALIC));
-                break;
-            case 23:
-                mOwnerInfo.setTypeface(Typeface.create("serif", Typeface.BOLD));
-                break;
-            case 24:
-                mOwnerInfo.setTypeface(Typeface.create("serif", Typeface.BOLD_ITALIC));
-                break;
-            case 25:
-                mOwnerInfo.setTypeface(Typeface.create("gobold-light-sys", Typeface.NORMAL));
-                break;
-            case 26:
-                mOwnerInfo.setTypeface(Typeface.create("roadrage-sys", Typeface.NORMAL));
-                break;
-            case 27:
-                mOwnerInfo.setTypeface(Typeface.create("snowstorm-sys", Typeface.NORMAL));
-                break;
-            case 28:
-                mOwnerInfo.setTypeface(Typeface.create("googlesans-sys", Typeface.NORMAL));
-                break;
-            case 29:
-                mOwnerInfo.setTypeface(Typeface.create("neoneon-sys", Typeface.NORMAL));
-                break;
-            case 30:
-                mOwnerInfo.setTypeface(Typeface.create("themeable-sys", Typeface.NORMAL));
-                break;
-            case 31:
-                mOwnerInfo.setTypeface(Typeface.create("samsung-sys", Typeface.NORMAL));
-                break;
-            case 32:
-                mOwnerInfo.setTypeface(Typeface.create("mexcellent-sys", Typeface.NORMAL));
-                break;
-            case 33:
-                mOwnerInfo.setTypeface(Typeface.create("burnstown-sys", Typeface.NORMAL));
-                break;
-            case 34:
-                mOwnerInfo.setTypeface(Typeface.create("dumbledor-sys", Typeface.NORMAL));
-                break;
-            case 35:
-                mOwnerInfo.setTypeface(Typeface.create("phantombold-sys", Typeface.NORMAL));
-                break;
-            case 36:
-                mOwnerInfo.setTypeface(Typeface.create("sourcesanspro-sys", Typeface.NORMAL));
-                break;
-            case 37:
-                mOwnerInfo.setTypeface(Typeface.create("circularstd-sys", Typeface.NORMAL));
-                break;
-            case 38:
-                mOwnerInfo.setTypeface(Typeface.create("oneplusslate-sys", Typeface.NORMAL));
-                break;
-            case 39:
-                mOwnerInfo.setTypeface(Typeface.create("aclonica-sys", Typeface.NORMAL));
-                break;
-            case 40:
-                mOwnerInfo.setTypeface(Typeface.create("amarante-sys", Typeface.NORMAL));
-                break;
-            case 41:
-                mOwnerInfo.setTypeface(Typeface.create("bariol-sys", Typeface.NORMAL));
-                break;
-            case 42:
-                mOwnerInfo.setTypeface(Typeface.create("cagliostro-sys", Typeface.NORMAL));
-                break;
-            case 43:
-                mOwnerInfo.setTypeface(Typeface.create("coolstory-sys", Typeface.NORMAL));
-                break;
-            case 44:
-                mOwnerInfo.setTypeface(Typeface.create("lgsmartgothic-sys", Typeface.NORMAL));
-                break;
-            case 45:
-                mOwnerInfo.setTypeface(Typeface.create("rosemary-sys", Typeface.NORMAL));
-                break;
-            case 46:
-                mOwnerInfo.setTypeface(Typeface.create("sonysketch-sys", Typeface.NORMAL));
-                break;
-            case 47:
-                mOwnerInfo.setTypeface(Typeface.create("surfer-sys", Typeface.NORMAL));
-                break;
         }
+        mOwnerInfo.setTypeface(Typeface.create(fontsArray[ownerinfoFont][0], fontType));
     }
 
     private void updateSettings() {

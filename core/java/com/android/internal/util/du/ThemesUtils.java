@@ -16,6 +16,12 @@
 
 package com.android.internal.util.du;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.UserHandle;
+
+import java.util.Arrays;
+
 public class ThemesUtils {
 
     public static final String[] ACCENTS = {
@@ -170,5 +176,57 @@ public class ThemesUtils {
         "com.android.system.switch.contained", // 5
         "com.android.system.switch.retro", // 6
         "com.android.system.switch.stockish", // 6
+    };
+
+    public static String[][] FONTS_STYLE = new String[][]{
+        {"sans-serif","NORMAL"},
+        {"sans-serif","BOLD"},
+        {"sans-serif","ITALIC"},
+        {"sans-serif","BOLD_ITALIC"},
+        {"sans-serif-light","ITALIC"},
+        {"sans-serif-light","NORMAL"},
+        {"sans-serif-thin","ITALIC"},
+        {"sans-serif-thin","NORMAL"},
+        {"sans-serif-condensed","NORMAL"},
+        {"sans-serif-condensed","ITALIC"},
+        {"sans-serif-condensed","BOLD"},
+        {"sans-serif-condensed","BOLD_ITALIC"},
+        {"sans-serif-medium","NORMAL"},
+        {"sans-serif-medium","ITALIC"},
+        {"sans-serif-condensed-light","NORMAL"},
+        {"sans-serif-condensed-light","ITALIC"},
+        {"sans-serif-black","NORMAL"},
+        {"sans-serif-black","ITALIC"},
+        {"cursive","NORMAL"},
+        {"cursive","BOLD"},
+        {"casual","NORMAL"},
+        {"serif","NORMAL"},
+        {"serif","ITALIC"},
+        {"serif","BOLD"},
+        {"serif","BOLD_ITALIC"},
+        {"gobold-light-sys","NORMAL"},
+        {"roadrage-sys","NORMAL"},
+        {"snowstorm-sys","NORMAL"},
+        {"googlesans-sys","NORMAL"},
+        {"neoneon-sys","NORMAL"},
+        {"themeable-sys","NORMAL"},
+        {"samsung-sys","NORMAL"},
+        {"mexcellent-sys","NORMAL"},
+        {"burnstown-sys","NORMAL"},
+        {"dumbledor-sys","NORMAL"},
+        {"phantombold-sys","NORMAL"},
+        {"sourcesanspro-sys","NORMAL"},
+        {"circularstd-sys","NORMAL"},
+        {"oneplusslate-sys","NORMAL"},
+        {"aclonica-sys","NORMAL"},
+        {"amarante-sys","NORMAL"},
+        {"bariol-sys","NORMAL"},
+        {"cagliostro-sys","NORMAL"},
+        {"coolstory-sys","NORMAL"},
+        {"lgsmartgothic-sys","NORMAL"},
+        {"rosemary-sys","NORMAL"},
+        {"sonysketch-sys","NORMAL"},
+        {"surfer-sys","NORMAL"},
+        {"themeable-sys","NORMAL"}
     };
 }
