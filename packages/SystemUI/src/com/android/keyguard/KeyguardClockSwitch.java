@@ -75,8 +75,6 @@ public class KeyguardClockSwitch extends RelativeLayout {
 
     private static final String TAG = "KeyguardClockSwitch";
 
-    private static final boolean CUSTOM_CLOCKS_ENABLED = true;
-
     /**
      * Animation fraction when text is transitioned to/from bold.
      */
@@ -237,16 +235,6 @@ public class KeyguardClockSwitch extends RelativeLayout {
         mStatusBarStateController.removeCallback(mStateListener);
         mSysuiColorExtractor.removeOnColorsChangedListener(mColorsListener);
         setClockPlugin(null);
-    }
-
-    private int getLockClockFont() {
-        return Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.LOCK_CLOCK_FONTS, 28);
-    }
-
-    private int getLockClockSize() {
-        return Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.LOCKCLOCK_FONT_SIZE, 54);
     }
 
     private void setClockPlugin(ClockPlugin plugin) {
@@ -476,9 +464,8 @@ public class KeyguardClockSwitch extends RelativeLayout {
 
     public void refreshLockFont() {
         String[][] fontsArray = ThemesUtils.FONTS_STYLE;
-        boolean isPrimary = UserHandle.getCallingUserId() == UserHandle.USER_OWNER;
-        int lockClockFont = isPrimary ? getLockClockFont() : 28;
-
+        int lockClockFont = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.LOCK_CLOCK_FONTS, 28, UserHandle.USER_CURRENT);
         int fontType = Typeface.NORMAL;
         switch (fontsArray[lockClockFont][1]) {
             case "BOLD":
@@ -499,8 +486,8 @@ public class KeyguardClockSwitch extends RelativeLayout {
     }
 
     public void refreshclocksize() {
-        boolean isPrimary = UserHandle.getCallingUserId() == UserHandle.USER_OWNER;
-        int lockClockSize = isPrimary ? getLockClockSize() : 54;
+        int lockClockSize = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.LOCKCLOCK_FONT_SIZE, 54, UserHandle.USER_CURRENT);
         mClockView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, lockClockSize);
         mClockViewBold.setTextSize(TypedValue.COMPLEX_UNIT_DIP, lockClockSize);
     }

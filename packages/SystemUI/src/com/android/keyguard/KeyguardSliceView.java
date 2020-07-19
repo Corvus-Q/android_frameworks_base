@@ -117,8 +117,6 @@ public class KeyguardSliceView extends LinearLayout implements View.OnClickListe
     private Runnable mContentChangeListener;
     private Slice mSlice;
     private boolean mHasHeader;
-    private final int mRowWithHeaderPadding;
-    private final int mRowPadding;
     private float mRowTextSize;
     private float mRowWithHeaderTextSize;
 
@@ -131,9 +129,6 @@ public class KeyguardSliceView extends LinearLayout implements View.OnClickListe
         tunerService.addTunable(this, Settings.Secure.KEYGUARD_SLICE_URI);
 
         mClickActions = new HashMap<>();
-        mRowPadding = context.getResources().getDimensionPixelSize(R.dimen.subtitle_clock_padding);
-        mRowWithHeaderPadding = context.getResources()
-                .getDimensionPixelSize(R.dimen.header_subtitle_padding);
         mActivityStarter = activityStarter;
         mConfigurationController = configurationController;
 
@@ -193,11 +188,6 @@ public class KeyguardSliceView extends LinearLayout implements View.OnClickListe
     public void onVisibilityAggregated(boolean isVisible) {
         super.onVisibilityAggregated(isVisible);
         setLayoutTransition(null);
-    }
-
-    private int getLockDateSize() {
-        return Settings.System.getInt(mContext.getContentResolver(),
-               Settings.System.LOCKDATE_FONT_SIZE, 18);
     }
 
     /**
@@ -480,8 +470,8 @@ public class KeyguardSliceView extends LinearLayout implements View.OnClickListe
     }
 
     public void refreshdatesize() {
-        boolean isPrimary = UserHandle.getCallingUserId() == UserHandle.USER_OWNER;
-        int lockDateSize = isPrimary ? getLockDateSize() : 18;
+        int lockDateSize = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.LOCKDATE_FONT_SIZE, 18, UserHandle.USER_CURRENT);
         mRowTextSize = Math.round(TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP, lockDateSize,
                 getResources().getDisplayMetrics()));

@@ -104,8 +104,6 @@ public class Clock extends TextView implements DemoMode, CommandQueue.Callbacks,
     public static final int AM_PM_STYLE_SMALL   = 1;
     public static final int AM_PM_STYLE_NORMAL  = 2;
 
-    private static int AM_PM_STYLE = AM_PM_STYLE_GONE;
-
     public static final int CLOCK_DATE_DISPLAY_GONE = 0;
     public static final int CLOCK_DATE_DISPLAY_SMALL = 1;
     public static final int CLOCK_DATE_DISPLAY_NORMAL = 2;
@@ -122,7 +120,6 @@ public class Clock extends TextView implements DemoMode, CommandQueue.Callbacks,
     public static final int STYLE_DATE_RIGHT = 1;
 
     public int DEFAULT_CLOCK_SIZE = 14;
-    private int mClockFontStyle = 28;
 
     public int DEFAULT_CLOCK_COLOR = 0xffffffff;
 
@@ -783,10 +780,9 @@ public class Clock extends TextView implements DemoMode, CommandQueue.Callbacks,
     }
 
     private void updateClockFontStyle() {
-        mClockFontStyle = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.STATUS_BAR_CLOCK_FONT_STYLE, 28,
-		UserHandle.USER_CURRENT);
-        getClockFontStyle(mClockFontStyle);
+        int clockStyle = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.STATUS_BAR_CLOCK_FONT_STYLE, 28, UserHandle.USER_CURRENT);
+        getClockFontStyle(clockStyle);
         updateClock();
     }
 
@@ -807,5 +803,6 @@ public class Clock extends TextView implements DemoMode, CommandQueue.Callbacks,
                 break;
         }
         setTypeface(Typeface.create(fontsArray[font][0], fontType));
+        updateClock();
     }
 }
