@@ -128,4 +128,11 @@
 
     <!-- the padding on the start and the end of the statusbar -->
     <dimen name="status_bar_extra_padding">0dp</dimen>
+
+    <!-- Starting padding for custom status bar elements -->
+    <dimen name="status_bar_start_padding">2dp</dimen>
+
+    <!-- Ending padding for custom status bar elements -->
+    <dimen name="status_bar_end_padding">1dp</dimen>
+
 </resources>

@@ -106,7 +106,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:gravity="start|center_vertical"
-                        android:paddingEnd="@dimen/status_bar_left_clock_end_padding"
+                        android:paddingEnd="@dimen/status_bar_end_padding"
                         android:visibility="gone"
                         android:singleLine="true"/>
                 </com.android.keyguard.AlphaOptimizedLinearLayout>
