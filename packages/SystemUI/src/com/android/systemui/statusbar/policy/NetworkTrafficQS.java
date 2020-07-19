@@ -61,7 +61,6 @@ public class NetworkTrafficQS extends TextView {
     private boolean indicatorDown = false;
     private String txtFont;    
     private boolean mScreenOn = true;
-    private boolean mTrafficVisible = true;
     private boolean mTrafficInHeaderView;
 
     private Handler mTrafficHandler = new Handler() {
@@ -90,7 +89,6 @@ public class NetworkTrafficQS extends TextView {
             if (shouldHide(rxData, txData, timeDelta)) {
                 setText("");
                 setVisibility(View.GONE);
-                mTrafficVisible = false;
             } else if (shouldShowUpload(rxData, txData, timeDelta)) {
                 // Show information for uplink if it's called for
                 CharSequence output = formatOutput(timeDelta, txData, symbol);
@@ -100,7 +98,6 @@ public class NetworkTrafficQS extends TextView {
                     setText(output);
                     indicatorUp = true;
                 }
-                mTrafficVisible = true;
             } else {
                 // Add information for downlink if it's called for
                 CharSequence output = formatOutput(timeDelta, rxData, symbol);
@@ -315,7 +312,7 @@ public class NetworkTrafficQS extends TextView {
     }
 
     private void setMode() {
-        ContentResolver resolver = mContext.getContentResolver();
+        final ContentResolver resolver = mContext.getContentResolver();
         mIsEnabled = Settings.System.getIntForUser(resolver,
                 Settings.System.NETWORK_TRAFFIC_STATE, 0,
                 UserHandle.USER_CURRENT) == 1;
