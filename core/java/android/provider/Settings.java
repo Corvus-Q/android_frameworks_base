@@ -6878,7 +6878,11 @@ public final class Settings {
          */
         public static final String SCREEN_STATE_ON_DELAY = "screen_state_on_delay";
 
-
+        /**
+         * Toggle for clipboard access toast.
+         * @hide
+         */
+        public static final String SHOW_CLIPBOARD_TOAST = "show_clipboard_toast";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
