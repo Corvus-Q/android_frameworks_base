@@ -28,7 +28,6 @@ import static com.android.server.wm.WindowStateAnimator.WINDOW_FREEZE_LAYER;
 import android.content.Context;
 import android.graphics.Matrix;
 import android.graphics.Rect;
-import android.util.BoostFramework;
 import android.util.Slog;
 import android.util.proto.ProtoOutputStream;
 import android.view.Display;
@@ -59,8 +58,6 @@ class ScreenRotationAnimation {
     static final int SCREEN_FREEZE_LAYER_EXIT       = SCREEN_FREEZE_LAYER_BASE + 2;
     static final int SCREEN_FREEZE_LAYER_CUSTOM     = SCREEN_FREEZE_LAYER_BASE + 3;
 
-    private BoostFramework mPerf = null;
-    private boolean mIsPerfLockAcquired = false;
     final Context mContext;
     final DisplayContent mDisplayContent;
     SurfaceControl mSurfaceControl;
@@ -230,8 +227,6 @@ class ScreenRotationAnimation {
         mContext = context;
         mDisplayContent = displayContent;
         displayContent.getBounds(mOriginalDisplayRect);
-
-        mPerf = new BoostFramework();
 
         // Screenshot does NOT include rotation!
         final Display display = displayContent.getDisplay();
@@ -700,10 +695,6 @@ class ScreenRotationAnimation {
             mRotateEnterAnimation.cancel();
             mRotateEnterAnimation = null;
         }
-        if (mPerf != null && mIsPerfLockAcquired) {
-            mPerf.perfLockRelease();
-            mIsPerfLockAcquired = false;
-        }
     }
 
     public boolean isAnimating() {
@@ -992,10 +983,6 @@ class ScreenRotationAnimation {
             }
             mAnimRunning = true;
             mHalfwayPoint = now + mRotateEnterAnimation.getDuration() / 2;
-            if (mPerf != null && !mIsPerfLockAcquired) {
-                mPerf.perfHint(BoostFramework.VENDOR_HINT_ROTATION_ANIM_BOOST, null);
-                mIsPerfLockAcquired = true;
-            }
         }
 
         return stepAnimation(now);
