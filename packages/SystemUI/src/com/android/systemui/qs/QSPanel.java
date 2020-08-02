@@ -122,6 +122,7 @@ public class QSPanel extends LinearLayout implements Tunable, Callback,
     private ImageView mMaxBrightness;
     private int mBrightnessSlider = 1;
     private int mIsQuickQsBrightnessEnabled = 2;
+    private boolean mBrightnessBottom;
 
     private final Vibrator mVibrator;
     private View mBrightnessPlaceholder;
@@ -224,12 +225,14 @@ public class QSPanel extends LinearLayout implements Tunable, Callback,
             default:
                 addView(mBrightnessView);
                 addView((View) mTileLayout);
+                mBrightnessBottom = false;
                 break;
             case 2:
                 removeView(mBrightnessView);
                 addView(mBrightnessPlaceholder);
                 addView((View) mTileLayout);
                 addView(mBrightnessView);
+                mBrightnessBottom = true;
                 break;
         }
 
@@ -352,6 +355,10 @@ public class QSPanel extends LinearLayout implements Tunable, Callback,
 
     View getBrightnessPlaceholder() {
         return mBrightnessPlaceholder;
+    }
+
+    public boolean isBrightnessViewBottom() {
+        return mBrightnessBottom;
     }
 
     public void setCallback(QSDetail.Callback callback) {
