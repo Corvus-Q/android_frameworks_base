@@ -81,6 +81,7 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
 
     private boolean mQsDisabled;
     private QSPanel mQsPanel;
+    private QSCarrierGroup mCarrierGroup;
 
     private boolean mExpanded;
 
@@ -152,6 +153,7 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
         mDragHandle = findViewById(R.id.qs_drag_handle_view);
         mActionsContainer = findViewById(R.id.qs_footer_actions_container);
         mEditContainer = findViewById(R.id.qs_footer_actions_edit_container);
+        mCarrierGroup = findViewById(R.id.carrier_group);
 
         // RenderThread is doing more harm than good when touching the header (to expand quick
         // settings), so disable it for this view
@@ -223,6 +225,7 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
                 .addFloat(mActionsContainer, "alpha", 1, 1)
                 .addFloat(mMultiUserAvatar, "alpha", 0, 1)
                 .addFloat(mEditContainer, "alpha", 0, 1)
+                .addFloat(mCarrierGroup, "alpha", 1, 0, 0)
                 .addFloat(mDragHandle, "alpha", 1, 0, 0)
                 .addFloat(mPageIndicator, "alpha", 0, 1)
                 .addFloat(mRunningServicesButton, "alpha", 0, 1)
@@ -345,6 +348,7 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
         } else {
             mUserInfoController.removeCallback(this);
         }
+        mCarrierGroup.setListening(mListening);
     }
 
     @Override
