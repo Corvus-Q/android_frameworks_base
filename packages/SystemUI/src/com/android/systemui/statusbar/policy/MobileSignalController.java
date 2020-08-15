@@ -468,6 +468,10 @@ public class MobileSignalController extends SignalController<
                 case 4:
                     resId = R.drawable.ic_miui_volte;
                     break;
+                // Oneplus Compact VoLTE
+                case 5:
+                    resId = R.drawable.ic_volte5;
+                    break;
  	        //Vo
                 case 0:
                 default:
@@ -913,6 +917,9 @@ public class MobileSignalController extends SignalController<
                 // EMUI (Huawei P10)
                 case 4:
                     return TelephonyIcons.VOWIFI_EMUI;
+                // Oneplus Compact
+                case 5:
+                    return TelephonyIcons.VOWIFI_ONEPLUS_COMPACT;
                 default:
                     return TelephonyIcons.VOWIFI;
             }
