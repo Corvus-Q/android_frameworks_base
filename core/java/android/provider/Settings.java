@@ -5986,6 +5986,13 @@ public final class Settings {
         private static final Validator AMBIENT_LIGHT_REPEAT_DIRECTION_VALIDATOR = BOOLEAN_VALIDATOR;
 
         /**
+         * Show Carrier group in QS Footer.
+         *
+         * @hide
+         */
+        public static final String QS_FOOTER_SHOW_CARRIER = "qs_footer_show_carrier";
+
+        /**
          * Whether to show arrow keys in navigation bar
          * @hide
          */
