@@ -75,6 +75,19 @@
                 android:textAppearance="@style/TextAppearance.Volume.Header"
                 android:textColor="?android:attr/colorAccent"
                 android:textStyle="bold" />
+
+            <com.android.keyguard.AlphaOptimizedImageButton
+                android:id="@+id/volume_row_app_icon"
+                style="@style/VolumeButtons"
+                android:visibility="gone"
+                android:layout_width="@dimen/volume_dialog_tap_target_size"
+                android:layout_height="@dimen/volume_dialog_tap_target_size"
+                android:background="@drawable/ripple_drawable_20dp"
+                android:layout_marginBottom="@dimen/volume_dialog_row_margin_bottom"
+                android:padding="@dimen/volume_row_app_icon_padding"
+                android:soundEffectsEnabled="false"
+                android:scaleType="centerInside" />
+
         </LinearLayout>
     </FrameLayout>
 
