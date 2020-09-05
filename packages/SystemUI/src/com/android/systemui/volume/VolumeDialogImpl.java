@@ -74,6 +74,7 @@ import android.util.Slog;
 import android.util.SparseBooleanArray;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.AccessibilityDelegate;
@@ -111,6 +112,7 @@ import com.android.systemui.statusbar.phone.ExpandableIndicator;
 import com.android.systemui.statusbar.policy.AccessibilityManagerWrapper;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.statusbar.policy.DeviceProvisionedController;
+import com.android.systemui.tuner.TunerService;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -206,6 +208,7 @@ public class VolumeDialogImpl implements VolumeDialog,
     private boolean mNotificationLinked;
 
     private SettingsObserver settingsObserver;
+    private TunerService mTunerService;
 
     private boolean mDarkMode;
     private boolean mVibrateOnSlider;
@@ -821,7 +824,7 @@ public class VolumeDialogImpl implements VolumeDialog,
                 mExpandRows.setExpanded(mExpanded);
             });	
         }
-        updateAppRows(expand);
+        updateAppRows(true);
     }
 
     private void updateAppRows(boolean expand) {
