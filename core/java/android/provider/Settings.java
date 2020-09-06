@@ -5089,6 +5089,12 @@ public final class Settings {
         public static final String AMBIENT_BATTERY_PERCENT = "ambient_battery_percent";
 
         /**
+         * Show app volume rows in volume panel
+         * @hide
+         */
+        public static final String SHOW_APP_VOLUME = "show_app_volume";
+
+        /**
          * Applications list where heasdup should't show
          *
          * @hide
