@@ -235,8 +235,10 @@ public class FODCircleView extends ImageView implements ConfigurationListener, T
         KeyguardUpdateMonitor.StrongAuthTracker strongAuthTracker =
                 mUpdateMonitor.getStrongAuthTracker();
         int strongAuth = strongAuthTracker.getStrongAuthForUser(currentUser);
-        if (biometrics && !strongAuthTracker.hasUserAuthenticatedSinceBoot()) {
+        if (biometrics && (!strongAuthTracker.hasUserAuthenticatedSinceBoot() && !isForceKeyguardOnRebootEnabled())) {
             return false;
+        } else if (biometrics && isForceKeyguardOnRebootEnabled()) {
+            return true;
         } else if (biometrics && (strongAuth & STRONG_AUTH_REQUIRED_AFTER_TIMEOUT) != 0) {
             return false;
         } else if (biometrics && (strongAuth & STRONG_AUTH_REQUIRED_AFTER_DPM_LOCK_NOW) != 0) {
@@ -247,6 +249,11 @@ public class FODCircleView extends ImageView implements ConfigurationListener, T
             return false;
         }
         return true;
+    }
+
+    private boolean isForceKeyguardOnRebootEnabled() {
+        return (Settings.System.getInt(getContext().getContentResolver(),
+                Settings.System.FP_UNLOCK_KEYSTORE, 1) == 1);
     }
 
     public FODCircleView(Context context) {
